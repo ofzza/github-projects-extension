@@ -1,0 +1,4 @@
+[ ] Suggestions dropdown keyboard navigation
+[ ] Aliases for explicit search terms
+[ ] Icon and pretify help box
+[ ] Fade help box to prevent flicker
