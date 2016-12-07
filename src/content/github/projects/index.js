@@ -22,8 +22,8 @@ $( document ).ready(() => {
   // Removes quotation marks from start and end of string 
   const clearQuotations = function (value) {
     // Clear leading and endoing quotations
-    if (value.length && (value[0] === '"' || value[0] === '\'' || value[0] === '`')) { value = value.substr(1); } 
-    if (value.length && (value[value.length - 1] === '"' || value[value.length - 1] === '\'' || value[value.length - 1] === '`')) { value = value.substr(0, value.length - 1); } 
+    if (value && value.length && (value[0] === '"' || value[0] === '\'' || value[0] === '`')) { value = value.substr(1); } 
+    if (value && value.length && (value[value.length - 1] === '"' || value[value.length - 1] === '\'' || value[value.length - 1] === '`')) { value = value.substr(0, value.length - 1); } 
     return value;
   }
 
@@ -80,8 +80,8 @@ $( document ).ready(() => {
                                    + '<table style="border: 0px; margin: 10px;">'
                                    + '  <tr><td>Issue number</td> <td style="padding-left: 10px;"><b>#1234</td></b></tr>                 \n'
                                    + '  <tr><td>In Title</td>     <td style="padding-left: 10px;"><b>title:My issue title</b></td></tr>  \n'
-                                   + '  <tr><td>Created by</td>   <td style="padding-left: 10px;"><b>created:username</b></td></tr>      \n'
-                                   + '  <tr><td>Assigned to</td>  <td style="padding-left: 10px;"><b>assigned:username</b></td></tr>     \n'
+                                   + '  <tr><td>Created by</td>   <td style="padding-left: 10px;"><b>opened:username</b></td></tr>      \n'
+                                   + '  <tr><td>Assigned to</td>  <td style="padding-left: 10px;"><b>assignee:username</b></td></tr>     \n'
                                    + '  <tr><td>Label</td>        <td style="padding-left: 10px;"><b>label:MyLabel</b></td></tr>         \n'
                                    + '</table>'
                                    + '  ... or combine multiple conditions by separating them with "<b>;</b>"';
@@ -91,8 +91,19 @@ $( document ).ready(() => {
     searchBarHelpEl.style.marginRight = '36px';
     searchBarHelpEl.style.cursor = 'help';
     searchBarHelpEl.innerText = '?';
-    $(searchBarHelpEl).mouseover(() => { searchBarHelpPanelEl.style.display = 'block'; });
-    $(searchBarHelpEl).mouseout(() => { searchBarHelpPanelEl.style.display = 'none'; });
+    let helpMouseoverTimeout = null;
+    $(searchBarHelpEl).mouseover(() => {
+      // Show help after a timeout
+      helpMouseoverTimeout = setTimeout(() => {
+        searchBarHelpPanelEl.style.display = 'block';
+      }, 200); 
+    });
+    $(searchBarHelpEl).mouseout(() => { 
+      // Clear timeout
+      if (helpMouseoverTimeout) { clearTimeout(helpMouseoverTimeout); }
+      // Hide help
+      searchBarHelpPanelEl.style.display = 'none'; 
+    });
 
     // Initialize search tooltip
     let searchTooltipEl = document.createElement('span');
@@ -167,7 +178,7 @@ $( document ).ready(() => {
           }
           return suggestions;
         }, []);
-      } else if ((operator === 'created') || (operator === 'assigned')) {
+      } else if ((operator === 'opened') || (operator === 'created') || (operator === 'by') || (operator === 'assignee') || (operator === 'assigned') || (operator === 'to') || (operator === 'for')) {
         suggestions = _.reduce(assigneesEls, (suggestions, el, username) => {
           if (!value || username.trim().toLowerCase().indexOf(value) > -1) {
             let suggestionEl = document.createElement('span');
@@ -246,12 +257,27 @@ $( document ).ready(() => {
           return { type: 'issue', value: condition };
         }
         // Check if explicit search by created
+        else if (condition.indexOf('opened:') === 0) {
+          return { type: 'created', value: clearQuotations(condition.split('opened:')[1].trim()) };
+        }
         else if (condition.indexOf('created:') === 0) {
           return { type: 'created', value: clearQuotations(condition.split('created:')[1].trim()) };
         }
+        else if (condition.indexOf('by:') === 0) {
+          return { type: 'created', value: clearQuotations(condition.split('by:')[1].trim()) };
+        }
         // Check if explicit search by created
+        else if (condition.indexOf('assignee:') === 0) {
+          return { type: 'assigned', value: clearQuotations(condition.split('assignee:')[1].trim()) };
+        }
         else if (condition.indexOf('assigned:') === 0) {
           return { type: 'assigned', value: clearQuotations(condition.split('assigned:')[1].trim()) };
+        }
+        else if (condition.indexOf('to:') === 0) {
+          return { type: 'assigned', value: clearQuotations(condition.split('to:')[1].trim()) };
+        }
+        else if (condition.indexOf('for:') === 0) {
+          return { type: 'assigned', value: clearQuotations(condition.split('for:')[1].trim()) };
         }
         // Check if explicit search by label
         else if (condition.indexOf('label:') === 0) {
@@ -352,59 +378,61 @@ $( document ).ready(() => {
     
     // Add condition tooltips
     _.forEach(conditions, (condition) => {
+      if (condition && condition.value && condition.value.trim().length) {
 
-      // Create tooltip container
-      let tooltipEl = document.createElement('span');
-      tooltipEl.style.padding = '1px 2px';
-      tooltipEl.style.border = '1px solid #eee';
-      tooltipEl.style.borderRadius = '2px';
-      tooltipEl.style.backgroundColor = (fullscreen ? '#fff' : '#fafafa');
+        // Create tooltip container
+        let tooltipEl = document.createElement('span');
+        tooltipEl.style.padding = '1px 2px';
+        tooltipEl.style.border = '1px solid #eee';
+        tooltipEl.style.borderRadius = '2px';
+        tooltipEl.style.backgroundColor = (fullscreen ? '#fff' : '#fafafa');
 
-      // Check condition type and add element
-      if (condition.type === 'title') {
-        tooltipEl.innerHTML = 'title: <b>{value}</b>'.replace(/\{value\}/g, condition.value);
-      } else if (condition.type === 'issue') {
-        tooltipEl.innerHTML = 'issue: <b>{value}</b>'.replace(/\{value\}/g, condition.value);
-      } else if (condition.type === 'created') {
-        if (!assigneesEls[condition.value]) { 
-          tooltipEl.innerHTML = 'created by: <b><a href="/{value}">{value}</a></b>'.replace(/\{value\}/g, condition.value);
-        } else  {
-          tooltipEl.innerHTML = 'created by: <b><a href="/{value}">{value}</a></b>'.replace(/\{value\}/g, condition.value);
-          assigneesEls[condition.value].style.position = 'relative';
-          assigneesEls[condition.value].style.top = '-2px';
-          assigneesEls[condition.value].style.width = '16px';
-          assigneesEls[condition.value].style.height = '16px';
-          assigneesEls[condition.value].style.marginLeft = '4px';
-          $(tooltipEl).append(assigneesEls[condition.value]);
+        // Check condition type and add element
+        if (condition.type === 'title') {
+          tooltipEl.innerHTML = 'title: <b>{value}</b>'.replace(/\{value\}/g, condition.value);
+        } else if (condition.type === 'issue') {
+          tooltipEl.innerHTML = 'issue: <b>{value}</b>'.replace(/\{value\}/g, condition.value);
+        } else if (condition.type === 'created') {
+          if (!assigneesEls[condition.value]) { 
+            tooltipEl.innerHTML = 'created by: <b><a href="/{value}">{value}</a></b>'.replace(/\{value\}/g, condition.value);
+          } else  {
+            tooltipEl.innerHTML = 'created by: <b><a href="/{value}">{value}</a></b>'.replace(/\{value\}/g, condition.value);
+            assigneesEls[condition.value].style.position = 'relative';
+            assigneesEls[condition.value].style.top = '-2px';
+            assigneesEls[condition.value].style.width = '16px';
+            assigneesEls[condition.value].style.height = '16px';
+            assigneesEls[condition.value].style.marginLeft = '4px';
+            $(tooltipEl).append(assigneesEls[condition.value]);
+          }
+        } else if (condition.type === 'assigned') {
+          if (!assigneesEls[condition.value]) { 
+            tooltipEl.innerHTML = 'assigned to: <b><a href="/{value}">{value}</a></b>'.replace(/\{value\}/g, condition.value);
+          } else  {
+            tooltipEl.innerHTML = 'assigned to: <b><a href="/{value}">{value}</a></b>'.replace(/\{value\}/g, condition.value);
+            assigneesEls[condition.value].style.position = 'relative';
+            assigneesEls[condition.value].style.top = '-2px';
+            assigneesEls[condition.value].style.width = '16px';
+            assigneesEls[condition.value].style.height = '16px';
+            assigneesEls[condition.value].style.marginLeft = '4px';
+            $(tooltipEl).append(assigneesEls[condition.value]);
+          }
+        } else if (condition.type === 'label') {
+          if (!labelsEls[condition.value]) { 
+            tooltipEl.innerHTML = 'label: <b>{value}</b>'.replace(/\{value\}/g, condition.value);
+          } else {
+            labelsEls[condition.value].style.position = 'relative';
+            labelsEls[condition.value].style.top = '-4px';
+            tooltipEl = labelsEls[condition.value];
+          }        
+        } else if (condition.type === 'any') {
+          tooltipEl.innerHTML = '<b>{value}</b>'.replace(/\{value\}/g, condition.value);
         }
-      } else if (condition.type === 'assigned') {
-        if (!assigneesEls[condition.value]) { 
-          tooltipEl.innerHTML = 'assigned to: <b><a href="/{value}">{value}</a></b>'.replace(/\{value\}/g, condition.value);
-        } else  {
-          tooltipEl.innerHTML = 'assigned to: <b><a href="/{value}">{value}</a></b>'.replace(/\{value\}/g, condition.value);
-          assigneesEls[condition.value].style.position = 'relative';
-          assigneesEls[condition.value].style.top = '-2px';
-          assigneesEls[condition.value].style.width = '16px';
-          assigneesEls[condition.value].style.height = '16px';
-          assigneesEls[condition.value].style.marginLeft = '4px';
-          $(tooltipEl).append(assigneesEls[condition.value]);
-        }
-      } else if (condition.type === 'label') {
-        if (!labelsEls[condition.value]) { 
-          tooltipEl.innerHTML = 'label: <b>{value}</b>'.replace(/\{value\}/g, condition.value);
-        } else {
-          labelsEls[condition.value].style.position = 'relative';
-          labelsEls[condition.value].style.top = '-4px';
-          tooltipEl = labelsEls[condition.value];
-        }        
-      } else if (condition.type === 'any') {
-        tooltipEl.innerHTML = '<b>{value}</b>'.replace(/\{value\}/g, condition.value);
+
+        // Add tooltip element
+        tooltipEl.style.marginRight = '2px';
+        $(searchTooltipEl).append(tooltipEl);
+
       }
-
-      // Add tooltip element
-      tooltipEl.style.marginRight = '2px';
-      $(searchTooltipEl).append(tooltipEl);
-
     });
 
   }
