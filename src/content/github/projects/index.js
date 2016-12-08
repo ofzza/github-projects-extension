@@ -8,8 +8,14 @@
 
   // On load, bootstrap projects page modifications
   $( document ).ready(() => { 
-    // Augment filtering
-    initAugmentFiltering();
+    // Check if github page
+    if ($('head').find('meta[content="@github"]').length || window.location.hostname.match(/github/)) {
+      // Check if projects page
+      if (window.location.pathname.match(/.\/projects/)) {
+        // Augment filtering
+        initAugmentFiltering();
+      }
+    }
   })
 
   // Augment filtering
@@ -17,8 +23,8 @@
   {
 
     // Holds references to ui-sugar elements
-    let assigneesEls = { },
-        labelsEls = { };
+    let assigneesEls = {},
+        labelsEls = {};
 
     // Holds current suggestions
     let suggestions = [], 
@@ -126,10 +132,10 @@
           delayedSearchFn = (e) => {
             if (delayedSearchTimeout) { clearTimeout(delayedSearchTimeout); }
             delayedSearchTimeout = setTimeout(() => { 
-              // Check for suggestions
-              checkSuggestions(searchSuggestionsEl, e.target);
               // Filter results
-              searchBarHandlerFn(searchTooltipEl, e.target.value); 
+              searchBarHandlerFn(searchTooltipEl, (e.target || searchBarEl).value); 
+              // Check for suggestions
+              checkSuggestions(searchSuggestionsEl, e.target || searchBarEl);
             }, 200);
           };
       $(searchBarEl).click(delayedSearchFn);
@@ -137,6 +143,7 @@
       $(searchBarEl).blur(delayedSearchFn);
       $(searchBarEl).change(delayedSearchFn);
       $(searchBarEl).keyup(delayedSearchFn);
+      delayedSearchFn(); 
       
       // Check if suggestions present and keypress should manipulate dropdown
       $(searchBarEl).keydown((e) => {

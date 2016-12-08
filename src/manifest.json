@@ -14,8 +14,7 @@
   "content_scripts" : [
     {
       "matches" : [ 
-        "https://github.com/*/*/projects/*",
-        "https://github.inquest.net/*/*/projects/*"
+        "https://*/*/*/projects/*"
        ],
       "js" : [ 
         "content/libs/jquery.slim.min.js", 
@@ -26,8 +25,6 @@
   ],
 
   "permissions": [
-    "activeTab",
-    "https://github.com/*/*/projects/*",
-    "https://github.inquest.net/*/*/projects/*"
+    "activeTab"
   ]
 }
