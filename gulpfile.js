@@ -13,10 +13,12 @@
 // Load dependencies
 // --------------------------------------------------------------------------------------------------------------------
 const gulp        = require('gulp'),
+      util        = require('gulp-util');
       gulpsync    = require('gulp-sync')(gulp);
       clean       = require('gulp-clean'),
       babel       = require('gulp-babel'),
       sourcemaps  = require('gulp-sourcemaps'),
+      uglify      = require('gulp-uglify'),
       watch       = require('gulp-watch');
 
 // Define a clear task (to be executed before a clean build)
@@ -56,7 +58,7 @@ gulp.task('copy@libs', () => {
 // --------------------------------------------------------------------------------------------------------------------
 gulp.task('transpile@build', () => {
   return gulp.src('./src/**/*.js')
-    .pipe(sourcemaps.init())
+    .pipe(!util.env.production ? sourcemaps.init() : util.noop())
     .pipe(babel({presets: ['es2015']}))
       .on('error', function (err){
         console.log();
@@ -64,10 +66,8 @@ gulp.task('transpile@build', () => {
         console.log();
         this.emit('end');
       })
-    .pipe(sourcemaps.write('.', {
-      includeContent: true,
-      sourceRoot: '../src'
-    }))
+    .pipe(uglify({ mangle: true }))
+    .pipe(!util.env.production ? sourcemaps.write('.', { includeContent: true, sourceRoot: '../src' }) : util.noop())
     .pipe(gulp.dest('./dist'));
 });
 // ... and attached watcher
