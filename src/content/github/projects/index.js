@@ -19,6 +19,12 @@ $( document ).ready(() => {
   let assigneesEls = { },
       labelsEls = { };
 
+  // Holds current suggestions
+  let suggestions = [], 
+      suggestionValues = [],
+      selectedSuggestion = null;
+
+
   // Removes quotation marks from start and end of string 
   const clearQuotations = function (value) {
     // Clear leading and endoing quotations
@@ -78,11 +84,11 @@ $( document ).ready(() => {
                                    + '<br /> \n'
                                    + '<b>Explicit syntax:</b> <br/>\n'
                                    + '<table style="border: 0px; margin: 10px;">'
-                                   + '  <tr><td>Issue number</td> <td style="padding-left: 10px;"><b>#1234</td></b></tr>                 \n'
-                                   + '  <tr><td>In Title</td>     <td style="padding-left: 10px;"><b>title:My issue title</b></td></tr>  \n'
-                                   + '  <tr><td>Created by</td>   <td style="padding-left: 10px;"><b>opened:username</b></td></tr>      \n'
-                                   + '  <tr><td>Assigned to</td>  <td style="padding-left: 10px;"><b>assignee:username</b></td></tr>     \n'
-                                   + '  <tr><td>Label</td>        <td style="padding-left: 10px;"><b>label:MyLabel</b></td></tr>         \n'
+                                   + '  <tr><td>Issue</td>        <td style="padding-left: 10px;"><b>#</b><i>1234</td></i></tr>               \n'
+                                   + '  <tr><td>Title</td>        <td style="padding-left: 10px;"><b>title:</b><i>My title</i></td></tr>      \n'
+                                   + '  <tr><td>Created by</td>   <td style="padding-left: 10px;"><b>opened:</b><i>username</i></td></tr>     \n'
+                                   + '  <tr><td>Assigned to</td>  <td style="padding-left: 10px;"><b>assignee:</b><i>username</i></td></tr>   \n'
+                                   + '  <tr><td>Label</td>        <td style="padding-left: 10px;"><b>label:</b><i>my-label</i></td></tr>      \n'
                                    + '</table>'
                                    + '  ... or combine multiple conditions by separating them with "<b>;</b>"';
 
@@ -130,7 +136,13 @@ $( document ).ready(() => {
     $(searchBarEl).blur(delayedSearchFn);
     $(searchBarEl).change(delayedSearchFn);
     $(searchBarEl).keyup(delayedSearchFn);
-
+    
+    // Check if suggestions present and keypress should manipulate dropdown
+    $(searchBarEl).keydown((e) => {
+      if (checkKeypressForSuggestions(e)) {
+        checkSuggestions(searchSuggestionsEl, e.target);
+      }
+    });
 
     // Insert search bar
     let searchContainerEl = (fullscreen ? $('.full-screen-project-header > div') : $('.project-header > .float-right'));
@@ -165,8 +177,8 @@ $( document ).ready(() => {
           value = clearQuotations(searchSyntax.length > semicolonPosition ? searchSyntax.substr((semicolonPosition), (valueEndPosition ? (valueEndPosition + 1 - (semicolonPosition + 1)) : undefined)).trim().toLowerCase() : null);
       
       // Search for suggestions
-      let suggestions = [], 
-          suggestionValues = [];
+      suggestions = []; 
+      suggestionValues = [];
       if (operator === 'label') {
         suggestions = _.reduce(labelsEls, (suggestions, el, label) => {
           if (!value || label.trim().toLowerCase().indexOf(value) > -1) {
@@ -193,20 +205,28 @@ $( document ).ready(() => {
       }
 
       // Wrap elements
-      suggestions = _.map(suggestions, (suggestionEl) => {
+      let selectedSuggestionEl = null;
+      suggestions = _.map(suggestions, (suggestionEl, i) => {
         let el = document.createElement('li');
+        el.style.position = 'relative';
         el.style.listStyle = 'none';
         el.style.padding = '1px 4px';
         el.style.cursor = 'pointer';
+        if (suggestionValues[i] === selectedSuggestion) {
+          selectedSuggestionEl = el;
+          el.style.backgroundColor = "#5080d8";
+        }
         $(el).append(suggestionEl);
         $(el).click(() => {
+
           // Inject element value to search syntax
-          let value = $(suggestionEl).attr('key');
+          let value = suggestionValues[i];
           searchEl.focus();
           let syntax = searchSyntax.substr(0, semicolonPosition) + ' ' + value + (valueEndPosition ? searchSyntax.substr(valueEndPosition) : '');
           searchEl.value = syntax;
           let position = semicolonPosition + value.length + 1;
           searchEl.setSelectionRange(position, position);
+
         })
         return el;
       });
@@ -215,6 +235,16 @@ $( document ).ready(() => {
       let suggestionsEl = $(searchSuggestionsEl);
       suggestionsEl.empty();
       suggestionsEl.append(suggestions);
+
+      // If selected, scroll to selected element
+      if (selectedSuggestionEl) {
+        let offset = $(selectedSuggestionEl).position().top;
+        if (offset > 160) { 
+          $(searchSuggestionsEl).scrollTop(offset - 160); 
+        } else {
+          $(searchSuggestionsEl).scrollTop(0);
+        }
+      }
 
       // Show suggestions
       searchSuggestionsEl.style.display = ((suggestions.length > 1) || (suggestions.length === 1 && suggestionValues[0] !== value) ? 'block' : 'none');
@@ -226,6 +256,46 @@ $( document ).ready(() => {
 
     }
 
+  }
+
+  /**
+   * Checks if keypress should manage suggestions dropdown
+   */
+  const checkKeypressForSuggestions = function (e) {
+    // Check if actionable key pressed
+    if ([38/* UP */, 40/* DOWN */, 33/* PGUP */, 34/* PGDOWN */, 13/* ENTER */].indexOf(e.keyCode) > -1) {
+      
+      // Prevent event propagation
+      e.preventDefault();
+
+      // Find current selected suggestion's index
+      let selectedIndex = suggestionValues.indexOf(selectedSuggestion);
+
+      // Select a suggestion (process keypress as drop-down action)
+      if (e.keyCode == 38) {
+        if (selectedIndex >= 1) { 
+          selectedSuggestion = suggestionValues[selectedIndex - 1]; 
+          return true;
+        }
+      } else if (e.keyCode == 40) {
+        if (selectedIndex + 1 < suggestionValues.length) {
+           selectedSuggestion = suggestionValues[selectedIndex + 1]; 
+           return true;
+        }
+      } else if (e.keyCode == 33) {
+          selectedSuggestion = suggestionValues[0]; 
+          return true;
+      } else if (e.keyCode == 34) {
+          selectedSuggestion = suggestionValues[suggestionValues.length - 1]; 
+          return true;
+      } else if (e.keyCode == 13) {
+        if (selectedIndex > -1) {
+          (suggestions[selectedIndex]).click();
+          return true;
+        }
+      }
+
+    }
   }
 
   /**

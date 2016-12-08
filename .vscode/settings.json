@@ -7,4 +7,6 @@
     "logs/": true,
     "typings/": true
   }
+,
+"typescript.check.workspaceVersion": false
 }

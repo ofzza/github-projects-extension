@@ -1,5 +1,5 @@
 [X] Aliases for explicit search terms
 [/] Fade help box to prevent flicker
-[ ] Suggestions dropdown keyboard navigation
+[X] Suggestions dropdown keyboard navigation
 [ ] Icon and pretify help box
 [ ] Limit pills container to prevent runoff
