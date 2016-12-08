@@ -25,18 +25,18 @@ gulp build --production
 
 ### License ###
 
-- Published under (MIT License)[./LICENSE]
+Published under [MIT License](./LICENSE)
 
 ### Attribution ###
 
-###### jQuery ###### 
+##### jQuery ##### 
 
-(jQuery)[https://jquery.org/]
+[jQuery](https://jquery.org/)
 
-###### Lodash ######
+##### Lodash #####
 
-(Lodash)[https://github.com/lodash/lodash]
+[Lodash](https://github.com/lodash/lodash)
 
-###### Graphic resources ######
+##### Graphic resources #####
 
 Icon based off of work of [pixan](https://www.iconfinder.com/iconsimple), published under [Creative Commons License](http://creativecommons.org/licenses/by/2.5/)
