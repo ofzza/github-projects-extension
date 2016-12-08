@@ -2,7 +2,7 @@
 
 Adds a functional search-bar to Github Projects page.
 
-### Deployment ###
+### Deployment
 
 1) Install NPM dependencies:
 ```
@@ -23,20 +23,20 @@ gulp build --production
 
 3) Load unpacked Chrome extension from ```/dist``` directory.
 
-### License ###
+### License
 
 Published under [MIT License](./LICENSE)
 
-### Attribution ###
+### Attribution
 
-##### jQuery ##### 
+##### jQuery 
 
 [jQuery](https://jquery.org/)
 
-##### Lodash #####
+##### Lodash
 
 [Lodash](https://github.com/lodash/lodash)
 
-##### Graphic resources #####
+##### Graphic resources
 
 Icon based off of work of [pixan](https://www.iconfinder.com/iconsimple), published under [Creative Commons License](http://creativecommons.org/licenses/by/2.5/)
