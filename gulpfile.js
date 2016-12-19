@@ -105,12 +105,12 @@ gulp.task('watch.transpile@build', () => {
 gulp.task('zip.githubcom@build', () => {
   return gulp.src(['./dist/github.com/**/*'])
     .pipe(zip(`dist.githubcom.v${pck.version}.zip`))
-    .pipe(gulp.dest('./versions/'));
+    .pipe(gulp.dest(`./versions/${util.env.production ? 'prod' : 'dev'}`));
 });
 gulp.task('zip.corporate@build', () => {
   return gulp.src(['./dist/corporate/**/*'])
     .pipe(zip(`dist.corporate.v${pck.version}.zip`))
-    .pipe(gulp.dest('./versions/'));
+    .pipe(gulp.dest(`./versions/${util.env.production ? 'prod' : 'dev'}`));
 });
 gulp.task('zip.build', ['zip.githubcom@build', 'zip.corporate@build' ]);
 // ... and attached watcher

@@ -1,6 +1,7 @@
-# GitHub Projects Search-Bar Chrome extension
+# GitHub Projects Chrome extension
 
-Adds a functional search-bar to Github Projects page.
+- Adds a functional search-bar to Github Projects page.
+- Adds label management to project page's cards
 
 ### Deployment
 
@@ -36,7 +37,3 @@ Published under [MIT License](./LICENSE)
 ##### Lodash
 
 [Lodash](https://github.com/lodash/lodash)
-
-##### Graphic resources
-
-Icon based off of work of [pixan](https://www.iconfinder.com/iconsimple), published under [Creative Commons License](http://creativecommons.org/licenses/by/2.5/)
