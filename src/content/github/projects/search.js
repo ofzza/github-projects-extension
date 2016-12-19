@@ -50,83 +50,180 @@
 
       // Initialize search bar
       let searchBarContainerEl = document.createElement('div');
-      searchBarContainerEl.style.position = 'relative';
-      searchBarContainerEl.style.top = '2px';
-      searchBarContainerEl.style.display = 'inline-block';
-      searchBarContainerEl.style.marginRight = '2px';
+      searchBarContainerEl.className = 'ogp-search-bar-container';
 
       let searchBarEl = document.createElement('input');
+      searchBarEl.className = 'ogp-search-bar-element';
       searchBarEl.type = 'text';
-      searchBarEl.placeholder = 'Filter';
-      searchBarEl.style.width = '200px';
-      searchBarEl.style.padding = '0px 4px';
-      searchBarEl.style.fontSize = '12px';
-      searchBarEl.style.lineHeight = '12px';
+      searchBarEl.placeholder = 'Filter';      
       $(searchBarContainerEl).append(searchBarEl);
 
       let searchSuggestionsEl = document.createElement('ul');
-      searchSuggestionsEl.style.display = 'none';
-      searchSuggestionsEl.style.zIndex = '31';
-      searchSuggestionsEl.style.position = 'absolute';
-      searchSuggestionsEl.style.width = '200px';
-      searchSuggestionsEl.style.minHeight = '20px';
-      searchSuggestionsEl.style.maxHeight = '200px';
-      searchSuggestionsEl.style.overflow = 'auto';
-      searchSuggestionsEl.style.border = '1px solid #eee';
-      searchSuggestionsEl.style.backgroundColor = '#fff';
-      searchSuggestionsEl.style.boxShadow = '1px 1px 1px 1px rgba(0,0,0,0.1)';
+      searchSuggestionsEl.className = 'ogp-suggestions-element';
       $(searchBarContainerEl).append(searchSuggestionsEl);
 
       let searchBarHelpPanelEl = document.createElement('div');
-      searchBarHelpPanelEl.style.display = 'none';
-      searchBarHelpPanelEl.style.zIndex = '32';
-      searchBarHelpPanelEl.style.position = 'absolute';
-      searchBarHelpPanelEl.style.top = (fullscreen ? '40px' : '36px');
-      searchBarHelpPanelEl.style.padding = '12px';
-      searchBarHelpPanelEl.style.border = '1px solid #eee';
-      searchBarHelpPanelEl.style.backgroundColor = '#fafafa';
-      searchBarHelpPanelEl.style.boxShadow = '2px 2px 2px 2px rgba(0,0,0,0.2)';
-      searchBarHelpPanelEl.innerHTML = '<b>Enter any text and only issues and notes <br />\n' 
-                                    + 'matching Title, Number, Creator, Assignee or Label will be shown.</b> <br/>\n' 
-                                    + '<br /> \n'
-                                    + '<b>Explicit syntax:</b> <br/>\n'
-                                    + '<table style="border: 0px; margin: 10px;">'
-                                    + '  <tr><td>Card type</td>    <td style="padding-left: 10px;"><b>is:</b><i>issue</i>;<b>is:</b><i>open</i></td></tr> \n'
-                                    + '  <tr><td>Issue</td>        <td style="padding-left: 10px;"><b>#</b><i>1234</i></td></tr>                          \n'
-                                    + '  <tr><td>Title</td>        <td style="padding-left: 10px;"><b>title:</b><i>My title</i></td></tr>                 \n'
-                                    + '  <tr><td>Created by</td>   <td style="padding-left: 10px;"><b>opened:</b><i>username</i></td></tr>                \n'
-                                    + '  <tr><td>Assigned to</td>  <td style="padding-left: 10px;"><b>assignee:</b><i>username</i></td></tr>              \n'
-                                    + '  <tr><td>Label</td>        <td style="padding-left: 10px;"><b>label:</b><i>my-label</i></td></tr>                 \n'
-                                    + '</table>'
-                                    + '  ... or combine multiple conditions by separating them with "<b>;</b>"';
+      searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel';
+
+      let searchBarHelpPanelContent = document.createElement('div');
+      searchBarHelpPanelContent.className = 'ogp-search-bar-help-content';
+      searchBarHelpPanelContent.innerHTML = `
+      
+        <div class="ogp-search-example">
+          <div class="ogp-search-example-syntax">
+            "<i>Fix problem</i>"
+          </div>
+          <div class="ogp-search-example-comment">
+            Finds all issues, notes and pull requests with searched phrase ("Fix problem") in title or label
+          </div>
+        </div>
+      
+        <div class="ogp-search-example">
+          <div class="ogp-search-example-syntax">
+            "<i>Joe</i>"
+          </div>
+          <div class="ogp-search-example-comment">
+            Finds all issues, notes and pull requests created by or assigned to user "Joe"
+          </div>
+        </div>
+
+        <div class="ogp-search-example">
+          <div class="ogp-search-example-syntax">
+            "<i>Fix problem</i>" <b>;</b>
+            "<i>Joe</i>"
+          </div>
+          <div class="ogp-search-example-comment">
+            Finds all issues, notes and pull requests with searched phrase ("Fix problem") in title or label that is also created by or assigned to user "Joe"
+          </div>
+        </div>
+
+        <div class="ogp-search-example">
+          <div class="ogp-search-example-syntax">
+            "<i>1234</i>"
+          </div>
+          <div class="ogp-search-example-comment">
+            Finds issue or pull request #1234
+          </div>
+        </div>
+
+        <div class="ogp-search-example">
+          <div class="ogp-search-example-comment">
+            Search by card type and current status
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>is:</b> <i>note</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>is:</b> <i>issue</i> <b>;</b>
+            <b>is:</b> <i>open</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>is:</b> <i>issue</i> <b>;</b> 
+            <b>is:</b> <i>closed</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>is:</b> <i>pull request</i> <b>;</b> 
+            <b>is:</b> <i>open</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>is:</b> <i>pr</i> <b>;</b> 
+            <b>is:</b> <i>closed</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>is:</b> <i>pr</i> <b>;</b> 
+            <b>is:</b> <i>merged</i>
+          </div>
+        </div>
+
+        <div class="ogp-search-example">
+          <div class="ogp-search-example-comment">
+            Search by phrase in card title
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>title:</b> <i>do something</i>
+          </div>
+        </div>
+
+        <div class="ogp-search-example">
+          <div class="ogp-search-example-comment">
+            Search by issue or pull reuqest number
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>#</b><i>123</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>num:</b> <i>1234</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>number:</b> <i>12345</i>
+          </div>
+        </div>
+
+        <div class="ogp-search-example">
+          <div class="ogp-search-example-comment">
+            Search by user who opened the card
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>opened: </b> <i>Joe</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>created: </b> <i>Joe</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>by: </b> <i>Joe</i>
+          </div>
+        </div>
+
+        <div class="ogp-search-example">
+          <div class="ogp-search-example-comment">
+            Search by assigned user
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>assignee: </b> <i>Joe</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>assigned: </b> <i>Joe</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>to: </b> <i>Joe</i>
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>for: </b> <i>Joe</i>
+          </div>
+        </div>
+
+        <div class="ogp-search-example">
+          <div class="ogp-search-example-comment">
+            Search by label
+          </div>
+          <div class="ogp-search-example-syntax indent">
+            <b>label: </b> <i>bug</i>
+          </div>
+        </div>
+
+      `;
+      $(searchBarHelpPanelEl).append(searchBarHelpPanelContent);
 
       let searchBarHelpEl = document.createElement('span');
-      searchBarHelpEl.style.display = 'inline-block';
-      searchBarHelpEl.style.marginRight = '36px';
-      searchBarHelpEl.style.cursor = 'help';
+      searchBarHelpEl.className = 'ogp-search-bar-help-element';
       searchBarHelpEl.innerText = '?';
       let helpMouseoverTimeout = null;
       $(searchBarHelpEl).mouseover(() => {
         // Show help after a timeout
         helpMouseoverTimeout = setTimeout(() => {
-          searchBarHelpPanelEl.style.display = 'block';
+          searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel ogp-shown';
         }, 200); 
       });
       $(searchBarHelpEl).mouseout(() => { 
         // Clear timeout
         if (helpMouseoverTimeout) { clearTimeout(helpMouseoverTimeout); }
         // Hide help
-        searchBarHelpPanelEl.style.display = 'none'; 
+        searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel'; 
       });
 
       // Initialize search tooltip
       let searchTooltipEl = document.createElement('span');
-      searchTooltipEl.style.position = 'relative';
-      searchTooltipEl.style.top = '2px';
-      searchTooltipEl.style.display = 'inline-block';
-      searchTooltipEl.style.padding = '0px 4px';
-      searchTooltipEl.style.fontSize = '12px';
-      searchTooltipEl.style.lineHeight = '12px';
+      searchTooltipEl.className = 'ogp-search-tooltip-el';
 
       // Assign search handler
       let delayedSearchTimeout = null,
@@ -217,13 +314,11 @@
         let selectedSuggestionEl = null;
         suggestions = _.map(suggestions, (suggestionEl, i) => {
           let el = document.createElement('li');
-          el.style.position = 'relative';
-          el.style.listStyle = 'none';
-          el.style.padding = '1px 4px';
-          el.style.cursor = 'pointer';
           if (suggestionValues[i] === selectedSuggestion) {
             selectedSuggestionEl = el;
-            el.style.backgroundColor = "#5080d8";
+            el.className = 'ogp-suggestion-item selected';
+          } else {
+            el.className = 'ogp-suggestion-item';
           }
           $(el).append(suggestionEl);
           $(el).click(() => {
@@ -334,9 +429,15 @@
           else if (condition.indexOf('title:') === 0) {
             return { type: 'title', value: clearQuotations(condition.split('title:')[1].trim()) };
           }
-          // Check explicit search by issue number
+          // Check explicit search by number
           else if (condition && condition.length && condition[0] === '#' && condition.substr(1).trim() == parseInt(condition.substr(1))) {
-            return { type: 'issue', value: condition };
+            return { type: 'number', value: condition };
+          }
+          else if (condition.indexOf('num:') === 0) {
+            return { type: 'number', value: '#' + clearQuotations(condition.split('num:')[1].trim()) };
+          }
+          else if (condition.indexOf('number:') === 0) {
+            return { type: 'number', value: '#' + clearQuotations(condition.split('number:')[1].trim()) };
           }
           // Check if explicit search by created
           else if (condition.indexOf('opened:') === 0) {
@@ -380,7 +481,7 @@
           let card = $(c),
               type = 'issue', status = 'open',
               title = card.find('h5').text() || card.find('div > p').text(),
-              issue = card.find('small').text().split('opened by')[0] || '',
+              number = card.find('small').text().split('opened by')[0] || '',
               creator = card.find('small').text().split('opened by')[1] || '',
               assignees = _.map(card.find('div > img'), (el) => {
                 let username = $(el).attr('alt').replace(/@/g, '');
@@ -419,9 +520,9 @@
               else if (condition.type === 'title') {
                 visible = visible && (title.trim().toLowerCase().indexOf(condition.value) > -1)
               }
-              // Check explicit search by issue number
-              else if (condition.type === 'issue') {
-                visible = visible && (issue.trim().toLowerCase() == condition.value)
+              // Check explicit search by number
+              else if (condition.type === 'number') {
+                visible = visible && (number.trim().toLowerCase() == condition.value)
               }
               // Check if explicit search by created
               else if (condition.type === 'created') {
@@ -443,7 +544,7 @@
               else if (condition.type === 'any') {
                 visible = visible && (
                               (title.trim().toLowerCase().indexOf(condition.value) > -1)
-                            || (issue.trim().toLowerCase().indexOf(condition.value) > -1)
+                            || (number.trim().toLowerCase().indexOf(condition.value) > -1)
                             || (creator.trim().toLowerCase().indexOf(condition.value) > -1)
                             || _.find(assignees, (assignee) => {
                                 return (assignee.trim().toLowerCase().indexOf(condition.value) > -1);
@@ -493,8 +594,8 @@
           // Check condition type and add element
           if (condition.type === 'title') {
             tooltipEl.innerHTML = 'title: <b>{value}</b>'.replace(/\{value\}/g, condition.value);
-          } else if (condition.type === 'issue') {
-            tooltipEl.innerHTML = 'issue: <b>{value}</b>'.replace(/\{value\}/g, condition.value);
+          } else if (condition.type === 'number') {
+            tooltipEl.innerHTML = '<b>{value}</b>'.replace(/\{value\}/g, condition.value);
           } else if (condition.type === 'created') {
             if (!assigneesEls[condition.value]) { 
               tooltipEl.innerHTML = 'created by: <b><a href="/{value}">{value}</a></b>'.replace(/\{value\}/g, condition.value);

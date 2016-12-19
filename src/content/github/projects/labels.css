@@ -15,6 +15,9 @@
     border-top: 8px solid #e5e5e5;
     cursor: pointer;
 }
+.project-container .project-columns .issue-card::before:hover {
+    border-top: 8px solid #51a7e8;
+}
 .project-column > div {
     padding-bottom: 270px !important;
 }
@@ -32,7 +35,19 @@
     border-radius: 3px;
     border: 1px #e5e5e5 solid;
     cursor: default;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0, 0.1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5)
+    /*box-shadow: 1px 1px 1px 1px rgba(0,0,0, 0.1);*/
+}
+.ogp-labels-menu::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 6px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 16px solid #eee;
 }
 .ogp-labels-menu .select-menu-list {
     max-height: 227px !important;
