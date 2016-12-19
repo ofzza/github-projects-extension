@@ -1,10 +1,10 @@
 // ============================================================================================
-// GitHub projects page
+// GitHub projects page search
 // ============================================================================================
 (() => {
 
   // Initialization functions declaration
-  let initAugmentFiltering = null;
+  let initSearchUI = null;
 
   // On load, bootstrap projects page modifications
   $( document ).ready(() => { 
@@ -13,12 +13,12 @@
       // Check if projects page
       if (window.location.pathname.match(/.\/projects/)) {
         // Augment filtering
-        initAugmentFiltering();
+        initSearchUI();
       }
     }
   })
 
-  // Augment filtering
+  // Search
   // ============================================================================================
   {
 
@@ -33,7 +33,7 @@
 
 
     // Removes quotation marks from start and end of string 
-    const clearQuotations = function (value) {
+    function clearQuotations (value) {
       // Clear leading and endoing quotations
       if (value && value.length && (value[0] === '"' || value[0] === '\'' || value[0] === '`')) { value = value.substr(1); } 
       if (value && value.length && (value[value.length - 1] === '"' || value[value.length - 1] === '\'' || value[value.length - 1] === '`')) { value = value.substr(0, value.length - 1); } 
@@ -43,7 +43,7 @@
     /**
      * Injects a filter input into the page and manages it's functionality'
      */
-    initAugmentFiltering = function () {
+    initSearchUI = function () {
 
       // Detect full-screen
       let fullscreen = (window.location.search.indexOf('fullscreen=true') > -1);
@@ -91,11 +91,12 @@
                                     + '<br /> \n'
                                     + '<b>Explicit syntax:</b> <br/>\n'
                                     + '<table style="border: 0px; margin: 10px;">'
-                                    + '  <tr><td>Issue</td>        <td style="padding-left: 10px;"><b>#</b><i>1234</td></i></tr>               \n'
-                                    + '  <tr><td>Title</td>        <td style="padding-left: 10px;"><b>title:</b><i>My title</i></td></tr>      \n'
-                                    + '  <tr><td>Created by</td>   <td style="padding-left: 10px;"><b>opened:</b><i>username</i></td></tr>     \n'
-                                    + '  <tr><td>Assigned to</td>  <td style="padding-left: 10px;"><b>assignee:</b><i>username</i></td></tr>   \n'
-                                    + '  <tr><td>Label</td>        <td style="padding-left: 10px;"><b>label:</b><i>my-label</i></td></tr>      \n'
+                                    + '  <tr><td>Card type</td>    <td style="padding-left: 10px;"><b>is:</b><i>issue</i>;<b>is:</b><i>open</i></td></tr> \n'
+                                    + '  <tr><td>Issue</td>        <td style="padding-left: 10px;"><b>#</b><i>1234</i></td></tr>                          \n'
+                                    + '  <tr><td>Title</td>        <td style="padding-left: 10px;"><b>title:</b><i>My title</i></td></tr>                 \n'
+                                    + '  <tr><td>Created by</td>   <td style="padding-left: 10px;"><b>opened:</b><i>username</i></td></tr>                \n'
+                                    + '  <tr><td>Assigned to</td>  <td style="padding-left: 10px;"><b>assignee:</b><i>username</i></td></tr>              \n'
+                                    + '  <tr><td>Label</td>        <td style="padding-left: 10px;"><b>label:</b><i>my-label</i></td></tr>                 \n'
                                     + '</table>'
                                     + '  ... or combine multiple conditions by separating them with "<b>;</b>"';
 
@@ -133,9 +134,9 @@
             if (delayedSearchTimeout) { clearTimeout(delayedSearchTimeout); }
             delayedSearchTimeout = setTimeout(() => { 
               // Filter results
-              searchBarHandlerFn(searchTooltipEl, (e.target || searchBarEl).value); 
+              searchBarInputHandlerFn(searchTooltipEl, (e.target || searchBarEl).value); 
               // Check for suggestions
-              checkSuggestions(searchSuggestionsEl, e.target || searchBarEl);
+              checkSearchSuggestions(searchSuggestionsEl, e.target || searchBarEl);
             }, 200);
           };
       $(searchBarEl).click(delayedSearchFn);
@@ -148,7 +149,7 @@
       // Check if suggestions present and keypress should manipulate dropdown
       $(searchBarEl).keydown((e) => {
         if (checkKeypressForSuggestions(e)) {
-          checkSuggestions(searchSuggestionsEl, e.target);
+          checkSearchSuggestions(searchSuggestionsEl, e.target);
         }
       });
 
@@ -165,7 +166,7 @@
     /**
      * Checks if suggestions need to be shown
      */
-    const checkSuggestions = function (searchSuggestionsEl, searchEl) {
+    function checkSearchSuggestions (searchSuggestionsEl, searchEl) {
 
       // Get search terms and caret position
       let searchSyntax = searchEl.value,
@@ -265,11 +266,10 @@
       }
 
     }
-
     /**
      * Checks if keypress should manage suggestions dropdown
      */
-    const checkKeypressForSuggestions = function (e) {
+    function checkKeypressForSuggestions (e) {
       // Check if actionable key pressed
       if ([38/* UP */, 40/* DOWN */, 33/* PGUP */, 34/* PGDOWN */, 13/* ENTER */].indexOf(e.keyCode) > -1) {
         
@@ -309,7 +309,7 @@
     /**
      * Handles search input
      */
-    const searchBarHandlerFn = function (searchTooltipEl, value) { 
+    function searchBarInputHandlerFn (searchTooltipEl, value) { 
       
       // Filter issues and notes
       if (!value.trim()) {
@@ -318,7 +318,7 @@
         $('.issue-card.project-card').css('display', 'block');
 
         // Clear conditions' tooltips
-        searchConditionsTooltipFn([], searchTooltipEl);
+        generateSearchConditionsTooltips([], searchTooltipEl);
 
       } else {
 
@@ -326,8 +326,12 @@
         let conditions = _.map(value.split(';'), (c) => { 
           let condition = c.trim().toLowerCase();
 
+          // Check if explicit IS
+          if (condition.indexOf('is:') === 0) {
+            return { type: 'is', value: clearQuotations(condition.split('is:')[1].trim()) };
+          }
           // Check if explicit search by title
-          if (condition.indexOf('title:') === 0) {
+          else if (condition.indexOf('title:') === 0) {
             return { type: 'title', value: clearQuotations(condition.split('title:')[1].trim()) };
           }
           // Check explicit search by issue number
@@ -374,6 +378,7 @@
 
           // Get card info
           let card = $(c),
+              type = 'issue', status = 'open',
               title = card.find('h5').text() || card.find('div > p').text(),
               issue = card.find('small').text().split('opened by')[0] || '',
               creator = card.find('small').text().split('opened by')[1] || '',
@@ -388,12 +393,30 @@
                 return label;
               });
 
+          let typeEl = card.find('.card-octicon');
+          if ($(typeEl).hasClass('card-note-octicon')) { type = 'note'; status = 'open'; }
+          if ($(typeEl).find('.octicon-issue-opened.open').length) { type = 'issue'; status = 'open' }
+          if ($(typeEl).find('.octicon-issue-closed.closed').length) { type = 'issue'; status = 'closed'; }
+          if ($(typeEl).find('.octicon-git-pull-request.open').length) { type = 'pr'; status = 'open'; }
+          if ($(typeEl).find('.octicon-git-pull-request.closed').length) { type = 'pr'; status = 'closed'; }
+          if ($(typeEl).find('.octicon-git-pull-request.merged').length) { type = 'pr'; status = 'merged'; }
+
           // Check conditions and determine if visible
           let visible = true;
           _.forEach(conditions, (condition) => {
             if (condition.value) {
+              // Check if explicit IS
+              if (condition.type === 'is') {
+                // Check if filtering issues
+                if (['note'].indexOf(condition.value) > -1) { visible = visible && (type === 'note'); }
+                if (['issue'].indexOf(condition.value) > -1) { visible = visible && (type === 'issue'); }
+                if (['pr', 'pull', 'request', 'pull request'].indexOf(condition.value) > -1) { visible = visible && (type === 'pr'); }
+                if (['open'].indexOf(condition.value) > -1) { visible = visible && (status === 'open'); }
+                if (['closed'].indexOf(condition.value) > -1) { visible = visible && (status === 'closed'); }
+                if (['merged'].indexOf(condition.value) > -1) { visible = visible && (status === 'merged'); }
+              }
               // Check if explicit search by title
-              if (condition.type === 'title') {
+              else if (condition.type === 'title') {
                 visible = visible && (title.trim().toLowerCase().indexOf(condition.value) > -1)
               }
               // Check explicit search by issue number
@@ -439,7 +462,7 @@
         });
 
         // Update conditions' tooltips
-        searchConditionsTooltipFn(conditions, searchTooltipEl, assigneesEls, labelsEls);
+        generateSearchConditionsTooltips(conditions, searchTooltipEl, assigneesEls, labelsEls);
 
       }
 
@@ -448,7 +471,7 @@
     /**
      * Adds a search conditions tooltip entry 
      */
-    const searchConditionsTooltipFn = function (conditions, searchTooltipEl, assigneesEls, labelsEls) {
+    function generateSearchConditionsTooltips (conditions, searchTooltipEl, assigneesEls, labelsEls) {
       
       // Detect full-screen
       let fullscreen = (window.location.search.indexOf('fullscreen=true') > -1);

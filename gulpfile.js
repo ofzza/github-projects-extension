@@ -12,14 +12,21 @@
 
 // Load dependencies
 // --------------------------------------------------------------------------------------------------------------------
-const gulp        = require('gulp'),
+const _           = require('lodash'),
+      fs          = require('fs'),
+      gulp        = require('gulp'),
       util        = require('gulp-util');
       gulpsync    = require('gulp-sync')(gulp);
       clean       = require('gulp-clean'),
       babel       = require('gulp-babel'),
       sourcemaps  = require('gulp-sourcemaps'),
       uglify      = require('gulp-uglify'),
+      zip         = require('gulp-zip'),
       watch       = require('gulp-watch');
+
+// Load package info
+// --------------------------------------------------------------------------------------------------------------------
+const pck         = require('./package.json');
 
 // Define a clear task (to be executed before a clean build)
 // --------------------------------------------------------------------------------------------------------------------
@@ -28,16 +35,32 @@ gulp.task('clear@build', () => {
     .pipe(clean({force: true}));
 });
 
+// Define manifest merge task
+// --------------------------------------------------------------------------------------------------------------------
+gulp.task('mainfest@build', () => {
+  // Load manifests
+  let manifest = require('./src/manifest.json'),
+      githubManifest = _.merge({}, manifest, require('./src/manifest.githubcom.json')),
+      corporateManifest = _.merge({}, manifest, require('./src/manifest.corporate.json'));
+  fs.writeFileSync('./dist/github.com/manifest.json', JSON.stringify(githubManifest));
+  fs.writeFileSync('./dist/corporate/manifest.json', JSON.stringify(corporateManifest));
+});
+// ... and attached watcher
+gulp.task('watch.mainfest@build', () => {
+  watch(['./src/**/*.json'], () => { gulp.start('mainfest@build'); });
+});
+
 // Define copy task
 // --------------------------------------------------------------------------------------------------------------------
 let otherFiletypes = [
   './src/**/*.png', 
   './src/**/*.ico', 
-  './src/**/*.json'
+  './src/**/*.css'
 ];
 gulp.task('copy@build', () => {
   return gulp.src(otherFiletypes)
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist/github.com'))
+    .pipe(gulp.dest('./dist/corporate'));
 });
 // ... and attached watcher
 gulp.task('watch.copy@build', () => {
@@ -46,12 +69,13 @@ gulp.task('watch.copy@build', () => {
 
 // ... and library copy task
 let libraries = [
-    './node_modules/jquery/dist/jquery.slim.min.js',
+    './node_modules/jquery/dist/jquery.min.js',
     './node_modules/lodash/lodash.min.js'
   ];
 gulp.task('copy@libs', () => {
   return gulp.src(libraries)
-    .pipe(gulp.dest('./dist/content/libs'));
+    .pipe(gulp.dest('./dist/github.com/content/libs'))
+    .pipe(gulp.dest('./dist/corporate/content/libs'));
 });
 
 // Define ES6 transpile task
@@ -68,14 +92,37 @@ gulp.task('transpile@build', () => {
       })
     .pipe(uglify({ mangle: true }))
     .pipe(!util.env.production ? sourcemaps.write('.', { includeContent: true, sourceRoot: '../src' }) : util.noop())
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist/github.com'))
+    .pipe(gulp.dest('./dist/corporate'));
 });
 // ... and attached watcher
 gulp.task('watch.transpile@build', () => {
   watch('./src/**/*.js', () => { gulp.start('transpile@build'); });
 });
 
+// Define zip task
+// --------------------------------------------------------------------------------------------------------------------
+gulp.task('zip.githubcom@build', () => {
+  return gulp.src(['./dist/github.com/**/*'])
+    .pipe(zip(`dist.githubcom.v${pck.version}.zip`))
+    .pipe(gulp.dest('./versions/'));
+});
+gulp.task('zip.corporate@build', () => {
+  return gulp.src(['./dist/corporate/**/*'])
+    .pipe(zip(`dist.corporate.v${pck.version}.zip`))
+    .pipe(gulp.dest('./versions/'));
+});
+gulp.task('zip.build', ['zip.githubcom@build', 'zip.corporate@build' ]);
+// ... and attached watcher
+gulp.task('watch.zip@build', () => {
+  watch(['./dist/**/*'], () => {
+    gulp.start('zip.githubcom@build'); 
+    gulp.start('zip.corporate@build'); 
+  });
+});
+
+
 // Define root tasks
 // --------------------------------------------------------------------------------------------------------------------
-gulp.task('build', gulpsync.sync(['clear@build', 'copy@build', 'copy@libs', 'transpile@build']));
-gulp.task('watch', gulpsync.sync(['watch.copy@build', 'watch.transpile@build']));
+gulp.task('build', gulpsync.sync(['clear@build', 'copy@build', 'copy@libs', 'mainfest@build', 'transpile@build', 'zip.build']));
+gulp.task('watch', gulpsync.sync(['watch.copy@build', 'watch.mainfest@build', 'watch.transpile@build', 'watch.zip@build']));

@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "GitHub Projects Searchbar",
+  "name": "GitHub Projects",
   "version": "1.0",
-  "description": "Adds a functional search-bar to Github Projects page.",
+  "description": "Adds search an d other optimizations to GitHub Projects page.",
 
   "icons": { 
     "16": "style/img/logo(16px).png",
@@ -13,20 +13,21 @@
 
   "content_scripts" : [
     {
-      "matches" : [ 
-        "https://*/*/*/projects/*"
-       ],
+      "matches" : [ ],
       "js" : [ 
-        "content/libs/jquery.slim.min.js", 
+        "content/libs/jquery.min.js", 
         "content/libs/lodash.min.js", 
-        "content/github/projects/index.js" 
+        "content/github/projects/search.js" ,
+        "content/github/projects/labels.js" 
+      ],
+      "css": [
+        "content/github/projects/columns.css",
+        "content/github/projects/labels.css" 
       ]
     }
   ],
 
   "permissions": [
-    "activeTab",
-    "http://*/*",
-    "https://*/*"
+    "activeTab"
   ]
 }

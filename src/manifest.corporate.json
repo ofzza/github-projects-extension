@@ -1,0 +1,13 @@
+{
+  "content_scripts" : [
+    {
+      "matches" : [ 
+        "https://*/*/*/projects/*"
+       ]
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}
