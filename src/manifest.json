@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "version": "1.0",
+  "version": "?",
 
   "icons": { 
     "16": "style/img/logo(16px).png",

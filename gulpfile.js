@@ -40,8 +40,8 @@ gulp.task('clear@build', () => {
 gulp.task('mainfest@build', () => {
   // Load manifests
   let manifest = require('./src/manifest.json'),
-      githubManifest = _.merge({}, manifest, require('./src/manifest.githubcom.json')),
-      enterpriseManifest = _.merge({}, manifest, require('./src/manifest.enterprise.json'));
+      githubManifest = _.merge({}, manifest, require('./src/manifest.githubcom.json'), { version: pck.version }),
+      enterpriseManifest = _.merge({}, manifest, require('./src/manifest.enterprise.json'), { version: pck.version });
   fs.writeFileSync('./dist/github.com/manifest.json', JSON.stringify(githubManifest));
   fs.writeFileSync('./dist/enterprise/manifest.json', JSON.stringify(enterpriseManifest));
 });
