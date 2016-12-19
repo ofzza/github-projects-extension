@@ -1,9 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "GitHub Projects",
   "version": "1.0",
-  "description": "Adds search an d other optimizations to GitHub Projects page.",
 
   "icons": { 
     "16": "style/img/logo(16px).png",

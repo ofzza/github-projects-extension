@@ -41,9 +41,9 @@ gulp.task('mainfest@build', () => {
   // Load manifests
   let manifest = require('./src/manifest.json'),
       githubManifest = _.merge({}, manifest, require('./src/manifest.githubcom.json')),
-      corporateManifest = _.merge({}, manifest, require('./src/manifest.corporate.json'));
+      enterpriseManifest = _.merge({}, manifest, require('./src/manifest.enterprise.json'));
   fs.writeFileSync('./dist/github.com/manifest.json', JSON.stringify(githubManifest));
-  fs.writeFileSync('./dist/corporate/manifest.json', JSON.stringify(corporateManifest));
+  fs.writeFileSync('./dist/enterprise/manifest.json', JSON.stringify(enterpriseManifest));
 });
 // ... and attached watcher
 gulp.task('watch.mainfest@build', () => {
@@ -60,7 +60,7 @@ let otherFiletypes = [
 gulp.task('copy@build', () => {
   return gulp.src(otherFiletypes)
     .pipe(gulp.dest('./dist/github.com'))
-    .pipe(gulp.dest('./dist/corporate'));
+    .pipe(gulp.dest('./dist/enterprise'));
 });
 // ... and attached watcher
 gulp.task('watch.copy@build', () => {
@@ -75,7 +75,7 @@ let libraries = [
 gulp.task('copy@libs', () => {
   return gulp.src(libraries)
     .pipe(gulp.dest('./dist/github.com/content/libs'))
-    .pipe(gulp.dest('./dist/corporate/content/libs'));
+    .pipe(gulp.dest('./dist/enterprise/content/libs'));
 });
 
 // Define ES6 transpile task
@@ -93,7 +93,7 @@ gulp.task('transpile@build', () => {
     .pipe(uglify({ mangle: true }))
     .pipe(!util.env.production ? sourcemaps.write('.', { includeContent: true, sourceRoot: '../src' }) : util.noop())
     .pipe(gulp.dest('./dist/github.com'))
-    .pipe(gulp.dest('./dist/corporate'));
+    .pipe(gulp.dest('./dist/enterprise'));
 });
 // ... and attached watcher
 gulp.task('watch.transpile@build', () => {
@@ -107,17 +107,17 @@ gulp.task('zip.githubcom@build', () => {
     .pipe(zip(`dist.githubcom.v${pck.version}.zip`))
     .pipe(gulp.dest(`./versions/${util.env.production ? 'prod' : 'dev'}`));
 });
-gulp.task('zip.corporate@build', () => {
-  return gulp.src(['./dist/corporate/**/*'])
-    .pipe(zip(`dist.corporate.v${pck.version}.zip`))
+gulp.task('zip.enterprise@build', () => {
+  return gulp.src(['./dist/enterprise/**/*'])
+    .pipe(zip(`dist.enterprise.v${pck.version}.zip`))
     .pipe(gulp.dest(`./versions/${util.env.production ? 'prod' : 'dev'}`));
 });
-gulp.task('zip.build', ['zip.githubcom@build', 'zip.corporate@build' ]);
+gulp.task('zip.build', ['zip.githubcom@build', 'zip.enterprise@build' ]);
 // ... and attached watcher
 gulp.task('watch.zip@build', () => {
   watch(['./dist/**/*'], () => {
     gulp.start('zip.githubcom@build'); 
-    gulp.start('zip.corporate@build'); 
+    gulp.start('zip.enterprise@build'); 
   });
 });
 

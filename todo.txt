@@ -1,4 +1,3 @@
 [X] Code refactor and style-2-css
 [X] Help window content makeover
-[ ] Labels menu loader
 [ ] Priority labels

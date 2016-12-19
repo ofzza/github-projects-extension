@@ -592,7 +592,9 @@
           tooltipEl.style.backgroundColor = (fullscreen ? '#fff' : '#fafafa');
 
           // Check condition type and add element
-          if (condition.type === 'title') {
+          if (condition.type === 'is') {
+            tooltipEl.innerHTML = 'is: <b>{value}</b>'.replace(/\{value\}/g, condition.value);
+          } else if (condition.type === 'title') {
             tooltipEl.innerHTML = 'title: <b>{value}</b>'.replace(/\{value\}/g, condition.value);
           } else if (condition.type === 'number') {
             tooltipEl.innerHTML = '<b>{value}</b>'.replace(/\{value\}/g, condition.value);
