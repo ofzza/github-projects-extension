@@ -4,8 +4,7 @@
     ".idea/": true,
     "node_modules/": true,
     "dist/": true,
-    "logs/": true,
-    "typings/": true
+    "versions/": true
   }
 ,
 "typescript.check.workspaceVersion": false

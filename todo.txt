@@ -1,5 +1,4 @@
-[X] Aliases for explicit search terms
-[/] Fade help box to prevent flicker
-[X] Suggestions dropdown keyboard navigation
-[ ] Icon and pretify help box
-[ ] Limit pills container to prevent runoff
+[ ] Code refactor and style-2-css
+[ ] Help window content makeover
+[ ] Labels menu loader
+[ ] Priority labels
