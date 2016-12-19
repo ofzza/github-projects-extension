@@ -1,3 +1,6 @@
 [X] Code refactor and style-2-css
 [X] Help window content makeover
+[ ] Column resizing
+[ ] Column collapsing/expanding
+[ ] Focus "Filter" when showing labels menu
 [ ] Priority labels

@@ -52,21 +52,21 @@
 
 .ogp-search-bar-help-element {
     position: relative;
-    top: 1px;
+    top: 2px;
     left: 2px;
     display: inline-block;
     z-index: 33;
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
     margin-right: 36px;
     color: #767676;
     border: 1px solid #aaa;
     border-radius: 6px;
-    font-size: 9px;
-    line-height: 10px;
+    font-size: 12px;
+    line-height: 14px;
     text-align: center;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0, 0.1) inset;
-    cursor: help;
+    cursor: pointer;
 }
 .ogp-search-bar-help-element:hover {
     background-color: #fff;
@@ -105,7 +105,7 @@
     content: '';
     position: absolute;
     top: -20px;
-    right: 224px;
+    right: 225px;
     margin-left: -20px;
     width: 0;
     height: 0;
@@ -115,7 +115,7 @@
 }
 .full-screen-project-header .ogp-search-bar-help-panel.ogp-shown:before,
 .full-screen-project-header .ogp-search-bar-help-panel:hover:before { 
-    right: 244px;
+    right: 245px;
 }
 
 .ogp-search-bar-help-panel .ogp-search-example {

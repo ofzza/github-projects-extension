@@ -208,15 +208,11 @@
       searchBarHelpEl.className = 'ogp-search-bar-help-element';
       searchBarHelpEl.innerText = '?';
       let helpMouseoverTimeout = null;
-      $(searchBarHelpEl).mouseover(() => {
+      $(searchBarHelpEl).click(() => {
         // Show help after a timeout
-        helpMouseoverTimeout = setTimeout(() => {
-          searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel ogp-shown';
-        }, 200); 
+        searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel ogp-shown';
       });
-      $(searchBarHelpEl).mouseout(() => { 
-        // Clear timeout
-        if (helpMouseoverTimeout) { clearTimeout(helpMouseoverTimeout); }
+      $(searchBarHelpPanelEl).mouseout(() => { 
         // Hide help
         searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel'; 
       });

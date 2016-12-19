@@ -1,6 +1,6 @@
 {
   "name": "GitHub Projects (Enterprise)",
-  "description": "Adds search functionality, labels management and other optimizations to GitHub Projects page. This version will work with GitHub Enterprise hosted on domains other then GitHub.com!",
+  "description": "Adds optimizations to GitHub Projects page. This version will work with GitHub Enterprise hosted on domains other then GitHub.com!",
   "content_scripts" : [
     {
       "matches" : [ 

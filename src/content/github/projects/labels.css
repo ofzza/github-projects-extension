@@ -6,17 +6,23 @@
 .project-container .project-columns .issue-card::before {
     content: '';
     position: absolute;
-    bottom: 18px;
-    left: 15px;
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 8px solid #e5e5e5;
+    bottom: 16px;
+    left: 12px;
+    width: 14px;
+    height: 16px;
+    /* 
+        <svg xmlns='http://www.w3.org/2000/svg' width="14" height="16">
+            <path stroke="#ccc" fill="#ccc" d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+        </svg> 
+    */
+    color: #ccc;
+    background: 
+        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiI+PHBhdGggc3Ryb2tlPSIjY2NjIiBmaWxsPSIjY2NjIiBkPSJNMTQgOC43N3YtMS42bC0xLjk0LS42NC0uNDUtMS4wOS44OC0xLjg0LTEuMTMtMS4xMy0xLjgxLjkxLTEuMDktLjQ1LS42OS0xLjkyaC0xLjZsLS42MyAxLjk0LTEuMTEuNDUtMS44NC0uODgtMS4xMyAxLjEzLjkxIDEuODEtLjQ1IDEuMDlMMCA3LjIzdjEuNTlsMS45NC42NC40NSAxLjA5LS44OCAxLjg0IDEuMTMgMS4xMyAxLjgxLS45MSAxLjA5LjQ1LjY5IDEuOTJoMS41OWwuNjMtMS45NCAxLjExLS40NSAxLjg0Ljg4IDEuMTMtMS4xMy0uOTItMS44MS40Ny0xLjA5TDE0IDguNzV2LjAyek03IDExYy0xLjY2IDAtMy0xLjM0LTMtM3MxLjM0LTMgMy0zIDMgMS4zNCAzIDMtMS4zNCAzLTMgM3oiLz48L3N2Zz4=") center center no-repeat;
     cursor: pointer;
 }
-.project-container .project-columns .issue-card::before:hover {
-    border-top: 8px solid #51a7e8;
+.project-container .project-columns .issue-card:hover::before {
+    background: 
+        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiI+PHBhdGggc3Ryb2tlPSIjNDA3OGMwIiBmaWxsPSIjNDA3OGMwIiBkPSJNMTQgOC43N3YtMS42bC0xLjk0LS42NC0uNDUtMS4wOS44OC0xLjg0LTEuMTMtMS4xMy0xLjgxLjkxLTEuMDktLjQ1LS42OS0xLjkyaC0xLjZsLS42MyAxLjk0LTEuMTEuNDUtMS44NC0uODgtMS4xMyAxLjEzLjkxIDEuODEtLjQ1IDEuMDlMMCA3LjIzdjEuNTlsMS45NC42NC40NSAxLjA5LS44OCAxLjg0IDEuMTMgMS4xMyAxLjgxLS45MSAxLjA5LjQ1LjY5IDEuOTJoMS41OWwuNjMtMS45NCAxLjExLS40NSAxLjg0Ljg4IDEuMTMtMS4xMy0uOTItMS44MS40Ny0xLjA5TDE0IDguNzV2LjAyek03IDExYy0xLjY2IDAtMy0xLjM0LTMtM3MxLjM0LTMgMy0zIDMgMS4zNCAzIDMtMS4zNCAzLTMgM3oiLz48L3N2Zz4=") center center no-repeat;
 }
 .project-column > div {
     padding-bottom: 270px !important;
@@ -36,7 +42,6 @@
     border: 1px #e5e5e5 solid;
     cursor: default;
     box-shadow: 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5)
-    /*box-shadow: 1px 1px 1px 1px rgba(0,0,0, 0.1);*/
 }
 .ogp-labels-menu::before {
     content: '';
