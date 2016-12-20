@@ -33,8 +33,8 @@
      */
     initLabelsUI = function () {
       
-      // Listen for clicks on labels
-      $('.project-columns').mousedown((e) => {
+      // Listen for clicks outside of labels
+      $('body, .project-columns').mousedown((e) => {
 
         // If menu shown
         if (labelsMenuEl) {
@@ -58,6 +58,7 @@
 
       });
 
+      // Listen for clicks on labels
       $('.project-columns').click((e) => {
 
         // Check if labels clicked
@@ -89,6 +90,9 @@
 
               // Inject labels menu HTML
               labelsMenuEl.innerHTML = res.html;
+
+              // Focus filter
+              $(labelsMenuEl).find('.select-menu-text-filter input').focus();
 
               // Prevent mouse scroll bleed
               let menuListEl = $(labelsMenuEl).find('.select-menu-list');

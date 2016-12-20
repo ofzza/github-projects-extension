@@ -83,25 +83,32 @@
     top: 36px;
     margin-top: 2px;
     margin-right: 4px;
-    padding: 4px 4px 0 4px;
+    padding: 0px 4px 0 4px;
     border: 1px solid #eee;
     border-radius: 3px;
     background-color: #fafafa;
     box-shadow: 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
+    text-align: right;
 }
 .full-screen-project-header .ogp-search-bar-help-panel { 
     top: 40px; 
 }
+.ogp-search-bar-help-panel .ogp-search-bar-help-close {
+    display: inline-block;
+    font-size: 13px;
+    margin-right: 4px;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
 .ogp-search-bar-help-panel .ogp-search-bar-help-content {
     max-height: 320px; 
     overflow: auto;
+    text-align: left;
 }
-.ogp-search-bar-help-panel.ogp-shown, 
-.ogp-search-bar-help-panel:hover { 
+.ogp-search-bar-help-panel.ogp-shown { 
     display: block;
 }
-.ogp-search-bar-help-panel.ogp-shown:before,
-.ogp-search-bar-help-panel:hover:before { 
+.ogp-search-bar-help-panel.ogp-shown:before { 
     content: '';
     position: absolute;
     top: -20px;
@@ -113,8 +120,7 @@
     border-right: 10px solid transparent;
     border-bottom: 20px solid #eee;
 }
-.full-screen-project-header .ogp-search-bar-help-panel.ogp-shown:before,
-.full-screen-project-header .ogp-search-bar-help-panel:hover:before { 
+.full-screen-project-header .ogp-search-bar-help-panel.ogp-shown:before { 
     right: 245px;
 }
 

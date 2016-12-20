@@ -57,3 +57,46 @@
 .ogp-labels-menu .select-menu-list {
     max-height: 227px !important;
 }
+
+/* Super-labels
+============================================================================================ */
+.issue-card .labels {
+    display:flex;
+    flex-flow: column
+}
+.issue-card .labels .issue-card-label { order: 1 }
+.issue-card .labels .issue-card-label[aria-label *= "@"]  { order: 0; }
+
+.issue-card .labels .issue-card-label[aria-label *= "@"] {
+    z-index: 1;
+    position: absolute;
+    border: 2px solid #e5e5e5;
+}
+.issue-card .labels .issue-card-label[aria-label *= "@"]:not(:hover) {
+    left: 100%;
+    margin-left: 3px;
+    width: 16px !important;
+    max-width: 16px !important;
+    height: 16px !important;
+    max-height: 16px !important;
+    color: transparent !important;
+    border-radius: 8px;
+    transition: none;
+}
+.issue-card .labels .issue-card-label[aria-label *= "@"]:hover {
+    right: -20px;
+    margin-right: 3px;
+    left: auto;
+    max-width: 320px !important;
+    max-height: 32px !important;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
+    transition-property: max-width, max-height, border-radius, color, box-shadow;
+    transition-timing-function: ease;
+    transition-duration: 400ms;
+}
+.issue-card .labels .issue-card-label[aria-label *= "@"]:nth-child(1) { top: -50px; }
+.issue-card .labels .issue-card-label[aria-label *= "@"]:nth-child(2) { top: -40px; }
+.issue-card .labels .issue-card-label[aria-label *= "@"]:nth-child(3) { top: -30px; }
+.issue-card .labels .issue-card-label[aria-label *= "@"]:nth-child(4) { top: -20px; }
+.issue-card .labels .issue-card-label[aria-label *= "@"] { top: -10px; }

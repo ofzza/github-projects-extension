@@ -65,6 +65,11 @@
       let searchBarHelpPanelEl = document.createElement('div');
       searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel';
 
+      let searchBarHelpPanelClose = document.createElement('a');
+      searchBarHelpPanelClose.className = 'ogp-search-bar-help-close';
+      searchBarHelpPanelClose.innerText = 'close';
+      $(searchBarHelpPanelEl).append(searchBarHelpPanelClose);
+
       let searchBarHelpPanelContent = document.createElement('div');
       searchBarHelpPanelContent.className = 'ogp-search-bar-help-content';
       searchBarHelpPanelContent.innerHTML = `
@@ -209,10 +214,14 @@
       searchBarHelpEl.innerText = '?';
       let helpMouseoverTimeout = null;
       $(searchBarHelpEl).click(() => {
-        // Show help after a timeout
-        searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel ogp-shown';
+        // Show help 
+        if ($searchBarHelpPanelEl).hasClass('ogp-shown')) {
+          searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel';
+        } else {
+          searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel ogp-shown';
+        }
       });
-      $(searchBarHelpPanelEl).mouseout(() => { 
+      $(searchBarHelpPanelClose).click((e) => {
         // Hide help
         searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel'; 
       });
