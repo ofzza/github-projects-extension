@@ -1,6 +1,18 @@
 /* Projects columns adjustments
 ============================================================================================ */
-.project-container .project-columns {
+.project-columns {
     padding-left: 4px !important;
     padding-right: 4px !important;
+}
+
+.project-column-inner {
+    overflow-x: hidden;
+}
+
+/* GitHub.com selector */
+.project-columns .project-column > div:not(:first-child),
+/* Enterprise selector */
+.project-columns .project-column-header + .project-column > div
+ {
+    padding-bottom: 270px !important;
 }

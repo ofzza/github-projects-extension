@@ -215,7 +215,7 @@
       let helpMouseoverTimeout = null;
       $(searchBarHelpEl).click(() => {
         // Show help 
-        if ($searchBarHelpPanelEl).hasClass('ogp-shown')) {
+        if ($(searchBarHelpPanelEl).hasClass('ogp-shown')) {
           searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel';
         } else {
           searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel ogp-shown';
@@ -256,7 +256,7 @@
       });
 
       // Insert search bar
-      let searchContainerEl = (fullscreen ? $('.full-screen-project-header > div') : $('.project-header > .float-right'));
+      let searchContainerEl = (fullscreen && $('.full-screen-project-header > div').length ? $('.full-screen-project-header > div') : $('.project-header > .float-right'));
       searchContainerEl.prepend(searchBarHelpEl);
       searchContainerEl.prepend(searchBarContainerEl);
       searchContainerEl.prepend(searchBarHelpPanelEl);
@@ -487,13 +487,13 @@
               type = 'issue', status = 'open',
               title = card.find('h5').text() || card.find('div > p').text(),
               number = card.find('small').text().split('opened by')[0] || '',
-              creator = card.find('small').text().split('opened by')[1] || '',
+              creator = card.find('small').text().split('by')[1] || '',
               assignees = _.map(card.find('div > img'), (el) => {
                 let username = $(el).attr('alt').replace(/@/g, '');
                 if (!assigneesEls[username]) { assigneesEls[username] = $(el).clone()[0]; }
                 return username;
               }),
-              labels = _.map(card.find('.labels > a'), (el) => { 
+              labels = _.map(card.find('.issue-card-label'), (el) => { 
                 let label = $(el).text(); 
                 if (!labelsEls[label]) { labelsEls[label] = $(el).clone()[0]; }
                 return label;

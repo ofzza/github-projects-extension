@@ -125,4 +125,4 @@ gulp.task('watch.zip@build', () => {
 // Define root tasks
 // --------------------------------------------------------------------------------------------------------------------
 gulp.task('build', gulpsync.sync(['clear@build', 'copy@build', 'copy@libs', 'mainfest@build', 'transpile@build', 'zip.build']));
-gulp.task('watch', gulpsync.sync(['watch.copy@build', 'watch.mainfest@build', 'watch.transpile@build', 'watch.zip@build']));
+gulp.task('watch', ['watch.copy@build', 'watch.mainfest@build', 'watch.transpile@build', 'watch.zip@build']);
