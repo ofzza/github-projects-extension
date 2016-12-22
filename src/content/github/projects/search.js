@@ -68,7 +68,7 @@
 
       let searchBarHelpPanelClose = document.createElement('a');
       searchBarHelpPanelClose.className = 'ogp-search-bar-help-close btn-link muted-link';
-      searchBarHelpPanelClose.innerText = 'close';
+      searchBarHelpPanelClose.innerHTML = '<svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>';
       $(searchBarHelpPanelEl).append(searchBarHelpPanelClose);
 
       let searchBarHelpPanelContent = document.createElement('div');

@@ -71,7 +71,7 @@
     top: 36px;
     margin-top: 2px;
     margin-right: 4px;
-    padding: 0px 4px 0 4px;
+    padding: 0px 0px 0 4px;
     border: 1px solid #eee;
     border-radius: 3px;
     background-color: #fafafa;
@@ -90,6 +90,9 @@
 .ogp-search-bar-help-panel .ogp-search-bar-help-content {
     max-height: 320px; 
     overflow: auto;
+    padding-right: 4px;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
     text-align: left;
 }
 .ogp-search-bar-help-panel.ogp-shown { 
@@ -107,8 +110,12 @@
     border-right: 10px solid transparent;
     border-bottom: 20px solid #eee;
 }
-.full-screen-project-header .ogp-search-bar-help-panel.ogp-shown:before { 
-    right: 245px;
+.ogp-search-bar-help-panel.ogp-shown:after {
+    content: 'Search syntax:';
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    color: #767676;
 }
 
 .ogp-search-bar-help-panel .ogp-search-example {
