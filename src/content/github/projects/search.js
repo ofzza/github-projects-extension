@@ -491,7 +491,7 @@
           // Match any
           else {
             return _.map(condition.match(/\w+|"[^"]+"/g), (condition) => { 
-              return { type: 'any', value: condition } 
+              return { type: 'any', value: clearQuotations(condition) } 
             });
           }
 
