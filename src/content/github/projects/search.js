@@ -49,14 +49,15 @@
       let fullscreen = (window.location.search.indexOf('fullscreen=true') > -1);
 
       // Initialize search bar
-      let searchBarContainerEl = document.createElement('div');
-      searchBarContainerEl.className = 'ogp-search-bar-container';
+      let searchBarContainerEl = document.createElement('form');
+      searchBarContainerEl.className = 'ogp-search-bar-container subnav-search';
 
       let searchBarEl = document.createElement('input');
-      searchBarEl.className = 'ogp-search-bar-element';
+      searchBarEl.className = 'ogp-search-bar-element form-control form-control subnav-search-input input-contrast';
       searchBarEl.type = 'text';
       searchBarEl.placeholder = 'Filter';      
       $(searchBarContainerEl).append(searchBarEl);
+      $(searchBarContainerEl).append(searchBarEl, '<svg aria-hidden="true" class="octicon octicon-search subnav-search-icon" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z"></path></svg>');
 
       let searchSuggestionsEl = document.createElement('ul');
       searchSuggestionsEl.className = 'ogp-suggestions-element';
@@ -66,7 +67,7 @@
       searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel';
 
       let searchBarHelpPanelClose = document.createElement('a');
-      searchBarHelpPanelClose.className = 'ogp-search-bar-help-close';
+      searchBarHelpPanelClose.className = 'ogp-search-bar-help-close btn-link muted-link';
       searchBarHelpPanelClose.innerText = 'close';
       $(searchBarHelpPanelEl).append(searchBarHelpPanelClose);
 
@@ -209,8 +210,8 @@
       `;
       $(searchBarHelpPanelEl).append(searchBarHelpPanelContent);
 
-      let searchBarHelpEl = document.createElement('span');
-      searchBarHelpEl.className = 'ogp-search-bar-help-element';
+      let searchBarHelpEl = document.createElement('a');
+      searchBarHelpEl.className = 'ogp-search-bar-help-element btn-link muted-link';
       searchBarHelpEl.innerText = '?';
       let helpMouseoverTimeout = null;
       $(searchBarHelpEl).click(() => {
@@ -225,6 +226,9 @@
         // Hide help
         searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel'; 
       });
+      $(searchBarContainerEl).append(searchBarHelpEl);
+      $(searchBarContainerEl).append(searchBarHelpPanelEl);
+
 
       // Initialize search tooltip
       let searchTooltipEl = document.createElement('span');
@@ -257,9 +261,7 @@
 
       // Insert search bar
       let searchContainerEl = (fullscreen && $('.full-screen-project-header > div').length ? $('.full-screen-project-header > div') : $('.project-header > .float-right'));
-      searchContainerEl.prepend(searchBarHelpEl);
       searchContainerEl.prepend(searchBarContainerEl);
-      searchContainerEl.prepend(searchBarHelpPanelEl);
       searchContainerEl.prepend(searchTooltipEl);
       $(searchBarEl).focus();
 
@@ -422,8 +424,23 @@
 
       } else {
 
+        // Treat explicit oconditions as separate even if no delimiter
+        value = value.replace(/ is:/g, ' ;is:');
+        value = value.replace(/ title:/g, ' ;title:');
+        value = value.replace(/ #/g, ' ;#');
+        value = value.replace(/ num:/g, ' ;num:');
+        value = value.replace(/ number:/g, ' ;number:');
+        value = value.replace(/ opened:/g, ' ;opened:');
+        value = value.replace(/ created:/g, ' ;created:');
+        value = value.replace(/ by:/g, ' ;by:');
+        value = value.replace(/ assignee:/g, ' ;assigneeby:');
+        value = value.replace(/ assigned:/g, ' ;assignedby:');
+        value = value.replace(/ to:/g, ' ;to:');
+        value = value.replace(/ for:/g, ' ;for:');
+        value = value.replace(/ label:/g, ' ;label:');
+
         // Process conditions
-        let conditions = _.map(value.split(';'), (c) => { 
+        let conditions = _.flatten(_.map(value.split(';'), (c) => { 
           let condition = c.trim().toLowerCase();
 
           // Check if explicit IS
@@ -473,10 +490,12 @@
           }
           // Match any
           else {
-            return { type: 'any', value: clearQuotations(condition) };
+            return _.map(condition.match(/\w+|"[^"]+"/g), (condition) => { 
+              return { type: 'any', value: condition } 
+            });
           }
 
-        }); 
+        })); 
               
         // Filter cards by content
         let cards = $('.issue-card.project-card');

@@ -1,5 +1,5 @@
 {
-  "name": "GitHub Projects (Enterprise)",
+  "name": "GitHub (Enterprise) Projects Optimizer",
   "description": "Adds optimizations to GitHub Projects page. This version will work with GitHub Enterprise hosted on domains other then GitHub.com!",
   "content_scripts" : [
     {

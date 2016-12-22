@@ -1,6 +1,10 @@
 /* Projects columns adjustments
 ============================================================================================ */
-.project-columns {
+.project-columns,
+/* GitHub.com selector */
+.repository-content .project-columns,
+/* Enterprise selector */
+.project-container .project-columns {
     padding-left: 4px !important;
     padding-right: 4px !important;
 }

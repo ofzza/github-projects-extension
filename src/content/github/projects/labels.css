@@ -12,18 +12,22 @@
     height: 12px;
     /* 
         <svg xmlns='http://www.w3.org/2000/svg' width="14" height="16">
-            <path stroke="#ccc" fill="#ccc" d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+            <path fill="#cccccc" d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
         </svg> 
     */
-    color: #ccc;
     background: 
-        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiI+PHBhdGggc3Ryb2tlPSIjY2NjIiBmaWxsPSIjY2NjIiBkPSJNMTQgOC43N3YtMS42bC0xLjk0LS42NC0uNDUtMS4wOS44OC0xLjg0LTEuMTMtMS4xMy0xLjgxLjkxLTEuMDktLjQ1LS42OS0xLjkyaC0xLjZsLS42MyAxLjk0LTEuMTEuNDUtMS44NC0uODgtMS4xMyAxLjEzLjkxIDEuODEtLjQ1IDEuMDlMMCA3LjIzdjEuNTlsMS45NC42NC40NSAxLjA5LS44OCAxLjg0IDEuMTMgMS4xMyAxLjgxLS45MSAxLjA5LjQ1LjY5IDEuOTJoMS41OWwuNjMtMS45NCAxLjExLS40NSAxLjg0Ljg4IDEuMTMtMS4xMy0uOTItMS44MS40Ny0xLjA5TDE0IDguNzV2LjAyek03IDExYy0xLjY2IDAtMy0xLjM0LTMtM3MxLjM0LTMgMy0zIDMgMS4zNCAzIDMtMS4zNCAzLTMgM3oiLz48L3N2Zz4=") center center no-repeat;
+        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiI+PHBhdGggZmlsbD0iI2NjY2NjYyIgZD0iTTE0IDguNzd2LTEuNmwtMS45NC0uNjQtLjQ1LTEuMDkuODgtMS44NC0xLjEzLTEuMTMtMS44MS45MS0xLjA5LS40NS0uNjktMS45MmgtMS42bC0uNjMgMS45NC0xLjExLjQ1LTEuODQtLjg4LTEuMTMgMS4xMy45MSAxLjgxLS40NSAxLjA5TDAgNy4yM3YxLjU5bDEuOTQuNjQuNDUgMS4wOS0uODggMS44NCAxLjEzIDEuMTMgMS44MS0uOTEgMS4wOS40NS42OSAxLjkyaDEuNTlsLjYzLTEuOTQgMS4xMS0uNDUgMS44NC44OCAxLjEzLTEuMTMtLjkyLTEuODEuNDctMS4wOUwxNCA4Ljc1di4wMnpNNyAxMWMtMS42NiAwLTMtMS4zNC0zLTNzMS4zNC0zIDMtMyAzIDEuMzQgMyAzLTEuMzQgMy0zIDN6Ii8+PC9zdmc+") center center no-repeat;
     background-size: 12px 12px;
     cursor: pointer;
 }
 .project-columns .issue-card:hover::before {
+    /* 
+        <svg xmlns='http://www.w3.org/2000/svg' width="14" height="16">
+            <path fill="#4078c0" d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
+        </svg> 
+    */
     background: 
-        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiI+PHBhdGggc3Ryb2tlPSIjNDA3OGMwIiBmaWxsPSIjNDA3OGMwIiBkPSJNMTQgOC43N3YtMS42bC0xLjk0LS42NC0uNDUtMS4wOS44OC0xLjg0LTEuMTMtMS4xMy0xLjgxLjkxLTEuMDktLjQ1LS42OS0xLjkyaC0xLjZsLS42MyAxLjk0LTEuMTEuNDUtMS44NC0uODgtMS4xMyAxLjEzLjkxIDEuODEtLjQ1IDEuMDlMMCA3LjIzdjEuNTlsMS45NC42NC40NSAxLjA5LS44OCAxLjg0IDEuMTMgMS4xMyAxLjgxLS45MSAxLjA5LjQ1LjY5IDEuOTJoMS41OWwuNjMtMS45NCAxLjExLS40NSAxLjg0Ljg4IDEuMTMtMS4xMy0uOTItMS44MS40Ny0xLjA5TDE0IDguNzV2LjAyek03IDExYy0xLjY2IDAtMy0xLjM0LTMtM3MxLjM0LTMgMy0zIDMgMS4zNCAzIDMtMS4zNCAzLTMgM3oiLz48L3N2Zz4=") center center no-repeat;
+        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiI+PHBhdGggZmlsbD0iIzQwNzhjMCIgZD0iTTE0IDguNzd2LTEuNmwtMS45NC0uNjQtLjQ1LTEuMDkuODgtMS44NC0xLjEzLTEuMTMtMS44MS45MS0xLjA5LS40NS0uNjktMS45MmgtMS42bC0uNjMgMS45NC0xLjExLjQ1LTEuODQtLjg4LTEuMTMgMS4xMy45MSAxLjgxLS40NSAxLjA5TDAgNy4yM3YxLjU5bDEuOTQuNjQuNDUgMS4wOS0uODggMS44NCAxLjEzIDEuMTMgMS44MS0uOTEgMS4wOS40NS42OSAxLjkyaDEuNTlsLjYzLTEuOTQgMS4xMS0uNDUgMS44NC44OCAxLjEzLTEuMTMtLjkyLTEuODEuNDctMS4wOUwxNCA4Ljc1di4wMnpNNyAxMWMtMS42NiAwLTMtMS4zNC0zLTNzMS4zNC0zIDMtMyAzIDEuMzQgMyAzLTEuMzQgMy0zIDN6Ii8+PC9zdmc+") center center no-repeat;
 }
 
 /* Labels dropdown
@@ -69,7 +73,7 @@
 .issue-card .labels .issue-card-label[aria-label *= "@"] {
     right: 0px;
     transform: translateX(8px);
-    z-index: 1;
+    z-index: 2;
     position: absolute;
     border: 2px solid #e5e5e5;
 }
@@ -78,6 +82,7 @@
     max-width: 16px !important;
     height: 16px !important;
     max-height: 16px !important;
+    padding-right: 0;
     color: transparent !important;
     border-radius: 8px;
     transition: none;
@@ -86,9 +91,10 @@
     left: auto;
     max-width: 320px !important;
     max-height: 32px !important;
+    padding-right: 16px;
     border-radius: 2px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
-    transition-property: max-width, max-height, border-radius, color, box-shadow;
+    transition-property: padding-right, max-width, max-height, border-radius, color, box-shadow;
     transition-timing-function: ease;
     transition-duration: 400ms;
 }
