@@ -5,8 +5,9 @@
 [X] Search design like in Issues view
 [X] Consider allowing multiple explicit searches with out ";" separator
 [X] Labels menu link design (SVG on hover)
-[ ] Consider using "#" instead of "@" for super-labels
-[ ] Consider using "invisible" alternate chars instead of "@" for super-labels
+[ ] Enterprise version should only work on enterprise sites (not on GitHub.com)
+[ ] (Not for now!) Consider using "#" instead of "@" for super-labels
+[ ] (Not for now!) Consider using "invisible" alternate chars instead of "@" for super-labels
 [ ] Rename "super-labels" to "tags"
 [ ] Columns padding for different standard screen widths (media queries)
 [ ] Column resizing

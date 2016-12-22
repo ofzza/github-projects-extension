@@ -75,7 +75,8 @@
     transform: translateX(8px);
     z-index: 2;
     position: absolute;
-    border: 2px solid #e5e5e5;
+    border: 2px solid #fafafa;
+    cursor: default;
 }
 .issue-card .labels .issue-card-label[aria-label *= "@"]:not(:hover) {
     width: 16px !important;
@@ -93,8 +94,7 @@
     max-height: 32px !important;
     padding-right: 16px;
     border-radius: 2px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5);
-    transition-property: padding-right, max-width, max-height, border-radius, color, box-shadow;
+    transition-property: padding-right, max-width, max-height, border-radius, color;
     transition-timing-function: ease;
     transition-duration: 400ms;
 }

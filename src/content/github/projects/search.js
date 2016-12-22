@@ -95,7 +95,7 @@
 
         <div class="ogp-search-example">
           <div class="ogp-search-example-syntax">
-            "<i>Fix problem</i>" <b>;</b>
+            "<i>Fix problem</i>" 
             "<i>Joe</i>"
           </div>
           <div class="ogp-search-example-comment">
@@ -120,23 +120,23 @@
             <b>is:</b> <i>note</i>
           </div>
           <div class="ogp-search-example-syntax indent">
-            <b>is:</b> <i>issue</i> <b>;</b>
+            <b>is:</b> <i>issue</i> 
             <b>is:</b> <i>open</i>
           </div>
           <div class="ogp-search-example-syntax indent">
-            <b>is:</b> <i>issue</i> <b>;</b> 
+            <b>is:</b> <i>issue</i> 
             <b>is:</b> <i>closed</i>
           </div>
           <div class="ogp-search-example-syntax indent">
-            <b>is:</b> <i>pull request</i> <b>;</b> 
+            <b>is:</b> <i>pull request</i> 
             <b>is:</b> <i>open</i>
           </div>
           <div class="ogp-search-example-syntax indent">
-            <b>is:</b> <i>pr</i> <b>;</b> 
+            <b>is:</b> <i>pr</i> 
             <b>is:</b> <i>closed</i>
           </div>
           <div class="ogp-search-example-syntax indent">
-            <b>is:</b> <i>pr</i> <b>;</b> 
+            <b>is:</b> <i>pr</i> 
             <b>is:</b> <i>merged</i>
           </div>
         </div>
