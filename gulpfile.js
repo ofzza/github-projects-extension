@@ -19,6 +19,10 @@ const _           = require('lodash'),
       gulpsync    = require('gulp-sync')(gulp);
       clean       = require('gulp-clean'),
       babel       = require('gulp-babel'),
+      babelify    = require('babelify'),
+      browserify  = require('browserify'),
+      source      = require('vinyl-source-stream'),
+      buffer      = require('vinyl-buffer'),
       sourcemaps  = require('gulp-sourcemaps'),
       uglify      = require('gulp-uglify'),
       zip         = require('gulp-zip'),
@@ -81,19 +85,18 @@ gulp.task('copy@libs', () => {
 // Define ES6 transpile task
 // --------------------------------------------------------------------------------------------------------------------
 gulp.task('transpile@build', () => {
-  return gulp.src('./src/**/*.js')
+  browserify({
+    entries: ['./src/content/bootstrap.js'],
+    debug: !util.env.production
+  })
+    .transform(['babelify', {presets: ['es2015']}]).bundle()
+    .pipe(source('bootstrap.js'))
+    .pipe(buffer())
     .pipe(!util.env.production ? sourcemaps.init() : util.noop())
-    .pipe(babel({presets: ['es2015']}))
-      .on('error', function (err){
-        console.log();
-        console.error('ERROR while executing "server.transpile[babel]" task:'.red, err.message.yellow);
-        console.log();
-        this.emit('end');
-      })
     .pipe(uglify({ mangle: true }))
     .pipe(!util.env.production ? sourcemaps.write('.', { includeContent: true, sourceRoot: '../src' }) : util.noop())
-    .pipe(gulp.dest('./dist/github.com'))
-    .pipe(gulp.dest('./dist/enterprise'));
+    .pipe(gulp.dest('./dist/github.com/'))
+    .pipe(gulp.dest('./dist/enterprise/'));
 });
 // ... and attached watcher
 gulp.task('watch.transpile@build', () => {

@@ -15,8 +15,7 @@
       "js" : [ 
         "content/libs/jquery.min.js", 
         "content/libs/lodash.min.js", 
-        "content/github/projects/search.js" ,
-        "content/github/projects/labels.js" 
+        "bootstrap.js"
       ],
       "css": [
         "content/github/projects/search.css",
