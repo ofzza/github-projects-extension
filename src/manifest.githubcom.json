@@ -1,6 +1,6 @@
 {
-  "name": "GitHub Projects Optimizer",
-  "description": "Adds search functionality, labels management and other optimizations to GitHub Projects page.",
+  "name": "GitHub Projects Additions",
+  "description": "Adds search functionality, labels management and other functionality to GitHub Projects page.",
   "content_scripts" : [
     {
       "matches" : [ 
