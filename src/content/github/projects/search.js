@@ -146,7 +146,7 @@
             Search by phrase in card title
           </div>
           <div class="ogp-search-example-syntax indent">
-            <b>title:</b> <i>do something</i>
+            <b>title:</b> <i>"do something"</i>
           </div>
         </div>
 
@@ -424,24 +424,29 @@
 
       } else {
 
-        // Treat explicit oconditions as separate even if no delimiter
-        value = value.replace(/ is:/g, ' ;is:');
-        value = value.replace(/ title:/g, ' ;title:');
-        value = value.replace(/ #/g, ' ;#');
-        value = value.replace(/ num:/g, ' ;num:');
-        value = value.replace(/ number:/g, ' ;number:');
-        value = value.replace(/ opened:/g, ' ;opened:');
-        value = value.replace(/ created:/g, ' ;created:');
-        value = value.replace(/ by:/g, ' ;by:');
-        value = value.replace(/ assignee:/g, ' ;assigneeby:');
-        value = value.replace(/ assigned:/g, ' ;assignedby:');
-        value = value.replace(/ to:/g, ' ;to:');
-        value = value.replace(/ for:/g, ' ;for:');
-        value = value.replace(/ label:/g, ' ;label:');
+        // Parse conditions string
+        let args = value.match(/[^\s"]+|"([^"]*)"/g);
+        // Join operators and arguments
+        _.forEach(args, (arg, i) => {
+          // Check if value and has next value
+          if (arg && (i + 1 < args.length)) {
+            // Get potential operator and argument value
+            let current = args[i],
+                next = args[i + 1];
+            // If operator and argument, join and clear argument standalone element
+            if ((current[current.length - 1] === ':') && (next[next.length - 1] !== ':')) {
+              args[i] = current + next;
+              args[i + 1] = null;
+            }
+          }
+        });
+        // Clear emptied arguments
+        args = _.compact(args);
+        console.log(args);
 
         // Process conditions
-        let conditions = _.flatten(_.map(value.split(';'), (c) => { 
-          let condition = c.trim().toLowerCase();
+        let conditions = _.flatten(_.map(args, (c) => { 
+          let condition = clearQuotations(c.trim().toLowerCase());
 
           // Check if explicit IS
           if (condition.indexOf('is:') === 0) {
@@ -490,9 +495,7 @@
           }
           // Match any
           else {
-            return _.map(condition.match(/\w+|"[^"]+"/g), (condition) => { 
-              return { type: 'any', value: clearQuotations(condition) } 
-            });
+            return { type: 'any', value: condition } 
           }
 
         })); 

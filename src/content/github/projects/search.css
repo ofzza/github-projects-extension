@@ -51,6 +51,14 @@
 .ogp-suggestion-item.selected {
     background-color: #5080d8;
 }
+.ogp-suggestion-item > *,
+.ogp-suggestion-item > .mt-1,
+.ogp-suggestion-item > .issue-card-label {
+    top: 0 !important;
+    bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
 
 .ogp-search-bar-help-element {
     position: relative;
