@@ -1,3 +1,5 @@
+[X] !!! FIX Gulp:zip@build¸not ingesting "bootstrap.js" !!!
+
 [X] Code refactor and style-2-css
 [X] Help window content makeover
 [X] Priority labels 
@@ -5,11 +7,14 @@
 [X] Search design like in Issues view
 [X] Consider allowing multiple explicit searches with out ";" separator
 [X] Labels menu link design (SVG on hover)
-[ ] Enterprise version should only work on enterprise sites (not on GitHub.com)
-[ ] Rename "super-labels" to "tags"
+[X] Enterprise version should only work on enterprise sites (not on GitHub.com)
+[X] Rename "super-labels" to "tags"
+[ ] Don't show labels menu on notes and PRs
 [ ] Columns padding for different standard screen widths (media queries)
 [ ] Column resizing
 [ ] Column collapsing/expanding
+
+[ ] Support "link" tags to other pages or URLs
 
 [ ] (Not for now!) Consider using "#" instead of "@" for super-labels
 [ ] (Not for now!) Consider using "invisible" alternate chars instead of "@" for super-labels

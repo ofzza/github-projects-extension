@@ -48,7 +48,7 @@ export default function bootstrap () { initLabelsUI(); }
     $('.project-columns').click((e) => {
 
       // Check if labels clicked
-      if ($(e.target).hasClass('issue-card')) {
+      if ($(e.target).hasClass('issue-card') && $(e.target).attr('data-content-type').toLowerCase() === 'issue') {
 
         // Show labels menu
         labelsMenuEl = document.createElement('div');

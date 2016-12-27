@@ -85,7 +85,7 @@ gulp.task('copy@libs', () => {
 // Define ES6 transpile task
 // --------------------------------------------------------------------------------------------------------------------
 gulp.task('transpile@build', () => {
-  browserify({
+  return browserify({
     entries: ['./src/content/bootstrap.js'],
     debug: !util.env.production
   })
@@ -127,5 +127,5 @@ gulp.task('watch.zip@build', () => {
 
 // Define root tasks
 // --------------------------------------------------------------------------------------------------------------------
-gulp.task('build', gulpsync.sync(['clear@build', 'copy@build', 'copy@libs', 'mainfest@build', 'transpile@build', 'zip.build']));
-gulp.task('watch', ['watch.copy@build', 'watch.mainfest@build', 'watch.transpile@build', 'watch.zip@build']);
+gulp.task('build', gulpsync.sync(['clear@build', 'copy@build', 'copy@libs', 'transpile@build', 'mainfest@build', 'zip.build']));
+gulp.task('watch', ['watch.copy@build', 'watch.transpile@build', 'watch.mainfest@build', 'watch.zip@build']);
