@@ -9,12 +9,16 @@
 [X] Labels menu link design (SVG on hover)
 [X] Enterprise version should only work on enterprise sites (not on GitHub.com)
 [X] Rename "super-labels" to "tags"
-[ ] Don't show labels menu on notes and PRs
+[X] Don't show labels menu on notes and PRs
+[X] When adding a new label, add note explaining "@special" labels as workflow-tags
+[ ] Sort labels in labels dropdown and on issue view
+[ ] Detect project-card types based on "data-content-type" attribute
+
+[ ] Support "link" tags to other pages or URLs
+
 [ ] Columns padding for different standard screen widths (media queries)
 [ ] Column resizing
 [ ] Column collapsing/expanding
-
-[ ] Support "link" tags to other pages or URLs
 
 [ ] (Not for now!) Consider using "#" instead of "@" for super-labels
 [ ] (Not for now!) Consider using "invisible" alternate chars instead of "@" for super-labels

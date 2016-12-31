@@ -1,0 +1,53 @@
+/* Labels configuration adjustments
+============================================================================================ */
+.new-label:hover > .label-edit,
+.labels-list-item.edit:hover form.label-edit > .label-edit {
+  position: relative;
+  min-height: 34px;
+}
+.new-label:hover > .label-edit::before,
+.labels-list-item.edit:hover form.label-edit > .label-edit::before {
+  z-index: 33;
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 8px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 16px solid #eee;
+}
+.new-label:hover > .label-edit::after,
+.labels-list-item.edit:hover form.label-edit > .label-edit::after {
+  z-index: 32;
+  content: 'Start label with "@" to display it as a work-flow tag instead of as an ordinary label!';
+  position: absolute;
+  top: 40px;
+  left: -10px;
+  display: inline-block;
+  width: auto;
+  height: 119px;
+  padding: 8px;
+  background: url('chrome-extension://__MSG_@@extension_id__/style/img/label-tag-example.png') no-repeat;
+  background-position: center 38px !important;
+  background-color: rgb(250, 250, 250);
+  box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 2px, rgba(81, 167, 232, 0.498039) 0px 0px 5px;
+  text-align: left;
+  font-size: 13px;
+  color: #767676;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(238, 238, 238);
+  border-image: initial;
+  border-radius: 3px;
+
+  transition: height ease 400ms;
+  animation: animate-label-tag-note;
+  animation-duration: 400ms;
+  animation-timing-function: ease;
+}
+@keyframes animate-label-tag-note {
+  0% { height: 20px; }
+  100% { height: 119px; }
+}

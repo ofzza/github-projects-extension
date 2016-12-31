@@ -6,6 +6,11 @@
       "matches" : [ 
         "https://github.com/*/*/projects/*"
        ]
+    },
+    {
+      "matches" : [ 
+        "https://github.com/*/*/labels"
+       ]
     }
   ],
   "permissions": [

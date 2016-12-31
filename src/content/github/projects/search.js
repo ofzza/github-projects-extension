@@ -226,9 +226,9 @@ export default function bootstrap () { initSearchUI(); }
           if (delayedSearchTimeout) { clearTimeout(delayedSearchTimeout); }
           delayedSearchTimeout = setTimeout(() => { 
             // Filter results
-            searchBarInputHandlerFn(searchTooltipEl, (e.target || searchBarEl).value); 
+            searchBarInputHandlerFn(searchTooltipEl, (e ? e.target : searchBarEl).value); 
             // Check for suggestions
-            checkSearchSuggestions(searchSuggestionsEl, e.target || searchBarEl);
+            checkSearchSuggestions(searchSuggestionsEl, (e ? e.target : searchBarEl));
           }, 200);
         };
     $(searchBarEl).click(delayedSearchFn);

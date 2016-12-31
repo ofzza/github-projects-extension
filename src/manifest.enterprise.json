@@ -6,6 +6,11 @@
       "matches" : [ 
         "https://*/*/*/projects/*"
        ]
+    },
+    {
+      "matches" : [ 
+        "https://*/*/*/labels"
+       ]
     }
   ],
   "permissions": [

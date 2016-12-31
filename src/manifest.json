@@ -19,10 +19,20 @@
       ],
       "css": [
         "content/github/projects/search.css",
-        "content/github/projects/labels.css" ,
+        "content/github/projects/labels.css",
         "content/github/projects/columns.css"
       ]
+    },
+    {
+      "matches" : [ ],
+      "js": [ ],
+      "css": [
+        "content/github/labels/labels.css"
+      ]
     }
+  ],
+  "web_accessible_resources": [
+    "style/img/label-tag-example.png"
   ],
 
   "permissions": [
