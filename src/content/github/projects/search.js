@@ -495,10 +495,9 @@ export default function bootstrap () { initSearchUI(); }
             title = card.find('h5').text() || card.find('div > p').text(),
             number = card.find('small').text().split('opened by')[0] || '',
             creator = card.find('small').text().split('by')[1] || '',
-            assignees = _.map(card.find('div > img'), (el) => {
-              let username = $(el).attr('alt').replace(/@/g, '');
-              if (!assigneesEls[username]) { assigneesEls[username] = $(el).clone()[0]; }
-              return username;
+            assigneesTooltip = card.find('div.tooltipped').attr('aria-label'),
+            assignees = _.map((assigneesTooltip || '').toLowerCase().replace('and', ',').replace('assigned to', '').split(','), (username) => {
+              return username.trim();
             }),
             labels = _.map(card.find('.issue-card-label'), (el) => { 
               let label = $(el).text(); 

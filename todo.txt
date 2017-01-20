@@ -11,14 +11,17 @@
 [X] Rename "super-labels" to "tags"
 [X] Don't show labels menu on notes and PRs
 [X] When adding a new label, add note explaining "@special" labels as workflow-tags
+[X] Detect asignees based on "aria-label='Assigned to ...'" attribute
 [ ] Sort labels in labels dropdown and on issue view
-[ ] Detect project-card types based on "data-content-type" attribute
 
 [ ] Support "link" tags to other pages or URLs
+
+[ ] Manage projects columns from issue view
 
 [ ] Columns padding for different standard screen widths (media queries)
 [ ] Column resizing
 [ ] Column collapsing/expanding
 
+[ ] (Not for now; issue/pr not doable) Detect project-card types based on "data-content-type=' ... '" attribute
 [ ] (Not for now!) Consider using "#" instead of "@" for super-labels
 [ ] (Not for now!) Consider using "invisible" alternate chars instead of "@" for super-labels
