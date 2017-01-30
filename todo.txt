@@ -12,12 +12,13 @@
 [X] Don't show labels menu on notes and PRs
 [X] When adding a new label, add note explaining "@special" labels as workflow-tags
 [X] Detect asignees based on "aria-label='Assigned to ...'" attribute
+
+[ ] Manage projects columns from issue view
+[ ] Manage assignees directly from card (like labels)
+[ ] Make sure labels (and asignees) edit refreshes the card (sometimes doesn't if page inactive for a while)
 [ ] Sort labels in labels dropdown and on issue view
 
 [ ] Support "link" tags to other pages or URLs
-
-[ ] Manage projects columns from issue view
-
 [ ] Columns padding for different standard screen widths (media queries)
 [ ] Column resizing
 [ ] Column collapsing/expanding

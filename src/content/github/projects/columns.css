@@ -20,3 +20,21 @@
  {
     padding-bottom: 270px !important;
 }
+
+/* New column 'column' */
+.project-column.new-project-column {
+    width: 120px;
+    height: auto !important;
+    padding: 4px 20px !important;
+    margin-right: -90px;
+    text-align: center !important;
+    transform: rotateZ(90deg) translateY(-24px);
+    transform-origin: top left;
+    background-image: -webkit-linear-gradient(#fcfcfc, #eee);
+    background-image: linear-gradient(#fcfcfc, #eee);
+}
+.project-column.new-project-column:hover {
+    text-decoration: none;
+    background-image: -webkit-linear-gradient(#eee, #ddd);
+    background-image: linear-gradient(#eee, #ddd);
+}
