@@ -12,6 +12,7 @@
 [X] Don't show labels menu on notes and PRs
 [X] When adding a new label, add note explaining "@special" labels as workflow-tags
 [X] Detect asignees based on "aria-label='Assigned to ...'" attribute
+[ ] Collapse "add column" column to a button
 
 [ ] Manage projects columns from issue view
 [ ] Manage assignees directly from card (like labels)

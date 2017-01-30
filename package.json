@@ -1,7 +1,7 @@
 {
-  "name": "github-projects-additions",
-  "version": "1.0.13",
-  "description": "GitHub Projects Additions Chrome extension",
+  "name": "github-projects-plus",
+  "version": "1.0.14",
+  "description": "GitHub Projects Plus Chrome extension",
   "author": "ofzza",
   "license": "MIT",
   "dependencies": {

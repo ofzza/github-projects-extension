@@ -1,6 +1,6 @@
 # GitHub Projects Chrome extension
 
-- Adds a functional search-bar to Github Projects page.
+- Adds a functional search-bar, labels management and other functionality to Github Projects page.
 - Adds label management to project page's cards
 
 ### Deployment
