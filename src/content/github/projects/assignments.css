@@ -39,7 +39,7 @@
     cursor: pointer;
 }
 .project-columns .issue-card[data-content-type="Issue"] .card-menu-container:hover::after {
-    content: 'Edit Assignemnts';
+    content: 'Edit Assignees';
     padding-right: 16px;
     font-size: 9px;
     line-height: 12px;

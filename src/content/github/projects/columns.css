@@ -22,7 +22,8 @@
 }
 
 /* New column 'column' */
-.project-column.new-project-column {
+.project-column.new-project-column,
+.project-columns-container .new-project-column {
     width: auto;
     height: auto !important;
     padding: 4px 20px !important;
@@ -35,7 +36,8 @@
     background-image: linear-gradient(#fcfcfc, #eee);
     border-style: solid;
 }
-.project-column.new-project-column:hover {
+.project-column.new-project-column:hover,
+.project-columns-container .new-project-column:hover {
     text-decoration: none;
     background-image: -webkit-linear-gradient(#eee, #ddd);
     background-image: linear-gradient(#eee, #ddd);

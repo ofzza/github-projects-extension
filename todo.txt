@@ -15,7 +15,7 @@
 [ ] Collapse "add column" column to a button
 
 [ ] Manage projects columns from issue view
-[ ] Manage assignees directly from card (like labels)
+[X] Manage assignees directly from card (like labels)
 [ ] Make sure labels (and asignees) edit refreshes the card (sometimes doesn't if page inactive for a while)
 [ ] Sort labels in labels dropdown and on issue view
 
