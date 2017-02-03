@@ -1,71 +1,73 @@
 // ============================================================================================
-// GitHub projects page labels management
+// GitHub projects page assigment management
 // ============================================================================================
-let initLabelsUI = null;
-export default function bootstrap () { initLabelsUI(); }  
+let initAssignmentUI = null;
+export default function bootstrap () { initAssignmentUI(); }  
 
 // Search
 // ============================================================================================
 {
 
-  // Holds reference to currently shown labels menu element 
-  let labelsMenuEl = null,
+  // Holds reference to currently shown assignments menu element 
+  let assignmentMenuEl = null,
       issueNumber = null,
       token = null,
       hasChanges = false;
 
   /**
-   * Inits labels management UI
+   * Inits assignments management UI
    */
-  initLabelsUI = function () {
+  initAssignmentUI = function () {
     
-    // Listen for clicks outside of labels
+    // Listen for clicks outside of assignments
     $('body, .project-columns').mousedown((e) => {
 
       // If menu shown
-      if (labelsMenuEl) {
+      if (assignmentMenuEl) {
 
         // Check if changes to Save
         if (hasChanges) {
-          // Save all selected labels
-          let labels = _.reduce($(labelsMenuEl).find('.select-menu-item.selected'), (labels, selectedLabelEl) => {
-            labels.push($(selectedLabelEl).find('.name').html().trim());
-            return labels;
+          // Save all selected assignments
+          let assignments = _.reduce($(assignmentMenuEl).find('.select-menu-item.selected'), (assignments, selectedAssignmentEl) => {
+            let avaratUrl = $(selectedAssignmentEl).find('img.avatar').attr('src').trim(),
+                avatarId = _.last(avaratUrl.split('/')).split('?')[0];
+            assignments.push(avatarId);
+            return assignments;
           }, [null]);
-          setLabels(issueNumber, labels, token);
+          setAssignment(issueNumber, assignments, token);
         }
 
-        // Clear previous labels menu
-        if (labelsMenuEl) { $(labelsMenuEl).remove(); }
+        // Clear previous assignments menu
+        if (assignmentMenuEl) { $(assignmentMenuEl).remove(); }
         hasChanges = false;
-        labelsMenuEl = null;
+        assignmentMenuEl = null;
       
       }
 
     });
 
-    // Listen for clicks on labels
+    // Listen for clicks on assignments
     $('.project-columns').click((e) => {
 
-      // Check if labels clicked
+      // Check if assigments clicked
       let issueEl = ($(e.target).hasClass('issue-card') ? $(e.target) : $(e.target).parents('.issue-card')),
           issueElOffset = issueEl && issueEl.length && issueEl.offset(),
           isIssue = issueEl && issueEl.length && issueEl.attr('data-content-type').toLowerCase() === 'issue',
-          isLabelSpecificTriggerClicked = $(e.target).hasClass('labels') || $(e.target).hasClass('issue-card-label'),
+          isAssignmentSpecificTriggerClicked = $(e.target).hasClass('avatar-stack') || $(e.target).hasClass('avatar'),
           isCommonEditTriggerClicked = $(e.target).hasClass('card-menu-container'),
-          isPositionLabel = issueElOffset && (e.clientX < issueElOffset.left + (issueEl.width() / 2));
-      if (isIssue && ((isCommonEditTriggerClicked && isPositionLabel) || isLabelSpecificTriggerClicked)) {
+          isPositionAssignment = issueElOffset && (e.clientX > issueElOffset.left + (issueEl.width() / 2));
+      if (isIssue && ((isCommonEditTriggerClicked && isPositionAssignment) || isAssignmentSpecificTriggerClicked)) {
 
-        // Show labels menu
-        labelsMenuEl = document.createElement('div');
-        labelsMenuEl.className = 'ogp-labels-menu label-select-menu';
-        $($(e.target).parents('.issue-card')[0]).append(labelsMenuEl);
+        // Show assignments menu
+        assignmentMenuEl = document.createElement('div');
+        assignmentMenuEl.className = 'ogp-assignments-menu assignments-select-menu';
+        $($(e.target).parents('.issue-card')[0]).append(assignmentMenuEl);
 
         // Reset changes flag
         hasChanges = false;
 
-        // Prevent click on labels menu propagation
-        $(labelsMenuEl).mousedown((e) => {
+        // Prevent click on assignments menu propagation
+        $(assignmentMenuEl).mousedown((e) => {
           e.originalEvent.stopPropagation();
         });
 
@@ -73,22 +75,22 @@ export default function bootstrap () { initLabelsUI(); }
         let issueHTML = $(e.target).parents('.issue-card').find('small').html();
         issueNumber = parseInt(issueHTML.trim().split(' ')[0].replace('#', ''));
 
-        // Load issue labels
-        getLabels(issueNumber)
+        // Load issue assignments
+        getAssignments(issueNumber)
           .then((res) => {
-            if (labelsMenuEl) {
+            if (assignmentMenuEl) {
 
               // Store token
               token = res.token;
 
-              // Inject labels menu HTML
-              labelsMenuEl.innerHTML = res.html;
+              // Inject assignments menu HTML
+              assignmentMenuEl.innerHTML = res.html;
 
               // Focus filter
-              $(labelsMenuEl).find('.select-menu-text-filter input').focus();
+              $(assignmentMenuEl).find('.select-menu-text-filter input').focus();
 
               // Prevent mouse scroll bleed
-              let menuListEl = $(labelsMenuEl).find('.select-menu-list');
+              let menuListEl = $(assignmentMenuEl).find('.select-menu-list');
               menuListEl.on('DOMMouseScroll mousewheel', function(ev) {
                   var $this = $(this),
                       scrollTop = this.scrollTop,
@@ -117,11 +119,11 @@ export default function bootstrap () { initLabelsUI(); }
                   }
               });
 
-              // Handle label click
-              _.forEach($(labelsMenuEl).find('.select-menu-item'), (itemEl) => {
+              // Handle assignments click
+              _.forEach($(assignmentMenuEl).find('.select-menu-item'), (itemEl) => {
                 $(itemEl).click((e) => {
 
-                  // Switch label UI state
+                  // Switch assignment UI state
                   if ($(itemEl).hasClass('selected')) {
                     $(itemEl).removeClass('selected');
                   } else {
@@ -144,9 +146,9 @@ export default function bootstrap () { initLabelsUI(); }
   }
 
   /**
-   * Gets available labels for an issue
+   * Gets available assignments for an issue
    */
-  function getLabels (issueNumber) {
+  function getAssignments (issueNumber) {
     return getAuthenticityToken(issueNumber)
       .then((token) => {
         // Get project ID
@@ -156,10 +158,10 @@ export default function bootstrap () { initLabelsUI(); }
             projectId = _.last(parsedPath);
 
         return new Promise((resolve, reject) => {
-          // Get available labels
+          // Get available assignments
           $.ajax({
             method: 'GET',
-            url: `/${projectOwner}/${projectRepo}/issues/${issueNumber}/show_partial?partial=issues%2Fsidebar%2Flabels_menu_content`,
+            url: `/${projectOwner}/${projectRepo}/issues/${issueNumber}/show_partial?partial=issues%2Fsidebar%2Fassignees_menu_content`,
             success: (html) => { 
               resolve({
                 token: token,
@@ -182,7 +184,7 @@ export default function bootstrap () { initLabelsUI(); }
         projectId = _.last(parsedPath);
 
     return new Promise((resolve, reject) => {
-      // Get available labels
+      // Get available assignments
       $.ajax({
         method: 'GET',
         url: `/${projectOwner}/${projectRepo}/issues/${issueNumber}`,
@@ -194,7 +196,7 @@ export default function bootstrap () { initLabelsUI(); }
           bodyEl.innerHTML = bodyHTML;
           
           // Get authenticity token
-          let inputEl = $(bodyEl).find('.sidebar-labels input[name="authenticity_token"]')[0],
+          let inputEl = $(bodyEl).find('.sidebar-assignee input[name="authenticity_token"]')[0],
               token = $(inputEl).attr('value');
           resolve(token);
           
@@ -205,9 +207,9 @@ export default function bootstrap () { initLabelsUI(); }
   }
 
   /**
-   * Sets labels for an issue
+   * Sets assignments for an issue
    */
-  function setLabels (issueNumber, labels, token) {
+  function setAssignment (issueNumber, assignments, token) {
     // Get project ID
     let parsedPath = window.location.pathname.split('/'),
         projectOwner = parsedPath[1],
@@ -215,14 +217,14 @@ export default function bootstrap () { initLabelsUI(); }
         projectId = _.last(parsedPath);
 
     return new Promise((resolve, reject) => {
-      // Get available labels
+      // Get available assignments
       $.ajax({
         method: 'POST',
-        url: `/${projectOwner}/${projectRepo}/issues/${issueNumber}?partial=issues%2Fsidebar%2Fshow%2Flabels`,
+        url: `/${projectOwner}/${projectRepo}/issues/${issueNumber}?partial=issues%2Fsidebar%2Fshow%2Fassignees`,
         data: {
           _method: 'put',
           authenticity_token: token,
-          issue: { labels: labels }
+          issue: { user_assignee_ids: assignments }
         },
         success: (html) => { resolve(html); },
         error: reject

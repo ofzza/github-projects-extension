@@ -3,6 +3,7 @@
 // ============================================================================================
 import bootstrapSearch from './github/projects/search';
 import bootstrapLabels from './github/projects/labels';
+import bootstrapAssignments from './github/projects/assignments';
 
 // On load, bootstrap plugin
 $( document ).ready(() => { 
@@ -25,6 +26,9 @@ $( document ).ready(() => {
 
       // Bootstrap labels optimizations
       bootstrapLabels();
+
+      // Bootstrap assignment optimizations
+      bootstrapAssignments();
 
     }
   }

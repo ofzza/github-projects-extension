@@ -33,6 +33,7 @@
     transform-origin: top left;
     background-image: -webkit-linear-gradient(#fcfcfc, #eee);
     background-image: linear-gradient(#fcfcfc, #eee);
+    border-style: solid;
 }
 .project-column.new-project-column:hover {
     text-decoration: none;
