@@ -1,36 +1,36 @@
 /* Labels configuration adjustments
 ============================================================================================ */
-.new-label:hover > .label-edit,
-.labels-list-item.edit:hover form.label-edit > .label-edit {
+.new-label > .label-edit + img + div,
+.labels-list-item.edit form.label-edit > .label-edit + img + div {
   position: relative;
-  min-height: 34px;
 }
-.new-label:hover > .label-edit::before,
-.labels-list-item.edit:hover form.label-edit > .label-edit::before {
+.new-label > .label-edit > .label-edit-name:focus + img + div::before,
+.labels-list-item.edit form.label-edit > .label-edit > .label-edit-name:focus + img + div::before {
   z-index: 33;
   content: '';
   position: absolute;
   top: 24px;
-  left: 8px;
+  right: 132px;
   width: 0;
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-bottom: 16px solid #eee;
 }
-.new-label:hover > .label-edit::after,
-.labels-list-item.edit:hover form.label-edit > .label-edit::after {
+.new-label > .label-edit > .label-edit-name:focus + img + div::after,
+.labels-list-item.edit form.label-edit > .label-edit > .label-edit-name:focus + img + div::after {
   z-index: 32;
   content: 'Start label with "@" to display it as a work-flow tag instead of as an ordinary label!';
   position: absolute;
   top: 40px;
-  left: -10px;
+  right: 122px;
   display: inline-block;
   width: auto;
-  height: 119px;
+  min-width: 340px;
+  height: 129px;
   padding: 8px;
   background: url('chrome-extension://__MSG_@@extension_id__/style/img/label-tag-example.png') no-repeat;
-  background-position: center 38px !important;
+  background-position: center 48px !important;
   background-color: rgb(250, 250, 250);
   box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 2px, rgba(81, 167, 232, 0.498039) 0px 0px 5px;
   text-align: left;
