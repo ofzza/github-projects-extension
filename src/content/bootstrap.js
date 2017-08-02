@@ -4,6 +4,7 @@
 import bootstrapSearch from './github/projects/search';
 import bootstrapLabels from './github/projects/labels';
 import bootstrapAssignments from './github/projects/assignments';
+import bootstrapBranchesExport from './github/branches/export';
 
 // On load, bootstrap plugin
 $( document ).ready(() => { 
@@ -18,6 +19,7 @@ $( document ).ready(() => {
 
   // Check if github page
   if ($('head').find('meta[content="@github"]').length || window.location.hostname.match(/github/)) {
+    
     // Check if projects page
     if (window.location.pathname.match(/.\/projects/)) {
       
@@ -31,6 +33,15 @@ $( document ).ready(() => {
       bootstrapAssignments();
 
     }
+    
+    // Check if branches page
+    else if (window.location.pathname.match(/.\/branches/)) {
+      
+      // Bootstrap branches export
+      bootstrapBranchesExport();
+
+    }
+
   }
   
 })

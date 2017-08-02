@@ -33,6 +33,8 @@ export default function bootstrap () { initSearchUI(); }
 
     // Detect full-screen
     let fullscreen = (window.location.search.indexOf('fullscreen=true') > -1);
+    // Detect native search
+    let nativeSearchEl = $('.full-screen-project-header .subnav-search, .project-header .subnav-search');
 
     // Initialize search bar
     let searchBarContainerEl = document.createElement('form');
@@ -41,7 +43,7 @@ export default function bootstrap () { initSearchUI(); }
     let searchBarEl = document.createElement('input');
     searchBarEl.className = 'ogp-search-bar-element form-control form-control subnav-search-input input-contrast';
     searchBarEl.type = 'text';
-    searchBarEl.placeholder = 'Filter';      
+    searchBarEl.placeholder = 'Filter (using GitHub Projects Plus syntax)';
     $(searchBarContainerEl).append(searchBarEl);
     $(searchBarContainerEl).append(searchBarEl, '<svg aria-hidden="true" class="octicon octicon-search subnav-search-icon" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z"></path></svg>');
 
@@ -52,10 +54,12 @@ export default function bootstrap () { initSearchUI(); }
     let searchBarHelpPanelEl = document.createElement('div');
     searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel';
 
+    /*
     let searchBarHelpPanelClose = document.createElement('a');
     searchBarHelpPanelClose.className = 'ogp-search-bar-help-close btn-link muted-link';
     searchBarHelpPanelClose.innerHTML = '<svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>';
     $(searchBarHelpPanelEl).append(searchBarHelpPanelClose);
+    */
 
     let searchBarHelpPanelContent = document.createElement('div');
     searchBarHelpPanelContent.className = 'ogp-search-bar-help-content';
@@ -196,6 +200,7 @@ export default function bootstrap () { initSearchUI(); }
     `;
     $(searchBarHelpPanelEl).append(searchBarHelpPanelContent);
 
+    /*
     let searchBarHelpEl = document.createElement('a');
     searchBarHelpEl.className = 'ogp-search-bar-help-element btn-link muted-link';
     searchBarHelpEl.innerText = '?';
@@ -208,11 +213,14 @@ export default function bootstrap () { initSearchUI(); }
         searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel ogp-shown';
       }
     });
+    */
+    /*
     $(searchBarHelpPanelClose).click((e) => {
       // Hide help
       searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel'; 
     });
     $(searchBarContainerEl).append(searchBarHelpEl);
+    */
     $(searchBarContainerEl).append(searchBarHelpPanelEl);
 
 
@@ -246,10 +254,41 @@ export default function bootstrap () { initSearchUI(); }
     });
 
     // Insert search bar
-    let searchContainerEl = (fullscreen && $('.full-screen-project-header > div').length ? $('.full-screen-project-header > div') : $('.project-header > .float-right'));
+    let searchContainerEl = (fullscreen && $('.full-screen-project-header > div').length ? $('.full-screen-project-header > div') : $('.project-header > div:last-child'));
     searchContainerEl.prepend(searchBarContainerEl);
-    searchContainerEl.prepend(searchTooltipEl);
     $(searchBarEl).focus();
+
+    // If native filtering present, add toggle button
+    if (nativeSearchEl.length) {
+
+      // Inject filter type toggle
+      let searchTypeToggleButton = document.createElement('span');
+      searchTypeToggleButton.className = 'btn ogp-search-bar-toggle';
+      searchTypeToggleButton.innerHTML = `
+        <svg aria-hidden="true" class="octicon octicon-search subnav-search-icon" height="12" version="1.1" viewBox="0 0 16 16" width="12"><path fill-rule="evenodd" d="M15.7 13.3l-3.81-3.83A5.93 5.93 0 0 0 13 6c0-3.31-2.69-6-6-6S1 2.69 1 6s2.69 6 6 6c1.3 0 2.48-.41 3.47-1.11l3.83 3.81c.19.2.45.3.7.3.25 0 .52-.09.7-.3a.996.996 0 0 0 0-1.41v.01zM7 10.7c-2.59 0-4.7-2.11-4.7-4.7 0-2.59 2.11-4.7 4.7-4.7 2.59 0 4.7 2.11 4.7 4.7 0 2.59-2.11 4.7-4.7 4.7z"></path></svg>
+      `;
+      $(searchTypeToggleButton).attr('title', 'Filter using GitHUb Projects Plus syntax');
+      $(searchTypeToggleButton).click(() => {
+        // Check which filter visible
+        if (searchBarContainerEl.style.display == 'none') {
+          $(searchTypeToggleButton).addClass('active');
+          $(searchBarContainerEl).css('display', 'block');
+          nativeSearchEl.css('display', 'none');
+        } else {
+          $(searchTypeToggleButton).removeClass('active');
+          $(searchBarContainerEl).css('display', 'none');
+          nativeSearchEl.css('display', 'block');
+        }
+      });
+      searchContainerEl.prepend(searchTypeToggleButton);
+
+      // Hide custom search
+      $(searchBarContainerEl).css('display', 'none');
+
+    }
+
+    // Insert tooltips container
+    searchContainerEl.prepend(searchTooltipEl);
 
   }
 
@@ -600,7 +639,7 @@ export default function bootstrap () { initSearchUI(); }
         tooltipEl.style.padding = '1px 2px';
         tooltipEl.style.border = '1px solid #eee';
         tooltipEl.style.borderRadius = '2px';
-        tooltipEl.style.backgroundColor = (fullscreen ? '#fff' : '#fafafa');
+        tooltipEl.style.backgroundColor = (fullscreen ? '#555' : '#fafafa');
 
         // Check condition type and add element
         if (condition.type === 'is') {

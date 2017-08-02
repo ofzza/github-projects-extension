@@ -1,23 +1,25 @@
 /* Projects columns adjustments
 ============================================================================================ */
+body:not(.enterprise) .repository-content .project-columns-container /* GitHub.com selector */ {
+    height: calc(100vh - 240px);
+}
+
 .project-columns,
-/* GitHub.com selector */
-.repository-content .project-columns,
-/* Enterprise selector */
-.project-container .project-columns {
+.repository-content /* GitHub.com selector */ .project-columns,
+.project-container /* Enterprise selector */ .project-columns {
+    padding-top: 13px !important;
+    margin-bottom: -13px !important;
     padding-left: 4px !important;
     padding-right: 4px !important;
 }
 
-.project-column-inner {
-    overflow-x: hidden;
+.repository-content /* GitHub.com selector */ .project-columns .project-column,
+.project-container /* Enterprise selector */ .project-columns .project-column {
+    margin-right: 4px !important;
 }
 
-/* GitHub.com selector */
-.project-columns .project-column > div:not(:first-child),
-/* Enterprise selector */
-.project-columns .project-column-header + .project-column > div
- {
+.repository-content /* GitHub.com selector */ .project-columns .project-column > div:not(:first-child) /* GitHub.com selector */,
+.project-container /* Enterprise selector */ .project-columns .project-column-header + .project-column /* Enterprise selector */ > div {
     padding-bottom: 270px !important;
 }
 
@@ -27,7 +29,7 @@
     width: auto;
     height: auto !important;
     padding: 4px 20px !important;
-    margin-right: -90px;
+    margin-left: 8px;
     white-space: nowrap;
     text-align: center !important;
     transform: rotateZ(90deg) translateY(-24px);

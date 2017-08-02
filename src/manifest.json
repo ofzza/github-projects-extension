@@ -21,7 +21,8 @@
         "content/github/projects/search.css",
         "content/github/projects/labels.css",
         "content/github/projects/assignments.css",
-        "content/github/projects/columns.css"
+        "content/github/projects/columns.css",
+        "content/github/branches/export.css"
       ]
     },
     {

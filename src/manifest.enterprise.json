@@ -4,12 +4,16 @@
   "content_scripts" : [
     {
       "matches" : [ 
-        "https://*/*/*/projects/*"
+        "https://*/*/*/projects/*",
+        "https://*/*/*/branches",
+        "https://*/*/*/branches/",
+        "https://*/*/*/branches/*"
        ]
     },
     {
       "matches" : [ 
-        "https://*/*/*/labels"
+        "https://*/*/*/labels",
+        "https://*/*/*/labels/"
        ]
     }
   ],
