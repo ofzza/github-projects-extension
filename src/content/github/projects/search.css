@@ -111,7 +111,7 @@
 .full-screen-project-header .ogp-search-bar-help-panel { 
     top: 40px; 
 }
-.ogp-search-bar-element:focus + * + * + .ogp-search-bar-help-panel {
+.ogp-search-bar-element:focus ~ .ogp-search-bar-help-panel {
     display: block;
 }
 .ogp-search-bar-help-panel .ogp-search-bar-help-close {

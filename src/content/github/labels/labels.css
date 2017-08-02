@@ -1,11 +1,11 @@
 /* Labels configuration adjustments
 ============================================================================================ */
-.new-label > .label-edit + img + div,
-.labels-list-item.edit form.label-edit > .label-edit + img + div {
+.new-label > .label-edit > div.error,
+.labels-list-item.edit form.label-edit > .label-edit > div.error {
   position: relative;
 }
-.new-label > .label-edit > .label-edit-name:focus + img + div::before,
-.labels-list-item.edit form.label-edit > .label-edit > .label-edit-name:focus + img + div::before {
+.new-label > .label-edit > .label-edit-name:focus  ~ div.error::before,
+.labels-list-item.edit form.label-edit > .label-edit > .label-edit-name:focus ~ div.error::before {
   z-index: 33;
   content: '';
   position: absolute;
@@ -17,8 +17,8 @@
   border-right: 8px solid transparent;
   border-bottom: 16px solid #eee;
 }
-.new-label > .label-edit > .label-edit-name:focus + img + div::after,
-.labels-list-item.edit form.label-edit > .label-edit > .label-edit-name:focus + img + div::after {
+.new-label > .label-edit > .label-edit-name:focus  ~ div.error::after,
+.labels-list-item.edit form.label-edit > .label-edit > .label-edit-name:focus ~ div.error::after {
   z-index: 32;
   content: 'Start label with "@" to display it as a work-flow tag instead of as an ordinary label!';
   position: absolute;
