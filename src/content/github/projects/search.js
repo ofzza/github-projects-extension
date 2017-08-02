@@ -54,13 +54,6 @@ export default function bootstrap () { initSearchUI(); }
     let searchBarHelpPanelEl = document.createElement('div');
     searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel';
 
-    /*
-    let searchBarHelpPanelClose = document.createElement('a');
-    searchBarHelpPanelClose.className = 'ogp-search-bar-help-close btn-link muted-link';
-    searchBarHelpPanelClose.innerHTML = '<svg aria-hidden="true" class="octicon octicon-x" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48z"></path></svg>';
-    $(searchBarHelpPanelEl).append(searchBarHelpPanelClose);
-    */
-
     let searchBarHelpPanelContent = document.createElement('div');
     searchBarHelpPanelContent.className = 'ogp-search-bar-help-content';
     searchBarHelpPanelContent.innerHTML = `
@@ -142,7 +135,7 @@ export default function bootstrap () { initSearchUI(); }
 
       <div class="ogp-search-example">
         <div class="ogp-search-example-comment">
-          Search by issue or pull reuqest number
+          Search by issue or pull request number
         </div>
         <div class="ogp-search-example-syntax indent">
           <b>#</b><i>123</i>
@@ -199,28 +192,6 @@ export default function bootstrap () { initSearchUI(); }
 
     `;
     $(searchBarHelpPanelEl).append(searchBarHelpPanelContent);
-
-    /*
-    let searchBarHelpEl = document.createElement('a');
-    searchBarHelpEl.className = 'ogp-search-bar-help-element btn-link muted-link';
-    searchBarHelpEl.innerText = '?';
-    let helpMouseoverTimeout = null;
-    $(searchBarHelpEl).click(() => {
-      // Show help 
-      if ($(searchBarHelpPanelEl).hasClass('ogp-shown')) {
-        searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel';
-      } else {
-        searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel ogp-shown';
-      }
-    });
-    */
-    /*
-    $(searchBarHelpPanelClose).click((e) => {
-      // Hide help
-      searchBarHelpPanelEl.className = 'ogp-search-bar-help-panel'; 
-    });
-    $(searchBarContainerEl).append(searchBarHelpEl);
-    */
     $(searchBarContainerEl).append(searchBarHelpPanelEl);
 
 
@@ -256,7 +227,6 @@ export default function bootstrap () { initSearchUI(); }
     // Insert search bar
     let searchContainerEl = (fullscreen && $('.full-screen-project-header > div').length ? $('.full-screen-project-header > div') : $('.project-header > div:last-child'));
     searchContainerEl.prepend(searchBarContainerEl);
-    $(searchBarEl).focus();
 
     // If native filtering present, add toggle button
     if (nativeSearchEl.length) {
