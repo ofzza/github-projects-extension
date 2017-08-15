@@ -164,11 +164,11 @@
 .ogp-search-bar-help-panel .ogp-search-example .indent {
     margin-left: 10px;
 }
-.ogp-search-bar-help-panel .ogp-search-example .ogp-search-example-syntax {
+.ogp-search-bar-help-panel .ogp-search-example-syntax {
     font-size: 13px;
     color: #444;
 }
-.ogp-search-bar-help-panel .ogp-search-example .ogp-search-example-comment {
+.ogp-search-bar-help-panel .ogp-search-example-comment {
     font-size: 11px;
     font-style: italic;
     color: #999;

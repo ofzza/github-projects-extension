@@ -58,6 +58,14 @@ export default function bootstrap () { initSearchUI(); }
     searchBarHelpPanelContent.className = 'ogp-search-bar-help-content';
     searchBarHelpPanelContent.innerHTML = `
     
+      <div class="ogp-search-example-comment">
+        Invert any search criteria by starting it with a <b>"!"</b>
+      </div>
+
+      <hr/>
+      Usage Examples:
+      <br/><br/>
+
       <div class="ogp-search-example">
         <div class="ogp-search-example-syntax">
           "<i>Fix problem</i>"
@@ -440,56 +448,63 @@ export default function bootstrap () { initSearchUI(); }
 
       // Process conditions
       let conditions = _.flatten(_.map(args, (c) => { 
-        let condition = clearQuotations(c.trim().toLowerCase());
+        let condition = clearQuotations(c.trim().toLowerCase()),
+            negated = false;
+
+        // Check if condition is negated
+        if (condition.length && condition[0] === '!') {
+          negated = true;
+          condition = condition.substr(1);
+        }
 
         // Check if explicit IS
         if (condition.indexOf('is:') === 0) {
-          return { type: 'is', value: clearQuotations(condition.split('is:')[1].trim()) };
+          return { type: 'is', value: clearQuotations(condition.split('is:')[1].trim()), negated: negated };
         }
         // Check if explicit search by title
         else if (condition.indexOf('title:') === 0) {
-          return { type: 'title', value: clearQuotations(condition.split('title:')[1].trim()) };
+          return { type: 'title', value: clearQuotations(condition.split('title:')[1].trim()), negated: negated };
         }
         // Check explicit search by number
         else if (condition && condition.length && condition[0] === '#' && condition.substr(1).trim() == parseInt(condition.substr(1))) {
-          return { type: 'number', value: condition };
+          return { type: 'number', value: condition, negated: negated };
         }
         else if (condition.indexOf('num:') === 0) {
-          return { type: 'number', value: '#' + clearQuotations(condition.split('num:')[1].trim()) };
+          return { type: 'number', value: '#' + clearQuotations(condition.split('num:')[1].trim()), negated: negated };
         }
         else if (condition.indexOf('number:') === 0) {
-          return { type: 'number', value: '#' + clearQuotations(condition.split('number:')[1].trim()) };
+          return { type: 'number', value: '#' + clearQuotations(condition.split('number:')[1].trim()), negated: negated };
         }
         // Check if explicit search by created
         else if (condition.indexOf('opened:') === 0) {
-          return { type: 'created', value: clearQuotations(condition.split('opened:')[1].trim()) };
+          return { type: 'created', value: clearQuotations(condition.split('opened:')[1].trim()), negated: negated };
         }
         else if (condition.indexOf('created:') === 0) {
-          return { type: 'created', value: clearQuotations(condition.split('created:')[1].trim()) };
+          return { type: 'created', value: clearQuotations(condition.split('created:')[1].trim()), negated: negated };
         }
         else if (condition.indexOf('by:') === 0) {
-          return { type: 'created', value: clearQuotations(condition.split('by:')[1].trim()) };
+          return { type: 'created', value: clearQuotations(condition.split('by:')[1].trim()), negated: negated };
         }
         // Check if explicit search by created
         else if (condition.indexOf('assignee:') === 0) {
-          return { type: 'assigned', value: clearQuotations(condition.split('assignee:')[1].trim()) };
+          return { type: 'assigned', value: clearQuotations(condition.split('assignee:')[1].trim()), negated: negated };
         }
         else if (condition.indexOf('assigned:') === 0) {
-          return { type: 'assigned', value: clearQuotations(condition.split('assigned:')[1].trim()) };
+          return { type: 'assigned', value: clearQuotations(condition.split('assigned:')[1].trim()), negated: negated };
         }
         else if (condition.indexOf('to:') === 0) {
-          return { type: 'assigned', value: clearQuotations(condition.split('to:')[1].trim()) };
+          return { type: 'assigned', value: clearQuotations(condition.split('to:')[1].trim()), negated: negated };
         }
         else if (condition.indexOf('for:') === 0) {
-          return { type: 'assigned', value: clearQuotations(condition.split('for:')[1].trim()) };
+          return { type: 'assigned', value: clearQuotations(condition.split('for:')[1].trim()), negated: negated };
         }
         // Check if explicit search by label
         else if (condition.indexOf('label:') === 0) {
-          return { type: 'label', value: clearQuotations(condition.split('label:')[1].trim()) };
+          return { type: 'label', value: clearQuotations(condition.split('label:')[1].trim()), negated: negated };
         }
         // Match any
         else {
-          return { type: 'any', value: condition } 
+          return { type: 'any', value: condition, negated: negated } 
         }
 
       })); 
@@ -501,7 +516,7 @@ export default function bootstrap () { initSearchUI(); }
         // Get card info
         let card = $(c),
             type = 'issue', status = 'open',
-            title = card.find('h5').text() || card.find('div > p').text(),
+            title = card.find('h5').text() || card.find('.h5').text() || card.find('div > p').text(),
             number = card.find('small').text().split('opened by')[0] || '',
             creator = card.find('small').text().split('by')[1] || '',
             assigneesTooltip = card.find('div.tooltipped').attr('aria-label'),
@@ -525,44 +540,45 @@ export default function bootstrap () { initSearchUI(); }
         // Check conditions and determine if visible
         let visible = true;
         _.forEach(conditions, (condition) => {
+          let visiblePerCondition = true;
           if (condition.value) {
             // Check if explicit IS
             if (condition.type === 'is') {
               // Check if filtering issues
-              if (['note'].indexOf(condition.value) > -1) { visible = visible && (type === 'note'); }
-              if (['issue'].indexOf(condition.value) > -1) { visible = visible && (type === 'issue'); }
-              if (['pr', 'pull', 'request', 'pull request'].indexOf(condition.value) > -1) { visible = visible && (type === 'pr'); }
-              if (['open'].indexOf(condition.value) > -1) { visible = visible && (status === 'open'); }
-              if (['closed'].indexOf(condition.value) > -1) { visible = visible && (status === 'closed'); }
-              if (['merged'].indexOf(condition.value) > -1) { visible = visible && (status === 'merged'); }
+              if (['note'].indexOf(condition.value) > -1) { visiblePerCondition = visiblePerCondition && (type === 'note'); }
+              if (['issue'].indexOf(condition.value) > -1) { visiblePerCondition = visiblePerCondition && (type === 'issue'); }
+              if (['pr', 'pull', 'request', 'pull request'].indexOf(condition.value) > -1) { visiblePerCondition = visiblePerCondition && (type === 'pr'); }
+              if (['open'].indexOf(condition.value) > -1) { visiblePerCondition = visiblePerCondition && (status === 'open'); }
+              if (['closed'].indexOf(condition.value) > -1) { visiblePerCondition = visiblePerCondition && (status === 'closed'); }
+              if (['merged'].indexOf(condition.value) > -1) { visiblePerCondition = visiblePerCondition && (status === 'merged'); }
             }
             // Check if explicit search by title
             else if (condition.type === 'title') {
-              visible = visible && (title.trim().toLowerCase().indexOf(condition.value) > -1)
+              visiblePerCondition = visiblePerCondition && (title.trim().toLowerCase().indexOf(condition.value) > -1)
             }
             // Check explicit search by number
             else if (condition.type === 'number') {
-              visible = visible && (number.trim().toLowerCase() == condition.value)
+              visiblePerCondition = visiblePerCondition && (number.trim().toLowerCase() == condition.value)
             }
             // Check if explicit search by created
             else if (condition.type === 'created') {
-              visible = visible && (creator.trim().toLowerCase() == condition.value)
+              visiblePerCondition = visiblePerCondition && (creator.trim().toLowerCase() == condition.value)
             }
             // Check if explicit search by created
             else if (condition.type === 'assigned') {
-              visible = visible && _.find(assignees, (assignee) => {
+              visiblePerCondition = visiblePerCondition && _.find(assignees, (assignee) => {
                 return (assignee.trim().toLowerCase() == condition.value);
               });
             }
             // Check if explicit search by label
             else if (condition.type === 'label') {
-              visible = visible && _.find(labels, (label) => {
+              visiblePerCondition = visiblePerCondition && _.find(labels, (label) => {
                 return (label.trim().toLowerCase() == condition.value);
               });
             }
             // Match any
             else if (condition.type === 'any') {
-              visible = visible && (
+              visiblePerCondition = visiblePerCondition && (
                             (title.trim().toLowerCase().indexOf(condition.value) > -1)
                           || (number.trim().toLowerCase().indexOf(condition.value) > -1)
                           || (creator.trim().toLowerCase().indexOf(condition.value) > -1)
@@ -573,8 +589,17 @@ export default function bootstrap () { initSearchUI(); }
                               return (label.trim().toLowerCase().indexOf(condition.value) > -1);
                             })
                         );
+
             }
+
+            // Check if negated
+            if (condition.negated) { visiblePerCondition = !visiblePerCondition; }
+
           }
+
+          // Update visible status
+          visible = visible && visiblePerCondition;
+
         });
         
         // Set visibility
