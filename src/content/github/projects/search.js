@@ -298,10 +298,11 @@ export default function bootstrap () { initSearchUI(); }
       if (operator === 'label') {
         suggestions = _.reduce(labelsEls, (suggestions, el, label) => {
           if (!value || label.trim().toLowerCase().indexOf(value) > -1) {
-            let suggestionEl = $(el).clone()[0];
+            let suggestionEl = $(el).clone()[0],
+                suggestionValue = (label.indexOf(' ') > -1 ? `"${label}"` : label).trim().toLowerCase();
             $(suggestionEl).removeAttr('href');
-            $(suggestionEl).attr('key', label.trim().toLowerCase());
-            suggestionValues.push(label.trim().toLowerCase());
+            $(suggestionEl).attr('key', suggestionValue);
+            suggestionValues.push(suggestionValue);
             suggestions.push(suggestionEl);
           }
           return suggestions;
@@ -309,11 +310,12 @@ export default function bootstrap () { initSearchUI(); }
       } else if ((operator === 'opened') || (operator === 'created') || (operator === 'by') || (operator === 'assignee') || (operator === 'assigned') || (operator === 'to') || (operator === 'for')) {
         suggestions = _.reduce(assigneesEls, (suggestions, el, username) => {
           if (!value || username.trim().toLowerCase().indexOf(value) > -1) {
-            let suggestionEl = document.createElement('span');
+            let suggestionEl = document.createElement('span'),
+                suggestionValue = (username.indexOf(' ') > -1 ? `"${username}"` : username).trim().toLowerCase();;
             suggestionEl.innerHTML = '<b style="margin-left: 4px;">' + username + '</b>';
             $(suggestionEl).prepend($(el).clone()[0]);
-            $(suggestionEl).attr('key', username.trim().toLowerCase());
-            suggestionValues.push(username.trim().toLowerCase());
+            $(suggestionEl).attr('key', suggestionValue);
+            suggestionValues.push(suggestionValue);
             suggestions.push(suggestionEl);
           }
           return suggestions;
@@ -677,6 +679,11 @@ export default function bootstrap () { initSearchUI(); }
           }        
         } else if (condition.type === 'any') {
           tooltipEl.innerHTML = '<b>{value}</b>'.replace(/\{value\}/g, condition.value);
+        }
+
+        // Check if negated condition
+        if (condition.negated) {
+          tooltipEl.innerHTML = '<b style="color: #e36209;">!</b>' + tooltipEl.innerHTML;
         }
 
         // Add tooltip element
