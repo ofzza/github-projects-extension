@@ -24,11 +24,14 @@
         bottom: 10px !important;
         right: 5px !important;
     }
+    .ogp-search-bar-toggle svg {
+        color: #333;
+    }
     .ogp-search-bar-toggle:hover svg {
         color: #0366d6;
     }
     .ogp-search-bar-toggle.active svg {
-        color: #333;
+        color: #888;
     }
 .ogp-search-bar-element {
     width: 200px;
