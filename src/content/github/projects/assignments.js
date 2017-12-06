@@ -2,7 +2,7 @@
 // GitHub projects page assigment management
 // ============================================================================================
 let initAssignmentUI = null;
-export default function bootstrap () { initAssignmentUI(); }  
+// export default function bootstrap () { initAssignmentUI(); }  
 
 // Search
 // ============================================================================================

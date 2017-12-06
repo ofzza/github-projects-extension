@@ -10,7 +10,9 @@
 .project-columns .issue-card[data-content-type="Issue"] .card-menu-container::after {
     content: '';
     z-index: 4;
-    display: block;
+    /* display: block; */
+    display: none;
+    opacity: 1;
     opacity: 1;
     position: absolute;
     top: auto;
