@@ -92,6 +92,8 @@
     z-index: 2;
     position: absolute;
     border: 2px solid #fafafa;
+    vertical-align: middle !important;
+    line-height: 10px !important;
     cursor: default;
 }
 .issue-card .labels .issue-card-label[aria-label *= "@"]:not(:hover),
