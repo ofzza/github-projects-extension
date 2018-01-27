@@ -4,6 +4,10 @@
     margin-bottom: 0 !important;
 }
 
+.repository-content .js-project-container {
+    overflow-x: hidden !important;
+}
+
 .container.new-discussion-timeline.experiment-repo-nav {
     overflow: hidden !important;
     height: calc(100vh - 158px) !important;
@@ -45,6 +49,7 @@
 }
 .container.new-discussion-timeline.experiment-repo-nav .repository-content .position-relative .project-columns .project-column .js-project-column-cards {
     padding-bottom: 320px !important;
+    overflow-x: hidden !important;
 }
 
 /* New column 'column' */
