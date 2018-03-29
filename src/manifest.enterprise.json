@@ -4,10 +4,7 @@
   "content_scripts" : [
     {
       "matches" : [ 
-        "https://*/*/*/projects/*",
-        "https://*/*/*/branches",
-        "https://*/*/*/branches/",
-        "https://*/*/*/branches/*"
+        "https://*/*/*/projects/*"
        ]
     },
     {

@@ -4,10 +4,7 @@
   "content_scripts" : [
     {
       "matches" : [ 
-        "https://github.com/*/*/projects/*",
-        "https://github.com/*/*/branches",
-        "https://github.com/*/*/branches/",
-        "https://github.com/*/*/branches/*"
+        "https://github.com/*/*/projects/*"
        ]
     },
     {

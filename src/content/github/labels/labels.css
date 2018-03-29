@@ -1,32 +1,39 @@
 /* Labels configuration adjustments
 ============================================================================================ */
-.new-label > .label-edit > div.error,
-.labels-list-item.edit form.label-edit > .label-edit > div.error {
+.labels-list label[for ^= "label-name-"] {
   position: relative;
+  cursor: help;
 }
-.new-label > .label-edit > .label-edit-name:focus  ~ div.error::before,
-.labels-list-item.edit form.label-edit > .label-edit > .label-edit-name:focus ~ div.error::before {
-  z-index: 33;
-  content: '';
+.labels-list label[for ^= "label-name-"]:after {
+  content: '?';
   position: absolute;
-  top: 24px;
-  right: 132px;
+  top: 0;
+  margin-left: 4px;
+  font-weight: bold;
+  color: #0366d6;
+}
+.labels-list label[for ^= "label-name-"]:hover:before {
+  content: '';
+  z-index: 32;
+  position: absolute;
+  top: 4px;
+  left: 74px;
+  margin-left: 4px;
   width: 0;
   height: 0;
-  border-left: 8px solid transparent;
-  border-right: 8px solid transparent;
-  border-bottom: 16px solid #eee;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 16px solid #eee;
 }
-.new-label > .label-edit > .label-edit-name:focus  ~ div.error::after,
-.labels-list-item.edit form.label-edit > .label-edit > .label-edit-name:focus ~ div.error::after {
-  z-index: 32;
-  content: 'Start label with "@" to display it as a work-flow tag instead of as an ordinary label!';
+.labels-list label[for ^= "label-name-"]:hover:after {
+  content: 'Start label with "@" to display it as a work-flow tag or with "#" to display it as a type!';
+  z-index: 33;
   position: absolute;
-  top: 40px;
-  right: 122px;
+  top: 0;
+  margin-left: 20px;
   display: inline-block;
   width: auto;
-  min-width: 340px;
+  min-width: 391px;
   height: 129px;
   padding: 8px;
   background: url('chrome-extension://__MSG_@@extension_id__/style/img/label-tag-example.png') no-repeat;
