@@ -1,7 +1,9 @@
 # GitHub Projects Chrome extension
 
+- Adds "@special" and "#type" labels to issues and milestones pages
+- Adds "@special" and "#type" labels to project page's cards
 - Adds a functional search-bar, labels management and other functionality to Github Projects page.
-- Adds label management to project page's cards
+  <br>(```DEPRECATED as the search is now natively supported by GutHub```)
 
 # Installation links:
 
