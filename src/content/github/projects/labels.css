@@ -79,8 +79,8 @@
 ============================================================================================ */
 .issue-card .labels {
     position: initial !important;
-    display:flex;
-    flex-flow: column
+    display: flex;
+    flex-flow: column;
 }
 .issue-card .labels .issue-card-label { order: 1 }
 

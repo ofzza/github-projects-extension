@@ -1,0 +1,291 @@
+/* Labels section adjustments
+============================================================================================ */
+.project-columns .js-issue-row[data-content-type="Issue"] .labels,
+.project-columns .js-issue-row[data-content-type="Issue"] .labels a {
+    cursor: pointer;
+}
+.project-columns .js-issue-row[data-content-type="Issue"] .card-menu-container::before {
+    content: '';
+    z-index: 5;
+    display: block;
+    opacity: 1;
+    position: absolute;
+    left: 6px;
+    bottom: 1px;
+    width: auto;
+    min-width: 12px;
+    height: 12px;
+    /* 
+        <svg xmlns='http://www.w3.org/2000/svg' width="14" height="16">
+            <path fill="#cccccc" d="M7.73 1.73C7.26 1.26 6.62 1 5.96 1H3.5C2.13 1 1 2.13 1 3.5v2.47c0 .66.27 1.3.73 1.77l6.06 6.06c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41L7.73 1.73zM2.38 7.09c-.31-.3-.47-.7-.47-1.13V3.5c0-.88.72-1.59 1.59-1.59h2.47c.42 0 .83.16 1.13.47l6.14 6.13-4.73 4.73-6.13-6.15zM3.01 3h2v2H3V3h.01z"></path>
+        </svg>
+    */
+    background-image:
+        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiI+DQogICAgICAgICAgICA8cGF0aCBmaWxsPSIjY2NjY2NjIiBkPSJNNy43MyAxLjczQzcuMjYgMS4yNiA2LjYyIDEgNS45NiAxSDMuNUMyLjEzIDEgMSAyLjEzIDEgMy41djIuNDdjMCAuNjYuMjcgMS4zLjczIDEuNzdsNi4wNiA2LjA2Yy4zOS4zOSAxLjAyLjM5IDEuNDEgMGw0LjU5LTQuNTlhLjk5Ni45OTYgMCAwIDAgMC0xLjQxTDcuNzMgMS43M3pNMi4zOCA3LjA5Yy0uMzEtLjMtLjQ3LS43LS40Ny0xLjEzVjMuNWMwLS44OC43Mi0xLjU5IDEuNTktMS41OWgyLjQ3Yy40MiAwIC44My4xNiAxLjEzLjQ3bDYuMTQgNi4xMy00LjczIDQuNzMtNi4xMy02LjE1ek0zLjAxIDNoMnYySDNWM2guMDF6Ij48L3BhdGg+DQogICAgICAgIDwvc3ZnPg==");
+    background-repeat: no-repeat;
+    background-size: 12px 12px;
+    background-position: top left;
+    background-origin: border-box;
+    pointer-events: all;
+    cursor: pointer;
+}
+.project-columns .js-issue-row[data-content-type="Issue"] .card-menu-container:hover::before {
+    content: 'Edit Labels';
+    padding-left: 16px;
+    font-size: 9px;
+    line-height: 12px;
+    vertical-align: middle;
+    color: #cccccc;
+    /* 
+        <svg xmlns='http://www.w3.org/2000/svg' width="14" height="16">
+            <path fill="#4078c0" d="M7.73 1.73C7.26 1.26 6.62 1 5.96 1H3.5C2.13 1 1 2.13 1 3.5v2.47c0 .66.27 1.3.73 1.77l6.06 6.06c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41L7.73 1.73zM2.38 7.09c-.31-.3-.47-.7-.47-1.13V3.5c0-.88.72-1.59 1.59-1.59h2.47c.42 0 .83.16 1.13.47l6.14 6.13-4.73 4.73-6.13-6.15zM3.01 3h2v2H3V3h.01z"></path>
+        </svg>
+    */
+    background-image: 
+        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNiI+DQogICAgICAgICAgICA8cGF0aCBmaWxsPSIjNDA3OGMwIiBkPSJNNy43MyAxLjczQzcuMjYgMS4yNiA2LjYyIDEgNS45NiAxSDMuNUMyLjEzIDEgMSAyLjEzIDEgMy41djIuNDdjMCAuNjYuMjcgMS4zLjczIDEuNzdsNi4wNiA2LjA2Yy4zOS4zOSAxLjAyLjM5IDEuNDEgMGw0LjU5LTQuNTlhLjk5Ni45OTYgMCAwIDAgMC0xLjQxTDcuNzMgMS43M3pNMi4zOCA3LjA5Yy0uMzEtLjMtLjQ3LS43LS40Ny0xLjEzVjMuNWMwLS44OC43Mi0xLjU5IDEuNTktMS41OWgyLjQ3Yy40MiAwIC44My4xNiAxLjEzLjQ3bDYuMTQgNi4xMy00LjczIDQuNzMtNi4xMy02LjE1ek0zLjAxIDNoMnYySDNWM2guMDF6Ij48L3BhdGg+DQogICAgICAgIDwvc3ZnPg==");
+}
+
+/* Labels dropdown
+============================================================================================ */
+.ogp-labels-menu {
+    z-index: 30;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: -4px;
+    width: 240px;
+    min-height: 40px;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px #e5e5e5 solid;
+    cursor: default;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.075), 0 0 5px rgba(81,167,232,0.5)
+}
+.ogp-labels-menu::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 6px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 16px solid #eee;
+}
+.ogp-labels-menu .select-menu-list {
+    max-height: 227px !important;
+}
+
+/* Super-labels
+============================================================================================ */
+.js-issue-row .labels {
+    position: initial !important;
+    float: right;
+    display: flex;
+    flex-flow: row;
+    width: min-content;
+    padding-top: 4px;
+}
+.js-issue-row .labels a {
+    order: 1;
+    margin-right: 2px;
+    white-space: nowrap;
+}
+
+/* Super-labels (Tags)
+============================================================================================ */
+.js-issue-row .labels a[title ^= "@"],
+.js-issue-row .labels a[title ^= "Label: @"],
+.js-issue-row .labels a[aria-label ^= "@"],
+.js-issue-row .labels a[data-label ^= "@"]  { order: 0; }
+
+.js-issue-row .labels a[title ^= "@"],
+.js-issue-row .labels a[title ^= "Label: @"],
+.js-issue-row .labels a[data-label ^= "@"],
+.js-issue-row .labels a[data-label ^= "@"] {
+    right: 0px;
+    transform: translateX(8px);
+    z-index: 2;
+    position: absolute;
+    border: 2px solid #fafafa;
+    vertical-align: middle !important;
+    line-height: 10px !important;
+    cursor: default;
+}
+.js-issue-row .labels a[title ^= "@"]:not(:hover),
+.js-issue-row .labels a[title ^= "Label: @"]:not(:hover),
+.js-issue-row .labels a[aria-label ^= "@"]:not(:hover),
+.js-issue-row .labels a[data-label ^= "@"]:not(:hover) {
+    width: 16px !important;
+    max-width: 16px !important;
+    height: 16px !important;
+    max-height: 16px !important;
+    padding-right: 0;
+    color: transparent !important;
+    border-radius: 8px;
+    transition: none;
+}
+.js-issue-row .labels a[title ^= "@"]:hover,
+.js-issue-row .labels a[title ^= "Label: @"]:hover,
+.js-issue-row .labels a[aria-label ^= "@"]:hover,
+.js-issue-row .labels a[data-label ^= "@"]:hover {
+    left: auto;
+    max-width: 320px !important;
+    max-height: 32px !important;
+    padding-right: 16px;
+    border-radius: 2px;
+    transition-property: padding-right, max-width, max-height, border-radius, color;
+    transition-timing-function: ease;
+    transition-duration: 400ms;
+}
+.js-issue-row .labels a[title ^= "@"]:nth-child(1),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(1),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(1),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(1)  { top: 10px; z-index: 4; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(2),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(2),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(2),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(2)  { top: 20px; z-index: 4; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(3),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(3),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(3),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(3)  { top: 30px; z-index: 4; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(4),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(4),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(4),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(4)  { top: 40px; z-index: 4; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(5),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(5),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(5),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(5)  { top: 50px; z-index: 4; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(6),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(6),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(6),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(6)  { top: 15px; right: 8px; z-index: 3; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(7),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(7),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(7),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(7)  { top: 25px; right: 8px; z-index: 3; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(8),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(8),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(8),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(8)  { top: 35px; right: 8px; z-index: 3; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(9),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(9),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(9),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(9)  { top: 45px; right: 8px; z-index: 3; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(10),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(10),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(10),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(10) { top: 55px; right: 8px; z-index: 3; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(11),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(11),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(11),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(11) { top: 10px; right: 16px; z-index: 2; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(12),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(12),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(12),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(12) { top: 20px; right: 16px; z-index: 2; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(13),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(13),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(13),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(13) { top: 30px; right: 16px; z-index: 2; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(14),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(14),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(14),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(14) { top: 40px; right: 16px; z-index: 2; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(15),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(15),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(15),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(15) { top: 50px; right: 16px; z-index: 2; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(16),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(16),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(16),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(16) { top: 15px; right: 20px; z-index: 1;}
+.js-issue-row .labels a[title ^= "@"]:nth-child(17),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(17),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(17),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(17) { top: 25px; right: 20px; z-index: 1; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(18),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(18),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(18),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(18) { top: 35px; right: 20px; z-index: 1; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(19),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(19),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(19),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(19) { top: 45px; right: 20px; z-index: 1; }
+.js-issue-row .labels a[title ^= "@"]:nth-child(20),
+.js-issue-row .labels a[title ^= "Label: @"]:nth-child(20),
+.js-issue-row .labels a[aria-label ^= "@"]:nth-child(20),
+.js-issue-row .labels a[data-label ^= "@"]:nth-child(20) { top: 55px; right: 20px; z-index: 1; }
+.js-issue-row .labels a[title ^= "@"],
+.js-issue-row .labels a[title ^= "Label: @"],
+.js-issue-row .labels a[aria-label ^= "@"],
+.js-issue-row .labels a[data-label ^= "@"] { top: 60px; }
+
+/* Super-labels (Types)
+============================================================================================ */
+.js-issue-row .labels a[title ^= "#"],
+.js-issue-row .labels a[title ^= "Label: #"],
+.js-issue-row .labels a[aria-label ^= "#"],
+.js-issue-row .labels a[data-label ^= "#"]  {
+    order: 0;
+    padding: 2px 0 0 6px !important;
+}
+
+.js-issue-row .labels a[title ^= "#"],
+.js-issue-row .labels a[title ^= "Label: #"],
+.js-issue-row .labels a[aria-label ^= "#"],
+.js-issue-row .labels a[data-label ^= "#"] {
+    transform: translateX(8px);
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    bottom: 0;
+    width: 100%;
+    margin: 0 !important;
+    border: 0 !important;
+    vertical-align: middle !important;
+    line-height: 16px !important;
+    cursor: default;
+}
+.js-issue-row .labels a[title ^= "#"]:not(:hover),
+.js-issue-row .labels a[title ^= "Label: #"]:not(:hover),
+.js-issue-row .labels a[aria-label ^= "#"]:not(:hover),
+.js-issue-row .labels a[data-label ^= "#"]:not(:hover) {
+    max-width: 0px !important;
+    color: transparent !important;
+    transition: none;
+}
+.js-issue-row .labels a[title ^= "#"]:not(:hover),
+.js-issue-row .labels a[title ^= "Label: #"]:not(:hover),
+.js-issue-row .labels a[aria-label ^= "#"]:not(:hover),
+.js-issue-row .labels a[data-label ^= "#"]:not(:hover) {
+    border-radius: 0 3px 3px 0;
+}
+.js-issue-row .labels a[title ^= "#"]:hover,
+.js-issue-row .labels a[title ^= "Label: #"]:hover,
+.js-issue-row .labels a[aria-label ^= "#"]:hover,
+.js-issue-row .labels a[data-label ^= "#"]:hover {
+    max-width: 320px !important;
+    transition-property: max-width, color;
+    transition-timing-function: ease;
+    transition-duration: 400ms;
+    transition-delay: 400ms;
+}
+.js-issue-row .labels a[title ^= "#"]:nth-child(1),
+.js-issue-row .labels a[title ^= "Label: #"]:nth-child(1),
+.js-issue-row .labels al[aria-label ^= "#"]:nth-child(1),
+.js-issue-row .labels a[data-label ^= "#"]:nth-child(1)  { top: 50%; height: 50% !important; z-index: 4; }
+.js-issue-row .labels a[title ^= "#"]:nth-child(2),
+.js-issue-row .labels a[title ^= "Label: #"]:nth-child(2),
+.js-issue-row .labels a[aria-label ^= "#"]:nth-child(2),
+.js-issue-row .labels a[data-label ^= "#"]:nth-child(2)  { top: 66%; height: 34% !important; z-index: 4; }
+.js-issue-row .labels a[title ^= "#"]:nth-child(3),
+.js-issue-row .labels a[title ^= "Label: #"]:nth-child(3),
+.js-issue-row .labels a[aria-label ^= "#"]:nth-child(3),
+.js-issue-row .labels a[data-label ^= "#"]:nth-child(3)  { top: 83%; height: 17% !important; z-index: 4; }
+.js-issue-row .labels a[title ^= "#"],
+.js-issue-row .labels a[title ^= "Label: #"],
+.js-issue-row .labels a[aria-label ^= "#"],
+.js-issue-row .labels a[data-label ^= "#"] { top: 50%; height: 50% !important; }

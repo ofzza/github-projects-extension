@@ -30,6 +30,13 @@
       "css": [
         "content/github/labels/labels.css"
       ]
+    },
+    {
+      "matches" : [ ],
+      "js" : [ ],
+      "css": [
+        "content/github/issues/labels.css"
+      ]
     }
   ],
   "web_accessible_resources": [
