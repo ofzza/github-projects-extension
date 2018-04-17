@@ -3,7 +3,7 @@
 - Adds "@special" and "#type" labels to issues and milestones pages
 - Adds "@special" and "#type" labels to project page's cards
 - Adds a functional search-bar, labels management and other functionality to Github Projects page.
-  <br>(```DEPRECATED as the search is now natively supported by GutHub```)
+  <br>```(DEPRECATED since search is now natively supported by GitHub)```
 
 # Installation links:
 
@@ -46,10 +46,4 @@ Published under [MIT License](./LICENSE)
 
 # Attribution
 
-#### jQuery 
-
-[jQuery](https://jquery.org/)
-
-#### Lodash
-
-[Lodash](https://github.com/lodash/lodash)
+[jQuery](https://jquery.org/), [Lodash](https://github.com/lodash/lodash)
