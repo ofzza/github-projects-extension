@@ -1,6 +1,6 @@
 {
   "name": "GitHub Projects Plus",
-  "description": "Adds search functionality, labels management and other functionality to GitHub Projects page.",
+  "description": "Adds advanced labels management and other functionality to GitHub.",
   "content_scripts" : [
     {
       "matches" : [ "https://github.com/*" ]
