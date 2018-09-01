@@ -18,6 +18,7 @@ const _           = require('lodash'),
       util        = require('gulp-util');
       gulpsync    = require('gulp-sync')(gulp);
       clean       = require('gulp-clean'),
+      less        = require('gulp-less'),
       babel       = require('gulp-babel'),
       babelify    = require('babelify'),
       browserify  = require('browserify'),
@@ -58,8 +59,7 @@ gulp.task('watch.mainfest@build', () => {
 // --------------------------------------------------------------------------------------------------------------------
 let otherFiletypes = [
   './src/**/*.png', 
-  './src/**/*.ico', 
-  './src/**/*.css'
+  './src/**/*.ico'
 ];
 gulp.task('copy@build', () => {
   return gulp.src(otherFiletypes)
@@ -72,14 +72,24 @@ gulp.task('watch.copy@build', () => {
 });
 
 // ... and library copy task
-let libraries = [
-    './node_modules/jquery/dist/jquery.min.js',
-    './node_modules/lodash/lodash.min.js'
-  ];
+let libraries = [ ];
 gulp.task('copy@libs', () => {
   return gulp.src(libraries)
     .pipe(gulp.dest('./dist/github.com/content/libs'))
     .pipe(gulp.dest('./dist/enterprise/content/libs'));
+});
+
+// Define LESS transpile task
+// --------------------------------------------------------------------------------------------------------------------
+gulp.task('less@build', () => {
+  return gulp.src('./src/content/github/style.less')
+    .pipe(less())
+    .pipe(gulp.dest('./dist/github.com'))
+    .pipe(gulp.dest('./dist/enterprise'));
+});
+// ... and attached watcher
+gulp.task('watch.less@build', () => {
+  watch('./src/content/github/style.less', () => { gulp.start('less@build'); });
 });
 
 // Define ES6 transpile task
@@ -127,5 +137,5 @@ gulp.task('watch.zip@build', () => {
 
 // Define root tasks
 // --------------------------------------------------------------------------------------------------------------------
-gulp.task('build', gulpsync.sync(['clear@build', 'copy@build', 'copy@libs', 'transpile@build', 'mainfest@build', 'zip.build']));
-gulp.task('watch', ['watch.copy@build', 'watch.transpile@build', 'watch.mainfest@build', 'watch.zip@build']);
+gulp.task('build', gulpsync.sync(['clear@build', 'copy@build', 'less@build', 'copy@libs', 'transpile@build', 'mainfest@build', 'zip.build']));
+gulp.task('watch', ['watch.copy@build', 'watch.less@build', 'watch.transpile@build', 'watch.mainfest@build', 'watch.zip@build']);

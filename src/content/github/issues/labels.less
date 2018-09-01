@@ -1,0 +1,131 @@
+/* Labels section adjustments
+============================================================================================ */
+
+/* Super-labels
+============================================================================================ */
+.issues-listing .js-issue-row .labels {
+  position: initial !important;
+  float: right;
+  display: flex;
+  flex-flow: row;
+  width: min-content;
+  padding-top: 4px;
+
+  & a {
+    order: 1;
+    margin-right: 2px;
+    white-space: nowrap;
+
+    /* Super-labels (Tags)
+    ============================================================================================ */
+    &[title ^= "@"],
+    &[title ^= "Label: @"],
+    &[aria-label ^= "@"],
+    &[data-label ^= "@"]  {
+      order: 0;
+
+      & {
+        right: 0px;
+        transform: translateX(8px);
+        z-index: 2;
+        position: absolute;
+        border: 2px solid #fafafa;
+        vertical-align: middle !important;
+        line-height: 10px !important;
+        cursor: pointer;
+      }
+      &:not(:hover) {
+        width: 16px !important;
+        max-width: 16px !important;
+        height: 16px !important;
+        max-height: 16px !important;
+        padding-right: 0;
+        color: transparent !important;
+        border-radius: 8px;
+        transition: none;
+      }
+      &:hover {
+        left: auto;
+        max-width: 320px !important;
+        max-height: 32px !important;
+        padding-right: 16px;
+        border-radius: 2px;
+        transition-property: padding-right, max-width, max-height, border-radius, color;
+        transition-timing-function: ease;
+        transition-duration: 400ms;
+      }
+
+      // Loop through different label positions
+      .loop (@i) when (@i > 0) {
+        // Style ...
+        &:nth-child(@{i}) {
+          // 1st column
+          & when (@i <= 5) { top: @i * 10px; }
+          & when (@i <= 5) { z-index: 4; }
+          // 2nd column
+          & when ((@i > 5) and (@i <= 10)) { top: @i * 10px + 5px; }
+          & when ((@i > 5) and (@i <= 10)) { right: 8px; }
+          & when ((@i > 5) and (@i <= 10)) { z-index: 3; }
+          // 3rd column
+          & when ((@i > 10) and (@i <= 15)) { top: @i * 10px; }
+          & when ((@i > 10) and (@i <= 15)) { right: 16px; }
+          & when ((@i > 10) and (@i <= 15)) { z-index: 2; }
+          // 4th column
+          & when ((@i > 15) and (@i <= 20)) { top: @i * 10px + 5px; }
+          & when ((@i > 15) and (@i <= 20)) { right: 20px; }
+          & when ((@i > 15) and (@i <= 20)) { z-index: 1; }
+        }
+        // Next
+        .loop(@i - 1);
+      }
+      .loop(20);
+
+      // Default label position
+      & { top: 60px; }
+
+    }
+
+    /* Super-labels (Types)
+    ============================================================================================ */
+    &[title ^= "#"],
+    &[title ^= "Label: #"],
+    &[aria-label ^= "#"],
+    &[data-label ^= "#"]  {
+      order: 0;
+      padding: 2px 0 0 6px !important;
+
+      & {
+        transform: translateX(8px);
+        z-index: 2;
+        position: absolute;
+        top: 50%;
+        left: -8px;
+        bottom: 0;
+        width: 100%;
+        margin: 0 !important;
+        border: 0 !important;
+        vertical-align: middle !important;
+        line-height: 16px !important;
+        cursor: pointer;
+      }
+      &:not(:hover) {
+        max-width: 0px !important;
+        color: transparent !important;
+        transition: none;
+        border-radius: 0 3px 3px 0;
+      }
+      &:hover {
+        max-width: 320px !important;
+        transition-property: max-width, color;
+        transition-timing-function: ease;
+        transition-duration: 400ms;
+        transition-delay: 400ms;
+      }
+      &:nth-child(1)  { top: 50%; height: 50% !important; z-index: 4; }
+      &:nth-child(2)  { top: 66%; height: 34% !important; z-index: 4; }
+      &:nth-child(3)  { top: 83%; height: 17% !important; z-index: 4; }
+      & { top: 50%; height: 50% !important; }
+
+    }
+  }
+}

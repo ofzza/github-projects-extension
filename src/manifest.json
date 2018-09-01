@@ -4,43 +4,20 @@
   "version": "?",
 
   "icons": { 
-    "16": "style/img/logo(16px).png",
-    "48": "style/img/logo(48px).png",
-    "128": "style/img/logo(128px).png" 
+    "16": "res/img/logo(16px).png",
+    "48": "res/img/logo(48px).png",
+    "128": "res/img/logo(128px).png" 
   },
 
   "content_scripts" : [
     {
       "matches" : [ ],
-      "js" : [ 
-        "content/libs/jquery.min.js", 
-        "content/libs/lodash.min.js", 
-        "bootstrap.js"
-      ],
-      "css": [
-        "content/github/projects/search.css",
-        "content/github/projects/labels.css",
-        "content/github/projects/assignments.css",
-        "content/github/projects/columns.css"
-      ]
-    },
-    {
-      "matches" : [ ],
-      "js": [ ],
-      "css": [
-        "content/github/labels/labels.css"
-      ]
-    },
-    {
-      "matches" : [ ],
-      "js" : [ ],
-      "css": [
-        "content/github/issues/labels.css"
-      ]
+      "js" : [ "bootstrap.js" ],
+      "css": [ "style.css" ]
     }
   ],
   "web_accessible_resources": [
-    "style/img/label-tag-example.png"
+    "res/img/label-tag-example.png"
   ],
 
   "permissions": [

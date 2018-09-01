@@ -3,25 +3,7 @@
   "description": "Adds search functionality, labels management and other functionality to GitHub Projects page.",
   "content_scripts" : [
     {
-      "matches" : [ 
-        "https://github.com/*/*/projects/*",
-        "https://github.com/*/*/projects/*/"
-       ]
-    },
-    {
-      "matches" : [ 
-        "https://github.com/*/*/labels",
-        "https://github.com/*/*/labels/"
-       ]
-    },
-    {
-      "matches" : [ 
-        "https://github.com/*/*/issues",
-        "https://github.com/*/*/issues*",
-        "https://github.com/*/*/issues/",
-        "https://github.com/*/*/milestone/*",
-        "https://github.com/*/*/milestone/*/"
-       ]
+      "matches" : [ "https://github.com/*" ]
     }
   ],
   "permissions": [
