@@ -2,8 +2,6 @@
 
 - Adds "@special" and "#type" labels to issues and milestones pages
 - Adds "@special" and "#type" labels to project page's cards
-- Adds a functional search-bar, labels management and other functionality to Github Projects page.
-  <br>```(DEPRECATED since search is now natively supported by GitHub)```
 
 # Installation links:
 
@@ -16,7 +14,7 @@
   - [Firefox (GitHub Enterprise version)](https://addons.mozilla.org/en-US/firefox/addon/github-entprise-projects-plus/)
 
 #### Opera:
-  - Opera: awaiting moderation - coming soon!
+  - [Opera](https://addons.opera.com/en/extensions/details/github-projects-plus/)
   - Opera (GitHub Enterprise version): awaiting moderation - coming soon!
 
 # Deployment
@@ -38,12 +36,8 @@ gulp build && gulp watch
 gulp build --production
 ```
 
-3) Load unpacked Chrome extension from ```/dist``` directory.
+3) Load unpacked extension from ```/dist``` directory.
 
 # License
 
 Published under [MIT License](./LICENSE)
-
-# Attribution
-
-[jQuery](https://jquery.org/), [Lodash](https://github.com/lodash/lodash)

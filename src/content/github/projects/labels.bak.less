@@ -1,0 +1,144 @@
+/* Projects Page: Super-labels display adjustments
+============================================================================================ */
+.js-project-container {
+
+  /* Super-labels
+  ============================================================================================ */
+  .js-project-column,
+  .js-project-column .js-project-column-cards {
+    overflow: visible !important;
+  }
+
+  .issue-card .labels {
+    position: initial !important;
+    display: flex;
+    flex-flow: column;
+
+    & .issue-card-label {
+      order: 1;
+
+      /* Super-labels (Special labels)
+      ============================================================================================ */
+      &[data-card-filter ^= "label:@"],   // Name starts with "@"
+      &[data-card-filter ^= "label:\"@"], // Name starts with "@" (legacy enterprise support)
+      &[aria-label ~= "[special]"] {      // Description contains "[special]"
+        order: 0;
+
+        & {
+          transform: translateX(8px);
+          z-index: 2;
+          position: absolute;
+          border: 2px solid #fafafa;
+          vertical-align: middle !important;
+          line-height: 10px !important;
+          cursor: pointer;
+        }
+        &:not(:hover) {
+          width: 16px !important;
+          max-width: 16px !important;
+          height: 16px !important;
+          max-height: 16px !important;
+          padding-right: 0;
+          color: transparent !important;
+          border-radius: 8px;
+          transition: none;
+        }
+        &:hover {
+          left: auto;
+          max-width: 320px !important;
+          max-height: 32px !important;
+          padding-right: 16px;
+          border-radius: 2px;
+          transition-property: padding-right, max-width, max-height, border-radius, color;
+          transition-timing-function: ease;
+          transition-duration: 400ms;
+        }
+
+        // Loop through different label positions
+        .loop (@i) when (@i > 0) {
+          // Style ...
+          &:nth-child(@{i})  {
+            // 1st column
+            & when ((@i > 0) and (@i <= 5)) { top: @i * 10px; }
+            & when ((@i > 0) and (@i <= 5)) { right: 0px; }
+            & when ((@i > 0) and (@i <= 5)) { z-index: 2; }
+            // 2nd column
+            & when ((@i > 5) and (@i <= 10)) { top: (@i - 5) * 10px + 5px; }
+            & when ((@i > 5) and (@i <= 10)) { right: -8px; }
+            & when ((@i > 5) and (@i <= 10)) { z-index: 3; }
+            // 3rd column
+            & when ((@i > 10) and (@i <= 15)) { top: (@i - 10) * 10px; }
+            & when ((@i > 10) and (@i <= 15)) { right: -16px; }
+            & when ((@i > 10) and (@i <= 15)) { z-index: 4; }
+            // 4th column
+            & when (@i > 15) { top: (@i - 15) * 10px + 5px; }
+            & when (@i > 15) { right: -24px; }
+            & when (@i > 15) { z-index: 5; }
+          }
+          // Next
+          .loop(@i - 1);
+        }
+        .loop(20);
+
+        // Default label position
+        & { top: 60px; }
+
+      }
+
+      /* Super-labels (Type labels)
+      ============================================================================================ */
+      &[data-card-filter ^= "label:#"],   // Name starts with "#"
+      &[data-card-filter ^= "label:\"#"], // Name starts with "#" (legacy enterprise support)
+      &[aria-label ~= "[type]"]  {        // Description contains "[type]"
+        order: 0;
+
+        & {
+          transform: translateX(8px);
+          z-index: 2;
+          position: absolute;
+          top: 0;
+          left: -8px;
+          bottom: 0;
+          width: 100%;
+          padding: 0 !important;
+          margin: 0 !important;
+          border: 0 !important;
+          vertical-align: middle !important;
+          line-height: 16px !important;
+          cursor: pointer;
+        }
+        &:not(:hover) {
+          max-width: 6px !important;
+          color: transparent !important;
+          transition: none;
+        }
+        &:hover {
+          max-width: 100% !important;
+          transition-property: max-width, color;
+          transition-timing-function: ease;
+          transition-duration: 400ms;
+          transition-delay: 400ms;
+        }
+        &:nth-child(1n)  { top: 0px; height: 100% !important; z-index: 2; }
+        &:nth-child(2n)  { top: 33%; height: 66% !important; z-index: 3; }
+        &:nth-child(3n)  { top: 66%; height: 33% !important; z-index: 4; }
+        & { top: 0px; height: 33% !important; }
+      
+      }
+    }
+  }
+
+  /* Round-border for type-label when needed (fix)
+  ============================================================================================ */
+  .issue-card.rounded-1 .labels .issue-card-label[data-card-filter ^= "label:#"]:not(:hover),   // Name starts with "#"
+  .issue-card.rounded-1 .labels .issue-card-label[data-card-filter ^= "label:\"#"]:not(:hover), // Name starts with "#" (legacy enterprise support)
+  .issue-card.rounded-1 .labels .issue-card-label[aria-label ~= "[type]"]:not(:hover) {         // Description contains "[spectypeial]"
+    border-radius: 3px 0 0 3px;
+  }
+  .issue-card.rounded-2 .labels .issue-card-label[data-card-filter ^= "label:#"]:not(:hover),   // Name starts with "#"
+  .issue-card.rounded-2 .labels .issue-card-label[data-card-filter ^= "label:\"#"]:not(:hover), // Name starts with "#" (legacy enterprise support)
+  .issue-card.rounded-2 .labels .issue-card-label[aria-label ~= "[type]"]:not(:hover) {         // Description contains "[spectypeial]"
+    border-radius: 6px 0 0 6px;
+  }
+
+}

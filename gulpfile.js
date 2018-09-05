@@ -89,7 +89,7 @@ gulp.task('less@build', () => {
 });
 // ... and attached watcher
 gulp.task('watch.less@build', () => {
-  watch('./src/content/github/style.less', () => { gulp.start('less@build'); });
+  watch('./src/content/github/**/*.less', () => { gulp.start('less@build'); });
 });
 
 // Define ES6 transpile task
