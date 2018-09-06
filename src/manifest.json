@@ -12,7 +12,7 @@
   "content_scripts" : [
     {
       "matches" : [ ],
-      "js" : [ ],
+      "js" : [ "bootstrap.js" ],
       "css": [ "style.css" ]
     }
   ],

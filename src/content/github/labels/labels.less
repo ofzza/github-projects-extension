@@ -1,61 +1,65 @@
 /* Labels Configuration Page: Super-labels instructions injection
 ============================================================================================ */
-.issues-listing .labels-list label[for ^= "label-name-"] {
-  position: relative;
-  cursor: help;
+[github-projects-plus] {
 
-  &:after {
-    content: '?';
-    position: absolute;
-    top: 0;
-    margin-left: 4px;
-    font-weight: bold;
-    color: #0366d6;
-  }
-  &:hover:before {
-    content: '';
-    z-index: 32;
-    position: absolute;
-    top: 4px;
-    left: 74px;
-    margin-left: 4px;
-    width: 0;
-    height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-right: 16px solid #eee;
-  }
-  &:hover:after {
-    content: 'Start your label name with "@" or add "[special]" to it\'s description to display it as a "@special" work-flow label; alternatively start your label name with "#" or add "[type]" to it\'s description to display it as a "#type" label.';
-    z-index: 33;
-    position: absolute;
-    top: 0;
-    margin-left: 20px;
-    display: inline-block;
-    width: auto;
-    min-width: 391px;
-    height: 179px;
-    padding: 8px;
-    background: url('chrome-extension://__MSG_@@extension_id__/res/img/label-tag-example.png') no-repeat;
-    background-position: center 98px !important;
-    background-color: rgb(250, 250, 250);
-    box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 2px, rgba(81, 167, 232, 0.498039) 0px 0px 5px;
-    text-align: left;
-    font-size: 13px;
-    color: #767676;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(238, 238, 238);
-    border-image: initial;
-    border-radius: 3px;
+  .issues-listing .labels-list label[for ^= "label-name-"] {
+    position: relative;
+    cursor: help;
 
-    transition: height ease 400ms;
-    animation: animate-label-tag-note;
-    animation-duration: 400ms;
-    animation-timing-function: ease;
+    &:after {
+      content: '?';
+      position: absolute;
+      top: 0;
+      margin-left: 4px;
+      font-weight: bold;
+      color: #0366d6;
+    }
+    &:hover:before {
+      content: '';
+      z-index: 32;
+      position: absolute;
+      top: 4px;
+      left: 74px;
+      margin-left: 4px;
+      width: 0;
+      height: 0;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+      border-right: 16px solid #eee;
+    }
+    &:hover:after {
+      content: 'Start your label name with "@" or add "[special]" to it\'s description to display it as a "@special" work-flow label; alternatively start your label name with "#" or add "[type]" to it\'s description to display it as a "#type" label.';
+      z-index: 33;
+      position: absolute;
+      top: 0;
+      margin-left: 20px;
+      display: inline-block;
+      width: auto;
+      min-width: 391px;
+      height: 179px;
+      padding: 8px;
+      background: url('chrome-extension://__MSG_@@extension_id__/res/img/label-tag-example.png') no-repeat;
+      background-position: center 98px !important;
+      background-color: rgb(250, 250, 250);
+      box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 2px, rgba(81, 167, 232, 0.498039) 0px 0px 5px;
+      text-align: left;
+      font-size: 13px;
+      color: #767676;
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(238, 238, 238);
+      border-image: initial;
+      border-radius: 3px;
+
+      transition: height ease 400ms;
+      animation: animate-label-tag-note;
+      animation-duration: 400ms;
+      animation-timing-function: ease;
+    }
+    @keyframes animate-label-tag-note {
+      0% { height: 20px; }
+      100% { height: 119px; }
+    }
   }
-  @keyframes animate-label-tag-note {
-    0% { height: 20px; }
-    100% { height: 119px; }
-  }
+
 }
