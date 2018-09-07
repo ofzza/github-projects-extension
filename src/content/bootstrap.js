@@ -1,9 +1,12 @@
 // ============================================================================================
 // GitHub projects page optimizations
 // ============================================================================================
+import testFn from './github/test';
 
-// Check if other version already loaded (in case both GitHub.con and Enterprise versions installed)
+// Load
 (() => {
+
+  // Check if other version already loaded (in case both GitHub.con and Enterprise versions installed)
   if (document.body.getAttribute('github-projects-plus')) { 
     console.log('> GitHub Projects Optimizer: Another version already loaded ...');
     return; 
@@ -15,14 +18,16 @@
   let metaEls = document.getElementsByTagName('meta'),
       foundGitHubMetaElement = false;
   for (let i in metaEls) {
-    if ((metaEls[i]['name'] === 'og:site_name') && (metaEls[i]['content'] === 'GitHub')) {
+    const metaEl = metaEls[i];
+    if (metaEl.attributes && (metaEl.attributes.property && metaEl.attributes.property.value === 'og:site_name') && (metaEl.attributes.content && metaEl.attributes.content.value === 'GitHub')) {
       foundGitHubMetaElement = true;
       break;
     }
   }
   if (foundGitHubMetaElement) {
     
-    // TODO: ...
+    // Initialize and load JS scripts
+    testFn();
 
   }
 })()
