@@ -1,0 +1,120 @@
+/* Super-labels: Global mixins
+============================================================================================ */
+
+/* Default label styling
+-------------------------------------------------------------------------------------------- */
+.super-label-default() {
+  display: inline-block !important;
+  position: initial;
+  top: unset;
+  bottom: unset;
+  left: unset;
+  right: unset;
+  width: auto !important;
+  max-width: unset !important;
+  min-width: unset !important;
+  height: auto !important;
+  max-height: unset !important;
+  min-height: unset !important;
+  
+  margin-top: 4px !important;
+  padding: 0.15em 4px !important;
+  padding-right: 4px !important;
+  border-width: 0 !important;
+  border-radius: 0;
+  
+  overflow: unset;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 15px !important;
+  font-size: 12px !important;
+  vertical-align: middle !important;
+
+  &:before, &:after {
+    content: '' !important;
+    display: none;
+    padding: 0 !important;
+  }
+}
+
+/* Type label, basic styling + :hover state
+-------------------------------------------------------------------------------------------- */
+.super-type-label(@i) {
+  position: absolute;
+  left: 0;
+  top: 4% + (@i * (92% / 5));
+  bottom: 4%;
+  height: 92% - (@i * (92% / 5)) !important;
+  width: 100%;
+  z-index: 1;
+
+  padding: 0 !important;
+  margin: 0 !important;
+  border-color: white !important;
+  border-style: solid !important;
+  border-width: 2px 2px 2px 0 !important;
+  border-radius: 0 5px 5px 0;
+  text-align: center;
+  vertical-align: middle !important;
+  line-height: 16px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:not(:hover) {
+    max-width: 8px !important;
+    font-size: 0 !important;
+    transition: none;
+  }
+  &:hover {
+    // max-width
+    // min-height
+    // line-height
+    z-index: 100;
+    transition-property: max-width, font-size;
+    transition-timing-function: ease;
+    transition-duration: 400ms;
+    transition-delay: 400ms;
+  }
+}
+
+/* Special label, basic styling + :hover state
+-------------------------------------------------------------------------------------------- */
+.super-special-label(@i) {
+  position: absolute;
+  right: 0px;
+  top: 4px + (@i * 10px);
+  z-index: 2;
+  transform: translateX(8px);
+
+  border: 2px solid #fafafa;
+  vertical-align: middle !important;
+  line-height: 10px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:not(:hover) {
+    width: 16px !important;
+    max-width: 16px !important;
+    height: 16px !important;
+    max-height: 16px !important;
+    padding-right: 0;
+    font-size: 0 !important;
+    border-radius: 8px;
+    transition: none;
+  }
+  &:hover {
+    z-index: 100;
+    left: auto;
+    max-width: 320px !important;
+    max-height: 32px !important;
+    padding-right: 16px;
+    border-radius: 2px;
+    transition-property: padding-right, max-width, max-height, border-radius, font-size;
+    transition-timing-function: ease;
+    transition-duration: 400ms;
+  }
+}

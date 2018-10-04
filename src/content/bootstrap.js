@@ -1,17 +1,18 @@
 // ============================================================================================
 // GitHub projects page optimizations
 // ============================================================================================
-import testFn from './github/test';
+import { namespace as ns } from './namespace';
+import bootstrapPersonalNotes from './github/issue-personal-notes';
 
 // Load
 (() => {
 
   // Check if other version already loaded (in case both GitHub.con and Enterprise versions installed)
-  if (document.body.getAttribute('github-projects-plus')) { 
+  if (document.body.getAttribute(ns)) { 
     console.log('> GitHub Projects Optimizer: Another version already loaded ...');
     return; 
   } else {
-    document.body.setAttribute('github-projects-plus', 'true');
+    document.body.setAttribute(ns, 'true');
   }
 
   // Check if github page
@@ -19,7 +20,7 @@ import testFn from './github/test';
       foundGitHubMetaElement = false;
   for (let i in metaEls) {
     const metaEl = metaEls[i];
-    if (metaEl.attributes && (metaEl.attributes.property && metaEl.attributes.property.value === 'og:site_name') && (metaEl.attributes.content && metaEl.attributes.content.value === 'GitHub')) {
+    if (metaEl && metaEl.getAttribute('property') === 'og:site_name' && metaEl.getAttribute('content') === 'GitHub') {
       foundGitHubMetaElement = true;
       break;
     }
@@ -27,7 +28,7 @@ import testFn from './github/test';
   if (foundGitHubMetaElement) {
     
     // Initialize and load JS scripts
-    testFn();
+    bootstrapPersonalNotes();
 
   }
 })()

@@ -1,6 +1,6 @@
 {
   "name": "GitHub (Enterprise) Projects Plus",
-  "description": "Additional functionality for GitHub page. This version will work with GitHub Enterprise on domains other then GitHub.com!",
+  "description": "[Deprecated] Adds advanced labels management and other functionality to GitHub.",
   "content_scripts" : [
     {
       "matches" : [ "https://*/*" ]

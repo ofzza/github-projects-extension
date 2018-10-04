@@ -1,21 +1,21 @@
 # GitHub Projects Chrome extension
 
-- Adds "@special" and "#type" labels to issues and milestones pages
-- Adds "@special" and "#type" labels to project page's cards
+- Adds "@special" and "#type" labels support to projects and issues/milestones pages
+- Adds personal notes support to issues on projects, issues/milestones and issue details pages
 
 # Installation links:
 
 #### Chrome
   - [Chrome](https://chrome.google.com/webstore/detail/github-projects-plus/pkkhkgaamkjaepakanehpgbifoljadnl)
-  - [Chrome (GitHub Enterprise version)](https://chrome.google.com/webstore/detail/github-projects-plus/pkkhkgaamkjaepakanehpgbifoljadnl)
+  - [Chrome ([Deprecated] GitHub Enterprise version)](https://chrome.google.com/webstore/detail/github-projects-plus/pkkhkgaamkjaepakanehpgbifoljadnl)
 
 #### Firefox
   - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/github-projects-plus/)
-  - [Firefox (GitHub Enterprise version)](https://addons.mozilla.org/en-US/firefox/addon/github-entprise-projects-plus/)
+  - [Firefox ([Deprecated] GitHub Enterprise version)](https://addons.mozilla.org/en-US/firefox/addon/github-entprise-projects-plus/)
 
 #### Opera:
   - [Opera](https://addons.opera.com/en/extensions/details/github-projects-plus/)
-  - Opera (GitHub Enterprise version): awaiting moderation - coming soon!
+  - [Opera ([Deprecated] GitHub Enterprise version)](https://addons.opera.com/en/extensions/details/github-enterprise-projects-plus/)
 
 # Deployment
 

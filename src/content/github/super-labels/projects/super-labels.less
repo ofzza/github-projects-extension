@@ -1,5 +1,7 @@
 /* Projects Page: Super-labels display adjustments
 ============================================================================================ */
+@import '../super-labels.less';
+
 [github-projects-plus] {
 
   .js-project-container {
@@ -21,44 +23,14 @@
         // Compose selector
         @projects-type-selector-name:        ~'.issue-card-label[data-card-filter ^= "label:#"]';   // Name starts with "#"
         @projects-type-selector-name-legacy: ~'.issue-card-label[data-card-filter ^= "label:\"#"]'; // Name starts with "#" (legacy enterprise support)
-        @projects-type-selector-description: ~'.issue-card-label[aria-label ~= "[type]"]';          // Description contains "[type]"
+        @projects-type-selector-description: ~'.issue-card-label[aria-label *= "[type]"]';          // Description contains "[type]"
         
-        // Type label, basic styling + :hover state MIXIN
+        // Type label, basic styling + :hover state
         .projects-type-label(@i) {
-          position: absolute;
-          left: 0;
-          top: 4% + (@i * (92% / 5));
-          bottom: 4%;
-          height: 92% - (@i * (92% / 5)) !important;
-          width: 100%;
-          z-index: 1;
-
-          padding: 0 !important;
-          margin: 0 !important;
-          border-color: white !important;
-          border-style: solid !important;
-          border-width: 2px 2px 2px 0 !important;
-          border-radius: 0 5px 5px 0;
-          text-align: center;
-          vertical-align: middle !important;
-          line-height: 16px !important;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          cursor: pointer;
-
-          &:not(:hover) {
-            max-width: 8px !important;
-            color: transparent !important;
-            transition: none;
-          }
+          .super-type-label(@i);
           &:hover {
             max-width: 60% !important;
             min-height: 32px !important;
-            transition-property: max-width, color;
-            transition-timing-function: ease;
-            transition-duration: 400ms;
-            transition-delay: 400ms;
           }
         }
 
@@ -86,7 +58,7 @@
                 & ~ @{projects-type-selector-name},
                 & ~ @{projects-type-selector-name-legacy},
                 & ~ @{projects-type-selector-description} {
-                  .projects-type-label(4);
+                  .super-label-default();
                 }
               }
             }
@@ -98,44 +70,11 @@
         // Compose selector
         @projects-special-selector-name:        ~'.issue-card-label[data-card-filter ^= "label:@"]';    // Name starts with "@"
         @projects-special-selector-name-legacy: ~'.issue-card-label[data-card-filter ^= "label:\"@"]';  // Name starts with "@" (legacy enterprise support)
-        @projects-special-selector-description: ~'.issue-card-label[aria-label ~= "[special]"]';        // Description contains "[special]"
+        @projects-special-selector-description: ~'.issue-card-label[aria-label *= "[special]"]';        // Description contains "[special]"
 
-        // Special label, basic styling + :hover state MIXIN
+        // Special label, basic styling + :hover state
         .projects-special-label(@i) {
-          position: absolute;
-          right: 0px;
-          top: 4px + (@i * 10px);
-          z-index: 2;
-          transform: translateX(8px);
-
-          border: 2px solid #fafafa;
-          vertical-align: middle !important;
-          line-height: 10px !important;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          cursor: pointer;
-
-          &:not(:hover) {
-            width: 16px !important;
-            max-width: 16px !important;
-            height: 16px !important;
-            max-height: 16px !important;
-            padding-right: 0;
-            color: transparent !important;
-            border-radius: 8px;
-            transition: none;
-          }
-          &:hover {
-            left: auto;
-            max-width: 320px !important;
-            max-height: 32px !important;
-            padding-right: 16px;
-            border-radius: 2px;
-            transition-property: padding-right, max-width, max-height, border-radius, color;
-            transition-timing-function: ease;
-            transition-duration: 400ms;
-          }
+          .super-special-label(@i);
         }
 
         // Position based on number of preceding elements matching same selector (max 5 labels)
@@ -162,7 +101,7 @@
                 & ~ @{projects-special-selector-name},
                 & ~ @{projects-special-selector-name-legacy},
                 & ~ @{projects-special-selector-description} {
-                  .projects-special-label(4);
+                  .super-label-default();
                 }
               }
             }

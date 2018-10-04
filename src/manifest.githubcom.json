@@ -3,10 +3,11 @@
   "description": "Adds advanced labels management and other functionality to GitHub.",
   "content_scripts" : [
     {
-      "matches" : [ "https://github.com/*" ]
+      "matches" : [ "https://*/*" ]
     }
   ],
   "permissions": [
-    "https://github.com/*"
+    "http://*/*",
+    "https://*/*"
   ]
 }
