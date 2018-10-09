@@ -225,7 +225,7 @@ export function generateIssueCardsStyling (issueNotes) {
       border-radius: 6px;
       font-size: 10px;
       color: #aaa;
-      white-space: pre;
+      white-space: pre-line;
       cursor: pointer;
     }`,
     `${ generateIssueCardsWithNotesSelector('PROJECTS', `${ projectsPageNotesHostSelector }:not(#${ editingIssueId }):hover:before`) },
@@ -302,6 +302,14 @@ export function generateIssueCardsStyling (issueNotes) {
      [${ pluginNamespace }] ${ singleIssuePageIssueSelector } ${ singleIssuePageNotesHostSelector }#${ editingIssueId } #${ editorElementId } textarea {
       z-index: 97;
       min-height: 90px;
+      color: #666;
+    }`,
+    `[${ pluginNamespace }] ${ projectsPageIssueSelector } ${ projectsPageNotesHostSelector }#${ editingIssueId } #${ editorElementId } textarea::placeholder,
+     [${ pluginNamespace }] ${ issuesPageIssueSelector } ${ issuesPageNotesHostSelector }#${ editingIssueId } #${ editorElementId } textarea::placeholder,
+     [${ pluginNamespace }] ${ singleIssuePageIssueSelector } ${ singleIssuePageNotesHostSelector }#${ editingIssueId } #${ editorElementId } textarea::placeholder {
+      opacity: 0.2;
+      color: #ee0701;
+      font-weight: bold;
     }`
 
   ].join('\n');

@@ -20,9 +20,16 @@ import bootstrapPersonalNotes from './github/issue-personal-notes';
       foundGitHubMetaElement = false;
   for (let i in metaEls) {
     const metaEl = metaEls[i];
-    if (metaEl && metaEl.getAttribute('property') === 'og:site_name' && metaEl.getAttribute('content') === 'GitHub') {
-      foundGitHubMetaElement = true;
-      break;
+    if (metaEl && metaEl.getAttribute) {
+      let propertyMatch = (metaEl.getAttribute('property') === 'og:site_name');
+      if (propertyMatch) {
+        let propertyValue = metaEl.getAttribute('content'),
+            propertyValueMatch = (propertyValue && propertyValue.substr(0, 6) === 'GitHub');
+        if (propertyMatch && propertyValueMatch) {
+          foundGitHubMetaElement = true;
+          break;
+        }
+      }
     }
   }
   if (foundGitHubMetaElement) {

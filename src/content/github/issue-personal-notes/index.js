@@ -31,7 +31,7 @@ import {
 export default function () {
 
   // Check if /projects, /issues or /milestones page
-  if (['projects', 'issues', 'milestones'].indexOf(window.location.pathname.split('/')[3]) > -1) {
+  if (['projects', 'issues', 'milestone'].indexOf(window.location.pathname.split('/')[3]) > -1) {
 
     // Initialize notes' local storage
     let notes = new LocalStorage(localStorageKey);
@@ -173,9 +173,7 @@ function generateNoteEditor (notes, issueNumber) {
   const textareaEl = document.createElement('textarea');
   textareaEl.id = editorTextareaId;
   textareaEl.value = issueNotes[issueNumber] || '';
-  textareaEl.setAttribute('placeholder',
-      `Note will only be visible to you and not to any other users\n`
-    + `and will be lost if you clear your browser's LocalStorage!`);
+  textareaEl.setAttribute('placeholder', `Note will only be visible to you and not to any other users and will be lost if you clear your browser's LocalStorage!`);
   innerContainerEl.appendChild(textareaEl);
 
   // Handle events

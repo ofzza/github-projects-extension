@@ -6,3 +6,8 @@
   [x] JS bootstrapping only after detection of GitHub by meta tags (for enterprise deployment on custom domains)
   [x] Deprecated Enterprise version of the plugin, while making the vanilla plugin bootstrap on any domain after detection of GitHub by meta tags 
   [x] Private (local storate persisted) notes for issues on Projects, Issues/Milestones and Issue details pages
+
+### v2.0.2
+  [x] Fixed GitHUb site detection
+  [x] Fixed issue causing Personal Notes not to bootstrap if loading directly onto a milestone pages
+  [x] Fixed wrapping on long Personal Notes
