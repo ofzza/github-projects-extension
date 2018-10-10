@@ -11,3 +11,6 @@
   [x] Fixed GitHUb site detection
   [x] Fixed issue causing Personal Notes not to bootstrap if loading directly onto a milestone pages
   [x] Fixed wrapping on long Personal Notes
+
+### v2.0.3
+  [x] Fixed issues with duplicated Personal Notes buttons on issues list's issues with comments icon

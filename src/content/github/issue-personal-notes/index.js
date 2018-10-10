@@ -14,14 +14,14 @@ import {
   issuesPageIssueClass,
   projectsPageIssueNumberAttribute,
   projectsPageIssueNumberAttributeValuePrefix,
-  projectsPageNotesButtonHostClass,
+  projectsPageNotesButtonHostClasses,
   issuesPageIssueNumberAttribute,
   issuesPageIssueNumberAttributeValuePrefix,
-  issuesPageNotesButtonHostClass,
+  issuesPageNotesButtonHostClasses,
   singleIssuePageIssueClass,
   singleIssuePageIssueNumberAttribute,
   singleIssuePageIssueNumberAttributeValuePrefix,
-  singleIssuePageNotesButtonHostClass
+  singleIssuePageNotesButtonHostClasses
 } from './res';
 
 /**
@@ -98,10 +98,25 @@ function trackUserInteractions (notes) {
       if (target && target.className && (target.className.split(' ').indexOf(projectsPageIssueClass) > -1)) { issueEl = target; }
       if (target && target.className && (target.className.split(' ').indexOf(issuesPageIssueClass) > -1)) { issueEl = target; }
       if (target && target.className && (target.className.split(' ').indexOf(singleIssuePageIssueClass) > -1)) { issueEl = target; }
-      // Detect nptes button host element
-      if (target && target.className && (target.className.split(' ').indexOf(projectsPageNotesButtonHostClass) > -1)) { notesButtonEl = target; }
-      if (target && target.className && (target.className.split(' ').indexOf(issuesPageNotesButtonHostClass) > -1)) { notesButtonEl = target; }
-      if (target && target.className && (target.className.split(' ').indexOf(singleIssuePageNotesButtonHostClass) > -1)) { notesButtonEl = target; }
+      // Detect notes button host element
+      if (target && target.className) {
+        let targetClasses = target.className.split(' '),
+            foundProjectsPage = true,
+            foundIssuesPage = true,
+            foundSingleIssuePage = true;
+        for (let i in projectsPageNotesButtonHostClasses) {
+          if (targetClasses.indexOf(projectsPageNotesButtonHostClasses[i]) === -1) { foundProjectsPage = false; break; }
+        }
+        for (let i in issuesPageNotesButtonHostClasses) {
+          if (targetClasses.indexOf(issuesPageNotesButtonHostClasses[i]) === -1) { foundIssuesPage = false; break; }
+        }
+        for (let i in singleIssuePageNotesButtonHostClasses) {
+          if (targetClasses.indexOf(singleIssuePageNotesButtonHostClasses[i]) === -1) { foundSingleIssuePage = false; break; }
+        }
+        if (foundProjectsPage || foundIssuesPage || foundSingleIssuePage) {
+          notesButtonEl = target;
+        }
+      }
     }
 
     // Get issue number

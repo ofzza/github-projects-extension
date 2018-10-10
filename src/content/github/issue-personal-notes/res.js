@@ -18,14 +18,14 @@ export const editorTextareaId   = `${ ns }_editing-issue_editor-textarea`;
 export const projectsPageIssueClass = 'issue-card';
 export const projectsPageIssueNumberAttribute = 'data-card-title';
 export const projectsPageIssueNumberAttributeValuePrefix = '#';
-export const projectsPageNotesButtonHostClass = 'sr-only';
+export const projectsPageNotesButtonHostClasses = ['sr-only'];
 // Define detectable features for issues/milestones page
 export const issuesPageIssueClass = 'js-issue-row';
 export const issuesPageIssueNumberAttribute = 'id';
 export const issuesPageIssueNumberAttributeValuePrefix = 'issue_';
-export const issuesPageNotesButtonHostClass = 'text-small';
+export const issuesPageNotesButtonHostClasses = ['mt-1', 'text-small'];
 // Define detectable features for single issue page
 export const singleIssuePageIssueClass = 'issue';
 export const singleIssuePageIssueNumberAttribute = 'data-url';
 export const singleIssuePageIssueNumberAttributeValuePrefix = '/issues/';
-export const singleIssuePageNotesButtonHostClass = 'gh-header-meta';
+export const singleIssuePageNotesButtonHostClasses = ['gh-header-meta'];

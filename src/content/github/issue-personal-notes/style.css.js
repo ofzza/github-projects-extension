@@ -9,24 +9,24 @@ import {
   projectsPageIssueClass,
   projectsPageIssueNumberAttribute,
   projectsPageIssueNumberAttributeValuePrefix,
-  projectsPageNotesButtonHostClass,
+  projectsPageNotesButtonHostClasses,
   issuesPageIssueClass,
   issuesPageIssueNumberAttribute,
   issuesPageIssueNumberAttributeValuePrefix,
-  issuesPageNotesButtonHostClass,
+  issuesPageNotesButtonHostClasses,
   singleIssuePageIssueClass,
   singleIssuePageIssueNumberAttribute,
   singleIssuePageIssueNumberAttributeValuePrefix,
-  singleIssuePageNotesButtonHostClass
+  singleIssuePageNotesButtonHostClasses
 } from './res';
 
 // Define selectors
 const projectsPageIssueSelector = `.js-project-container .${ projectsPageIssueClass }[data-card-type='["issue"]']`,
-      projectsPageNotesHostSelector = `.${ projectsPageNotesButtonHostClass }`,
+      projectsPageNotesHostSelector = `.${ projectsPageNotesButtonHostClasses.join('.') }`,
       issuesPageIssueSelector = `.issues-listing .${ issuesPageIssueClass }`,
-      issuesPageNotesHostSelector = `.${ issuesPageNotesButtonHostClass }`,
+      issuesPageNotesHostSelector = `.${ issuesPageNotesButtonHostClasses.join('.') }`,
       singleIssuePageIssueSelector = `.issues-listing .${ singleIssuePageIssueClass }`,
-      singleIssuePageNotesHostSelector = `.${ singleIssuePageNotesButtonHostClass }`;
+      singleIssuePageNotesHostSelector = `.${ singleIssuePageNotesButtonHostClasses.join('.') }`;
 
 /**
  * Generates additional styling for an issue card
