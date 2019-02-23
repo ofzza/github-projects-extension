@@ -1,10 +1,10 @@
 {
   "name": "github-projects-plus",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "GitHub Projects Plus Chrome extension",
   "author": "ofzza",
   "license": "MIT",
-  "dependencies": { },
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "6.26.3",
     "babel-loader": "7.1.4",
@@ -21,6 +21,7 @@
     "gulp-util": "3.0.8",
     "gulp-watch": "5.0.0",
     "gulp-zip": "4.1.0",
+    "natives": "^1.1.6",
     "vinyl-buffer": "1.0.1",
     "vinyl-source-stream": "2.0.0"
   }

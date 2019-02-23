@@ -16,4 +16,4 @@
   [x] Fixed issues with duplicated Personal Notes buttons on issues list's issues with comments icon
 
 ### v2.0.4
-  [x] Fixed labels wrappping issue
+  [x] Fixed labels wrapping issue
