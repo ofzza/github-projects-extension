@@ -3,6 +3,7 @@
 // ============================================================================================
 import { namespace as ns } from './namespace';
 import bootstrapPersonalNotes from './github/issue-personal-notes';
+import bootstrapProjectsNewIssueBtn from './github/projects-newissue-btn';
 
 // Load
 (() => {
@@ -36,6 +37,9 @@ import bootstrapPersonalNotes from './github/issue-personal-notes';
     
     // Initialize and load JS scripts
     bootstrapPersonalNotes();
+
+    // Initialize projects page "New issue" button
+    bootstrapProjectsNewIssueBtn();
 
   }
 })()
