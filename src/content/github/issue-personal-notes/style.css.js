@@ -23,9 +23,9 @@ import {
 // Define selectors
 const projectsPageIssueSelector = `.js-project-container .${ projectsPageIssueClass }[data-card-type='["issue"]']`,
       projectsPageNotesHostSelector = `.${ projectsPageNotesButtonHostClasses.join('.') }`,
-      issuesPageIssueSelector = `.issues-listing .${ issuesPageIssueClass }`,
+      issuesPageIssueSelector = `.${ issuesPageIssueClass }`,
       issuesPageNotesHostSelector = `.${ issuesPageNotesButtonHostClasses.join('.') }`,
-      singleIssuePageIssueSelector = `.issues-listing .${ singleIssuePageIssueClass }`,
+      singleIssuePageIssueSelector = `.${ singleIssuePageIssueClass }`,
       singleIssuePageNotesHostSelector = `.${ singleIssuePageNotesButtonHostClasses.join('.') }`;
 
 /**

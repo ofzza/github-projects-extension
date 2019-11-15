@@ -4,107 +4,103 @@
 
 [github-projects-plus] {
 
-  .issues-listing {
+  /* Super-labels
+  ============================================================================================ */
+  .js-issue-row {
 
-    /* Super-labels
-    ============================================================================================ */
-    .js-issue-row {
+    .labels {
+      position: initial !important;
+      float: right;
+      display: flex;
+      flex-flow: row;
+      width: min-content;
+      padding-top: 4px;
+  
+      // Styling for all labels (special or not)
+      a {
+        display: inline-block;
+        margin-right: 2px;
+        white-space: nowrap;
+      }
 
-      .labels {
-        position: initial !important;
-        float: right;
-        display: flex;
-        flex-flow: row;
-        width: min-content;
-        padding-top: 4px;
-    
-        // Styling for all labels (special or not)
-        a {
-          display: inline-block;
-          margin-right: 2px;
-          white-space: nowrap;
+      /* Super-labels (Type labels)
+      ============================================================================================ */
+      
+      // Compose selector
+      @issues-type-selector-name:        ~'a[title ^= "#"]';            // Name starts with "#"
+      @issues-type-selector-description: ~'a[aria-label *= "[type]"]';  // Description contains "[type]"
+      
+      // Type label, basic styling + :hover state
+      .issues-type-label(@i) {
+        .super-type-label(@i);
+        &:hover {
+          max-width: 200px !important;
+          min-height: 32px !important;
+          line-height: 32px !important;
         }
+      }        
 
-        /* Super-labels (Type labels)
-        ============================================================================================ */
-        
-        // Compose selector
-        @issues-type-selector-name:        ~'a[title ^= "#"]';            // Name starts with "#"
-        @issues-type-selector-description: ~'a[aria-label *= "[type]"]';  // Description contains "[type]"
-        
-        // Type label, basic styling + :hover state
-        .issues-type-label(@i) {
-          .super-type-label(@i);
-          &:hover {
-            max-width: 200px !important;
-            min-height: 32px !important;
-            line-height: 32px !important;
-          }
-        }        
+      // Position based on number of preceding elements matching same selector (max 5 labels)
+      @{issues-type-selector-name},
+      @{issues-type-selector-description} {
+        .issues-type-label(0);
 
-        // Position based on number of preceding elements matching same selector (max 5 labels)
-        @{issues-type-selector-name},
-        @{issues-type-selector-description} {
-          .issues-type-label(0);
+        & ~ @{issues-type-selector-name},
+        & ~ @{issues-type-selector-description} {
+          .issues-type-label(1);
 
           & ~ @{issues-type-selector-name},
           & ~ @{issues-type-selector-description} {
-            .issues-type-label(1);
+            .issues-type-label(2);
 
             & ~ @{issues-type-selector-name},
             & ~ @{issues-type-selector-description} {
-              .issues-type-label(2);
+              .issues-type-label(3);
 
               & ~ @{issues-type-selector-name},
               & ~ @{issues-type-selector-description} {
-                .issues-type-label(3);
-
-                & ~ @{issues-type-selector-name},
-                & ~ @{issues-type-selector-description} {
-                  .super-label-default();
-                }
+                .super-label-default();
               }
             }
           }
         }
+      }
 
-        /* Super-labels (Special labels)
-        ============================================================================================ */
-        // Compose selector
-        @issues-special-selector-name:        ~'a[title ^= "@"]';               // Name starts with "@"
-        @issues-special-selector-description: ~'a[aria-label *= "[special]"]';  // Description contains "[special]"
+      /* Super-labels (Special labels)
+      ============================================================================================ */
+      // Compose selector
+      @issues-special-selector-name:        ~'a[title ^= "@"]';               // Name starts with "@"
+      @issues-special-selector-description: ~'a[aria-label *= "[special]"]';  // Description contains "[special]"
 
-        // Special label, basic styling + :hover state
-        .issues-special-label(@i) {
-          .super-special-label(@i);
-        }
+      // Special label, basic styling + :hover state
+      .issues-special-label(@i) {
+        .super-special-label(@i);
+      }
 
-        // Position based on number of preceding elements matching same selector (max 5 labels)
-        @{issues-special-selector-name},
-        @{issues-special-selector-description} {
-          .issues-special-label(0);
+      // Position based on number of preceding elements matching same selector (max 5 labels)
+      @{issues-special-selector-name},
+      @{issues-special-selector-description} {
+        .issues-special-label(0);
+
+        & ~ @{issues-special-selector-name},
+        & ~ @{issues-special-selector-description} {
+          .issues-special-label(1);
 
           & ~ @{issues-special-selector-name},
           & ~ @{issues-special-selector-description} {
-            .issues-special-label(1);
+            .issues-special-label(2);
 
             & ~ @{issues-special-selector-name},
             & ~ @{issues-special-selector-description} {
-              .issues-special-label(2);
+              .issues-special-label(3);
 
               & ~ @{issues-special-selector-name},
               & ~ @{issues-special-selector-description} {
-                .issues-special-label(3);
-
-                & ~ @{issues-special-selector-name},
-                & ~ @{issues-special-selector-description} {
-                  .super-label-default();
-                }
+                .super-label-default();
               }
             }
           }
         }
-
       }
 
     }

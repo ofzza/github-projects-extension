@@ -5,7 +5,7 @@
   [x] Fixed "super labels" positioning to lineup with relative order within "super label" kind (up to 5 labels of each kind)
   [x] JS bootstrapping only after detection of GitHub by meta tags (for enterprise deployment on custom domains)
   [x] Deprecated Enterprise version of the plugin, while making the vanilla plugin bootstrap on any domain after detection of GitHub by meta tags 
-  [x] Private (local storate persisted) notes for issues on Projects, Issues/Milestones and Issue details pages
+  [x] Private (local storage persisted) notes for issues on Projects, Issues/Milestones and Issue details pages
 
 ### v2.0.2
   [x] Fixed GitHUb site detection
@@ -17,3 +17,11 @@
 
 ### v2.0.4
   [x] Fixed labels wrapping issue
+
+### v2.0.6
+  [x] Extension now adds a "New issue" button to every project page
+
+### v2.0.7
+  [x] Fixed super-labels on Issues and PRs pages
+  [x] Fixed notes on Issues and PRs pages
+  [x] Fixed notes on Issue page
