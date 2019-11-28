@@ -25,3 +25,7 @@
   [x] Fixed super-labels on Issues and PRs pages
   [x] Fixed notes on Issues and PRs pages
   [x] Fixed notes on Issue page
+
+### V2.0.8
+ [x] Fixed the "New issue" button's target URL
+ [x] Fixed new/edit label info icon with instructions
