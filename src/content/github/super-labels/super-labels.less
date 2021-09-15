@@ -16,13 +16,13 @@
   height: auto !important;
   max-height: unset !important;
   min-height: unset !important;
-  
+
   margin-top: 4px !important;
   padding: 0.15em 4px !important;
   padding-right: 4px !important;
   border-width: 0 !important;
   border-radius: 0;
-  
+
   overflow: unset;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -30,8 +30,9 @@
   font-size: 12px !important;
   vertical-align: middle !important;
 
-  &:before, &:after {
-    content: '' !important;
+  &:before,
+  &:after {
+    content: "" !important;
     display: none;
     padding: 0 !important;
   }
@@ -50,9 +51,7 @@
 
   padding: 0 !important;
   margin: 0 !important;
-  border-color: white !important;
-  border-style: solid !important;
-  border-width: 2px 2px 2px 0 !important;
+  border: 1px solid var(--color-border-primary) !important;
   border-radius: 0 5px 5px 0;
   text-align: center;
   vertical-align: middle !important;
@@ -77,6 +76,29 @@
     transition-duration: 400ms;
     transition-delay: 400ms;
   }
+
+  &:before,
+  &:after {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+  &:before {
+    content: "" !important;
+    background-color: var(--color-fg-muted);
+  }
+  &:after {
+    content: "" !important;
+    background-color: inherit;
+  }
+  & > * {
+    z-index: 1;
+    position: relative;
+  }
 }
 
 /* Special label, basic styling + :hover state
@@ -88,7 +110,7 @@
   z-index: 2;
   transform: translateX(8px);
 
-  border: 2px solid #fafafa;
+  border: 1px solid var(--color-border-primary) !important;
   vertical-align: middle !important;
   line-height: 10px !important;
   overflow: hidden;
@@ -110,11 +132,36 @@
     z-index: 100;
     left: auto;
     max-width: 320px !important;
+    height: 32px !important;
     max-height: 32px !important;
     padding-right: 16px;
-    border-radius: 2px;
-    transition-property: padding-right, max-width, max-height, border-radius, font-size;
+    border-radius: 4px;
+    transition-property: padding-right, max-width, width, max-height, height,
+      border-radius, font-size;
     transition-timing-function: ease;
     transition-duration: 400ms;
+  }
+
+  &:before,
+  &:after {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+  &:before {
+    content: "" !important;
+    background-color: var(--color-fg-muted);
+  }
+  &:after {
+    content: "" !important;
+    background-color: inherit;
+  }
+  & > * {
+    z-index: 1;
+    position: relative;
   }
 }
