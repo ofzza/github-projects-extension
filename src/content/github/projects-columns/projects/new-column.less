@@ -1,30 +1,43 @@
 /* Columns 
 ============================================================================================ */
-[github-projects-plus]  {
-  
+[github-projects-plus] {
   /* New column 'column' */
-  .new-discussion-timeline.experiment-repo-nav .repository-content .position-relative .project-columns .js-new-project-column-container {
+  .new-discussion-timeline
+    .repository-content
+    .position-relative
+    .project-columns
+    .js-new-project-column-container {
     margin-left: 4px;
     width: 40px !important;
   }
 
-  .new-discussion-timeline.experiment-repo-nav .repository-content .position-relative .project-columns .new-project-column {
+  .new-discussion-timeline
+    .repository-content
+    .position-relative
+    .project-columns
+    .new-project-column {
     width: auto;
     height: auto !important;
     padding: 4px 20px !important;
     margin-left: 8px;
     white-space: nowrap;
     text-align: center !important;
+    transform-origin: left top;
     transform: rotateZ(90deg) translateY(-24px);
-    transform-origin: top left;
-    background-image: -webkit-linear-gradient(#fcfcfc, #eee);
-    background-image: linear-gradient(#fcfcfc, #eee);
+    color: var(--color-btn-primary-text) !important;
+    background-color: var(--color-btn-primary-bg) !important;
+    border-color: var(--color-btn-primary-border) !important;
     border-style: solid !important;
+    box-shadow: var(--color-btn-primary-shadow),
+      var(--color-btn-primary-inset-shadow) !important;
   }
-  .new-discussion-timeline.experiment-repo-nav .repository-content .position-relative .project-columns .new-project-column:hover {
+  .new-discussion-timeline
+    .repository-content
+    .position-relative
+    .project-columns
+    .new-project-column:hover {
     text-decoration: none;
     background-image: -webkit-linear-gradient(#eee, #ddd);
     background-image: linear-gradient(#eee, #ddd);
   }
-
 }
