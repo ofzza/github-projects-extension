@@ -1,21 +1,24 @@
 /* Issues and Milstone Page: Super-labels display adjustments
 ============================================================================================ */
-@import '../super-labels.less';
+@import "../super-labels.less";
 
 [github-projects-plus] {
-
   /* Super-labels
   ============================================================================================ */
   .js-issue-row {
-
+    .markdown-title {
+      float: left;
+      margin-right: 8px;
+    }
     .labels {
       position: initial !important;
-      float: right;
-      display: flex;
+      float: left;
+      max-width: 50%;
+      display: flex !important;
       flex-flow: row;
       width: min-content;
       padding-top: 4px;
-  
+
       // Styling for all labels (special or not)
       a {
         display: inline-block;
@@ -23,22 +26,30 @@
         white-space: nowrap;
       }
 
+      // Break float after this
+      & + * {
+        clear: both;
+      }
+
       /* Super-labels (Type labels)
       ============================================================================================ */
-      
+
       // Compose selector
-      @issues-type-selector-name:        ~'a[title ^= "#"]';            // Name starts with "#"
-      @issues-type-selector-description: ~'a[aria-label *= "[type]"]';  // Description contains "[type]"
-      
+      @issues-type-selector-name: ~'.IssueLabel[data-name ^= "#"]'; // Name starts with "#"
+      @issues-type-selector-description: ~'.IssueLabel[title *= "[type]"]'; // Description contains "[type]"
+
       // Type label, basic styling + :hover state
       .issues-type-label(@i) {
-        .super-type-label(@i);
+        .super-type-label(@i, var(--color-fg-default), var(--color-canvas-subtle), var(--color-border-muted));
+        line-height: 100%;
+        vertical-align: middle;
+
         &:hover {
           max-width: 200px !important;
           min-height: 32px !important;
           line-height: 32px !important;
         }
-      }        
+      }
 
       // Position based on number of preceding elements matching same selector (max 5 labels)
       @{issues-type-selector-name},
@@ -69,12 +80,14 @@
       /* Super-labels (Special labels)
       ============================================================================================ */
       // Compose selector
-      @issues-special-selector-name:        ~'a[title ^= "@"]';               // Name starts with "@"
-      @issues-special-selector-description: ~'a[aria-label *= "[special]"]';  // Description contains "[special]"
+      @issues-special-selector-name: ~'.IssueLabel[data-name ^= "@"]'; // Name starts with "@"
+      @issues-special-selector-description: ~'.IssueLabel[title *= "[special]"]'; // Description contains "[special]"
 
       // Special label, basic styling + :hover state
       .issues-special-label(@i) {
-        .super-special-label(@i);
+        .super-special-label(@i, var(--color-fg-default), var(--color-canvas-subtle), var(--color-border-muted));
+        line-height: 100%;
+        vertical-align: middle;
       }
 
       // Position based on number of preceding elements matching same selector (max 5 labels)
@@ -102,9 +115,6 @@
           }
         }
       }
-
     }
-
   }
-
 }

@@ -38,9 +38,50 @@
   }
 }
 
+/* Default label styling
+-------------------------------------------------------------------------------------------- */
+.color-label(@fgColor, @bgColor, @borderColor) {
+  &:before,
+  &:after {
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+
+    transition-property: background-color;
+    transition-timing-function: ease;
+    transition-duration: 400ms;
+    transition-delay: 400ms;
+  }
+  &:hover {
+    background-color: @fgColor;
+    color: @bgColor;
+  }
+  &:hover:before,
+  &:hover:after {
+    background-color: unset;
+    color: inherit;
+  }
+  &:before {
+    content: "" !important;
+    background-color: var(--color-fg-muted);
+  }
+  &:after {
+    content: "" !important;
+    background-color: inherit;
+  }
+  & > * {
+    z-index: 1;
+    position: relative;
+  }
+}
+
 /* Type label, basic styling + :hover state
 -------------------------------------------------------------------------------------------- */
-.super-type-label(@i) {
+.super-type-label(@i, @fgColor, @bgColor, @borderColor) {
   position: absolute;
   left: 0;
   top: 4% + (@i * (92% / 5));
@@ -77,33 +118,12 @@
     transition-delay: 400ms;
   }
 
-  &:before,
-  &:after {
-    z-index: 0;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-  }
-  &:before {
-    content: "" !important;
-    background-color: var(--color-fg-muted);
-  }
-  &:after {
-    content: "" !important;
-    background-color: inherit;
-  }
-  & > * {
-    z-index: 1;
-    position: relative;
-  }
+  .color-label(@fgColor, @bgColor, @borderColor);
 }
 
 /* Special label, basic styling + :hover state
 -------------------------------------------------------------------------------------------- */
-.super-special-label(@i) {
+.super-special-label(@i, @fgColor, @bgColor, @borderColor) {
   position: absolute;
   right: 0px;
   top: 4px + (@i * 10px);
@@ -133,35 +153,16 @@
     left: auto;
     max-width: 320px !important;
     height: 32px !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
     max-height: 32px !important;
     padding-right: 16px;
     border-radius: 4px;
-    transition-property: padding-right, max-width, width, max-height, height,
-      border-radius, font-size;
+    transition-property: padding-top, padding-bottom, padding-right, max-width,
+      width, max-height, height, border-radius, font-size;
     transition-timing-function: ease;
     transition-duration: 400ms;
   }
 
-  &:before,
-  &:after {
-    z-index: 0;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-  }
-  &:before {
-    content: "" !important;
-    background-color: var(--color-fg-muted);
-  }
-  &:after {
-    content: "" !important;
-    background-color: inherit;
-  }
-  & > * {
-    z-index: 1;
-    position: relative;
-  }
+  .color-label(@fgColor, @bgColor, @borderColor);
 }

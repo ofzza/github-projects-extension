@@ -20,12 +20,12 @@
         ============================================================================================ */
 
         // Compose selector
-        @projects-type-selector-name: ~'[data-card-filter ^= "label:#"]'; // Name starts with "#"
-        @projects-type-selector-description: ~'[title *= "[type]"]'; // Description contains "[type]"
+        @projects-type-selector-name: ~'.IssueLabel[data-card-filter ^= "label:#"]'; // Name starts with "#"
+        @projects-type-selector-description: ~'.IssueLabel[title *= "[type]"]'; // Description contains "[type]"
 
         // Type label, basic styling + :hover state
         .projects-type-label(@i) {
-          .super-type-label(@i);
+          .super-type-label(@i, var(--color-fg-default), var(--color-canvas-subtle), var(--color-border-primary));
           &:hover {
             max-width: 60% !important;
             min-height: 32px !important;
@@ -61,12 +61,12 @@
         /* Super-labels (Special labels)
         ============================================================================================ */
         // Compose selector
-        @projects-special-selector-name: ~'[data-card-filter ^= "label:@"]'; // Name starts with "@"
-        @projects-special-selector-description: ~'[title *= "[special]"]'; // Description contains "[special]"
+        @projects-special-selector-name: ~'.IssueLabel[data-card-filter ^= "label:@"]'; // Name starts with "@"
+        @projects-special-selector-description: ~'.IssueLabel[title *= "[special]"]'; // Description contains "[special]"
 
         // Special label, basic styling + :hover state
         .projects-special-label(@i) {
-          .super-special-label(@i);
+          .super-special-label(@i, var(--color-fg-default), var(--color-canvas-subtle), var(--color-border-primary));
         }
 
         // Position based on number of preceding elements matching same selector (max 5 labels)
